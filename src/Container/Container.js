@@ -4,7 +4,7 @@ class Container extends Component{
     render(){
         return(
             <div>
-<Route path="/register" component = {Register}/>
+                <Route path="/register" component = {Register}/>
 
             </div>
         )
