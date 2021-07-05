@@ -23,10 +23,6 @@ class Register extends Component {
             username: this.state.username,
         }
         axios.post("http://localhost:90/api_insert", data)
-            .then(
-                alert("Registered!!!")
-                )
-
             .catch()
     }
     render() {
@@ -81,7 +77,7 @@ class Register extends Component {
                                 className="form-control" placeholder="username"
                                 value={this.state.username} onChange={(event) => { this.setState({ username: event.target.value }) }}
                                 required />
-                            <label htmlFor="username">username</label>
+                            <label htmlFor="username">Username</label>
                         </div>
 
                         <div className="form-label-group">
@@ -91,7 +87,7 @@ class Register extends Component {
                             <label htmlFor="inputPassword">Password</label>
                         </div>
 
-                        <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit"
+                        <button className="btn btn-lg btn-primary btn-block btn-register text-uppercase font-weight-bold mb-2" type="submit"
                             onClick={this.registerUser} href="/login">Register</button>
 
                         <p className="registerprompt">Already an User ? Login Now. Click<a href="/login">Here</a></p>
