@@ -6,9 +6,7 @@ class Register extends Component {
         fullname: "",
         email: "",
         phone: "",
-        
         address: "",
-        
         gender: "",
         username: "",
         password: "",
@@ -21,6 +19,7 @@ class Register extends Component {
             address: this.state.address,
             phone: this.state.phone,
             gender: this.state.gender,
+            username: this.state.username,
         }
         axios.post("http://localhost:90/api_insert", data)
             .then(
@@ -74,6 +73,14 @@ class Register extends Component {
                                 value={this.state.email} onChange={(event) => { this.setState({ email: event.target.value }) }}
                                 placeholder="Email" required />
                             <label htmlFor="inputEmail">Email</label>
+                        </div>
+
+                        <div className="form-label-group">
+                            <input type="text" name="username" id="username"
+                                className="form-control" placeholder="username"
+                                value={this.state.username} onChange={(event) => { this.setState({ username: event.target.value }) }}
+                                required />
+                            <label htmlFor="username">username</label>
                         </div>
 
                         <div className="form-label-group">
