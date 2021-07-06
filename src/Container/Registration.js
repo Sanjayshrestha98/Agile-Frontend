@@ -22,14 +22,14 @@ class Register extends Component {
             gender: this.state.gender,
             username: this.state.username,
         }
-        axios.post("http://localhost:90/api_insert", data)
+        axios.post("http://localhost:90/signup", data)
             .catch()
     }
     render() {
         return (
             <div className="registerform">
                 <div className="col-md-12 col-lg-12">
-                    <h3 className="form-heading mb-4">Registration</h3>
+                    <h3 className="form-heading mb-4">Fill out the details below.</h3>
                     <form>
 
                         <div className="form-label-group">
@@ -40,15 +40,12 @@ class Register extends Component {
                             <label htmlFor="fullname">Full Name</label>
                         </div>
 
-                        
-
                         <div className="form-label-group">
                             <input type="text" name="address" id="address" className="form-control"
                                 value={this.state.address} onChange={(event) => { this.setState({ address: event.target.value }) }}
                                 placeholder="Address" required />
                             <label htmlFor="address">Address</label>
                         </div>
-
 
                         <div className="form-label-group">
                             <input type="number" name="phone" id="phone" className="form-control" placeholder="Phone Number"
@@ -87,8 +84,14 @@ class Register extends Component {
                             <label htmlFor="inputPassword">Password</label>
                         </div>
 
+                        <div className="form-label-group">
+                            <input type="password" name="confirmpassword" id="confirmpassword" className="form-control"
+                                placeholder="Re-Enter Password" required />
+                            <label htmlFor="confirmpassword">Re-Enter Password</label>
+                        </div>
+
                         <button className="btn btn-lg btn-primary btn-block btn-register text-uppercase font-weight-bold mb-2" type="submit"
-                            onClick={this.registerUser} href="/login">Register</button>
+                            onClick={this.registerUser} href="/login">Confirm</button>
 
                         <p className="registerprompt">Already an User ? Login Now. Click<a href="/login">Here</a></p>
                     </form>
