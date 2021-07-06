@@ -12,7 +12,9 @@ class Register extends Component {
         username: "",
         password: "",
     }
-    registerUser = () => {
+    registerUser = (e) => {
+        e.preventDefault();
+        console.log("try")
         const data = {
             fullname: this.state.fullname,
             email: this.state.email,
@@ -22,6 +24,7 @@ class Register extends Component {
             gender: this.state.gender,
             username: this.state.username,
         }
+        console.log(data)
         axios.post("http://localhost:90/signup", data)
             .catch()
     }
@@ -90,8 +93,10 @@ class Register extends Component {
                             <label htmlFor="confirmpassword">Re-Enter Password</label>
                         </div>
 
-                        <button className="btn btn-lg btn-primary btn-block btn-register text-uppercase font-weight-bold mb-2" type="submit"
-                            onClick={this.registerUser} href="/login">Confirm</button>
+                        <button className="btn btn-lg btn-primary btn-block btn-register text-uppercase font-weight-bold mb-2" type="signup"
+                            onClick={(e) => this.registerUser(e)}
+                            //href="/login"
+                            >Confirm</button>
 
                         <p className="registerprompt">Already an User ? Login Now. Click<a href="/login">Here</a></p>
                     </form>
