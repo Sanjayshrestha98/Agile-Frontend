@@ -10,7 +10,6 @@ class Container extends Component{
             <div>
                 <Route path="/register" component = {Registration}/>
                 <Route path="/login" component = {Login}/>
-
             </div>
         )
     }
