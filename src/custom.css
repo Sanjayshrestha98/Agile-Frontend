@@ -58,6 +58,13 @@ button {
 	}
 }
 
+.form-control{
+  margin-bottom: 20px;
+}
+
+.error{
+  color: red;
+}
 
 .loginform{
   margin-bottom: 80px;

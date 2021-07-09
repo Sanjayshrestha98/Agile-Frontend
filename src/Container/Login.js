@@ -25,7 +25,7 @@ function Login() {
             }
 
             if (!values.password) {
-                errors.name = "Required"
+                errors.password = "Required"
             }
 
             return errors
@@ -33,6 +33,7 @@ function Login() {
     })
 
     console.log('form errors', formik.errors)
+    console.log('visited Fields', formik.touched)
 
     return (
         <div>
@@ -43,20 +44,24 @@ function Login() {
                     <form onSubmit={formik.handleSubmit}>
 
                         <div className="form-label-group form-control">
+                            
+                        <label htmlFor="email">Email address</label>
                             <input type="email" name="email" id="email" placeholder="Email address"
-                                onChange={formik.handleChange} value={formik.values.email} required />
-                            <label htmlFor="email">Email address</label>
+                                onBlur={formik.handleBlur}
+                                onChange={formik.handleChange} 
+                                value={formik.values.email} />
 
-                            {formik.errors.email ? <div> {formik.errors.email} </div> : null}
+                            {formik.touched.email && formik.errors.email ? (<div className="error"> {formik.errors.email} </div>) : null}
                         </div>
 
-                        
+
                         <div className="form-label-group form-control">
                             <input type="password" name="password" id="password" placeholder="Password"
-                                onChange={formik.handleChange} value={formik.values.password} required />
+                                onBlur={formik.handleBlur}
+                                onChange={formik.handleChange} value={formik.values.password}  />
                             <label htmlFor="password">Password</label>
 
-                            {formik.errors.password ? <div>{formik.errors.password} </div> : null}
+                            {formik.touched.password && formik.errors.password ? (<div className="error">{formik.errors.password} </div> ) : null}
                         </div>
                         <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit"
                         >
