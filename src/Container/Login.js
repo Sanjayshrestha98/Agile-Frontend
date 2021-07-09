@@ -19,7 +19,7 @@ function Login() {
             let errors = {}
 
             if (!values.email) {
-                errors.name = "Required"
+                errors.email = "Required"
             } else if (!/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i.test(values.email)) {
                 errors.email = "Invalid email"
             }
@@ -44,12 +44,15 @@ function Login() {
                     <form onSubmit={formik.handleSubmit}>
 
                         <div className="form-label-group form-control">
+
                             
-                        <label htmlFor="email">Email address</label>
                             <input type="email" name="email" id="email" placeholder="Email address"
-                                onBlur={formik.handleBlur}
-                                onChange={formik.handleChange} 
-                                value={formik.values.email} />
+                                // onBlur={formik.handleBlur}
+                                // onChange={formik.handleChange} 
+                                // value={formik.values.email}  Alternative with { ... formik.getFieldProps('name')}
+                                {...formik.getFieldProps('email')}
+                            />
+                            <label htmlFor="email">Email address</label>
 
                             {formik.touched.email && formik.errors.email ? (<div className="error"> {formik.errors.email} </div>) : null}
                         </div>
@@ -57,11 +60,12 @@ function Login() {
 
                         <div className="form-label-group form-control">
                             <input type="password" name="password" id="password" placeholder="Password"
-                                onBlur={formik.handleBlur}
-                                onChange={formik.handleChange} value={formik.values.password}  />
+
+                                {...formik.getFieldProps('password')}
+                            />
                             <label htmlFor="password">Password</label>
 
-                            {formik.touched.password && formik.errors.password ? (<div className="error">{formik.errors.password} </div> ) : null}
+                            {formik.touched.password && formik.errors.password ? (<div className="error">{formik.errors.password} </div>) : null}
                         </div>
                         <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit"
                         >
