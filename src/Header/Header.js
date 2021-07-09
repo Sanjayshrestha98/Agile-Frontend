@@ -7,7 +7,12 @@ import { NavDropdown } from "react-bootstrap";
 
 class Header extends Component {
 
+	logout = () => {
+		localStorage.clear();
+	}
+
 	render() {
+
 		return (
 			<div>
 				<Navbar collapseOnSelect expand="lg" variant="light">
@@ -38,27 +43,35 @@ class Header extends Component {
 							</NavDropdown>
 
 						</Nav>
-						<Nav>
+
+						<Nav className="rightnav">
 							<Nav.Link href="/register">Register</Nav.Link>
 							<Nav.Link href="/login">Login</Nav.Link>
 
-							<Nav.Link href ="/cartpage">
-								<div className="cart"> 
+							<Nav.Link href="/cartpage">
+								<div className="righticons">
 									<img src="./cart.png" alt="cart" />
 								</div>
 							</Nav.Link>
 
-							<Nav.Link href ="/profile">
-								<div className="cart"> 
-								
+							<Nav.Link href="/profile">
+								<div className="righticons">
+
 									<img src="./user.png" alt="profile" />
+								</div>
+							</Nav.Link>
+
+							<Nav.Link >
+								<div className="righticons">
+									<img src="./logout.png" onClick={this.logout()} alt="logout" />
 								</div>
 							</Nav.Link>
 
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>
-				
+
+
 			</div>
 
 

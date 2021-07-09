@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
 
 * {
-	margin: 0px;
+	margin: 2px;
 	box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
@@ -18,14 +18,12 @@ button {
 	font-family: 'Poppins', sans-serif;
 }
 
-.topnavbar {
-	display: flex;
-	width: 90%;
-	height: 10vh;
-	margin: auto;
-	align-items: center;
-  background-color: transparent !important;
+.rightnav{
+
+  margin-top: 7px;
+  margin-left: auto;
 }
+
 
 
 @keyframes drop {
@@ -274,8 +272,7 @@ color: red;
 
 
 .navbar-nav{
-  margin-left: 40px;
-  gap: 30px ;
+  gap: 40px ;
 }
 
 .homecontainer{
@@ -350,6 +347,15 @@ color: red;
 
 }
 
+.navbar-brand {
+  padding-top: .3125rem !important;
+  padding-bottom: 1.3125rem  !important;
+  margin-right: 3rem !important;
+  margin-left: 38px !important;
+  font-size: 1.25rem !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
 
 .navbar{
   position: fixed;
