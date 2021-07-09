@@ -1,7 +1,8 @@
 import { Component } from "react";
 import axios from "axios";
-import React from "react";
-import { useFormik, Formik } from 'formik';
+import React, { useContext, useState } from "react";
+
+import { useFormik, Formik, Form, Field, ErrorMessage } from 'formik';
 import { values } from "lodash";
 import * as Yup from "yup";
 
@@ -12,79 +13,76 @@ const initialValues = {
 
 const onSubmit = values => {
     console.log('Form Data', values)
+    const response =  axios
+        .post("http://localhost:90/login", values).catch
+
+
 }
 
 const validationSchema = Yup.object({
-    email: Yup.string().email('Invalid Email Format').required('required'),
-    password : Yup.string().required('Required')
+    email: Yup.string().email('Invalid Email Format').required('Field cannot be empty'),
+    password: Yup.string().required('Required')
 })
-
-const validate = values => {
-    let errors = {}
-
-    if (!values.email) {
-        errors.email = "Required"
-    } else if (!/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i.test(values.email)) {
-        errors.email = "Invalid email"
-    }
-
-    if (!values.password) {
-        errors.password = "Required"
-    }
-
-    return errors
-}
-
-
 
 function Login() {
 
-    const formik = useFormik({
+    // const formik = useFormik({
 
-        initialValues,
-        onSubmit,
-        validationSchema
-    
-    })
+    //     initialValues,
+    //     onSubmit,
+    //     validationSchema
 
-    console.log('form errors', formik.errors)
-    console.log('visited Fields', formik.touched)
+    // })
+
+    // console.log('form errors', formik.errors)
+    // console.log('visited Fields', formik.touched)
+
+    // userlogin = (e) => {
+    //     e.preventDefault()
+    // }
 
     return (
         <Formik
-        initialValues = {initialValues}
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
         >
             <div className="loginform">
                 <div className="col-md-12 col-lg-12">
                     <h3 className="form-heading mb-4">Welcome Back ! Login to Continue</h3>
 
-                    <form onSubmit={formik.handleSubmit}>
-
+                    <Form>
                         <div className="form-label-group form-control">
 
-
-                            <input type="email" name="email" id="email" placeholder="Email address"
-                                // onBlur={formik.handleBlur}
-                                // onChange={formik.handleChange} 
-                                // value={formik.values.email}  Alternative with { ... formik.getFieldProps('name')}
-                                {...formik.getFieldProps('email')}
+                            <Field
+                                type="email" name="email" id="email" placeholder="Email address"
+                            // onBlur={formik.handleBlur}
+                            // onChange={formik.handleChange} 
+                            // value={formik.values.email}  Alternative with { ... formik.getFieldProps('name')}
+                            // {...formik.getFieldProps('email')}
                             />
                             <label htmlFor="email">Email address</label>
 
-                            {formik.touched.email && formik.errors.email ? (<div className="error"> {formik.errors.email} </div>) : null}
+
+
+                            {/* {formik.touched.email && formik.errors.email ? (<div className="error"> {formik.errors.email} </div>) : null} */}
+                            <ErrorMessage name='email' />
+
                         </div>
 
 
                         <div className="form-label-group form-control">
-                            <input type="password" name="password" id="password" placeholder="Password"
+                            <Field type="password" name="password" id="password" placeholder="Password"
 
-                                {...formik.getFieldProps('password')}
+                            // {...formik.getFieldProps('password')}
                             />
                             <label htmlFor="password">Password</label>
 
-                            {formik.touched.password && formik.errors.password ? (<div className="error">{formik.errors.password} </div>) : null}
+                            <ErrorMessage name="password" />
                         </div>
-                        <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit"
+                        <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+
+                            type="submit"
                         >
                             Log in
                         </button>
@@ -93,7 +91,7 @@ function Login() {
                             <a className="small" href="/login">Forgot password?</a></div>
 
                         <p className="registerprompt">Not an User, Register Now. Click<a href="/register">Here</a></p>
-                    </form>
+                    </Form>
                 </div>
             </div>
 
