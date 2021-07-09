@@ -2,6 +2,7 @@ import { Component } from "react";
 import axios from "axios";
 import React from "react";
 import { useFormik } from 'formik';
+import { values } from "lodash";
 
 
 function Login() {
@@ -10,29 +11,53 @@ function Login() {
         initialValues: {
             email: '',
             password: ''
+        },
+        onSubmit: values => {
+            console.log('Form Data', values)
+        },
+        validate: values => {
+            let errors = {}
+
+            if (!values.email) {
+                errors.name = "Required"
+            } else if (!/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i.test(values.email)) {
+                errors.email = "Invalid email"
+            }
+
+            if (!values.password) {
+                errors.name = "Required"
+            }
+
+            return errors
         }
     })
 
-    console.log('form values', formik.values)
+    console.log('form errors', formik.errors)
 
     return (
         <div>
             <div className="loginform">
                 <div className="col-md-12 col-lg-12">
                     <h3 className="form-heading mb-4">Welcome Back ! Login to Continue</h3>
-                    <form>
-                        <div className="form-label-group">
-                            <input type="email" name="email" id="email" className="form-control" placeholder="Email address"
+
+                    <form onSubmit={formik.handleSubmit}>
+
+                        <div className="form-label-group form-control">
+                            <input type="email" name="email" id="email" placeholder="Email address"
                                 onChange={formik.handleChange} value={formik.values.email} required />
                             <label htmlFor="email">Email address</label>
+
+                            {formik.errors.email ? <div> {formik.errors.email} </div> : null}
                         </div>
 
-                        <div className="form-label-group">
-                            <input type="password" name="password" id="password" className="form-control" placeholder="Password"
+                        
+                        <div className="form-label-group form-control">
+                            <input type="password" name="password" id="password" placeholder="Password"
                                 onChange={formik.handleChange} value={formik.values.password} required />
                             <label htmlFor="password">Password</label>
-                        </div>
 
+                            {formik.errors.password ? <div>{formik.errors.password} </div> : null}
+                        </div>
                         <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit"
                         >
                             Log in
