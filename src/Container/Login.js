@@ -3,7 +3,7 @@ import axios from "axios";
 import React from "react";
 import { useFormik, Formik } from 'formik';
 import { values } from "lodash";
-
+import * as Yup from "yup";
 
 const initialValues = {
     email: '',
@@ -13,6 +13,12 @@ const initialValues = {
 const onSubmit = values => {
     console.log('Form Data', values)
 }
+
+const validationSchema = Yup.object({
+    email: Yup.string().email('Invalid Email Format').required('required'),
+    password : Yup.string().required('Required')
+})
+
 const validate = values => {
     let errors = {}
 
@@ -34,35 +40,20 @@ const validate = values => {
 function Login() {
 
     const formik = useFormik({
-        // initialValues: {
-        //     email: '',
-        //     password: ''
-        // },
-        // onSubmit: values => {
-        //     console.log('Form Data', values)
-        // },
-        // validate: values => {
-        //     let errors = {}
 
-        //     if (!values.email) {
-        //         errors.email = "Required"
-        //     } else if (!/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i.test(values.email)) {
-        //         errors.email = "Invalid email"
-        //     }
-
-        //     if (!values.password) {
-        //         errors.password = "Required"
-        //     }
-
-        //     return errors
-        // }
+        initialValues,
+        onSubmit,
+        validationSchema
+    
     })
 
     console.log('form errors', formik.errors)
     console.log('visited Fields', formik.touched)
 
     return (
-        <div>
+        <Formik
+        initialValues = {initialValues}
+        >
             <div className="loginform">
                 <div className="col-md-12 col-lg-12">
                     <h3 className="form-heading mb-4">Welcome Back ! Login to Continue</h3>
@@ -106,7 +97,7 @@ function Login() {
                 </div>
             </div>
 
-        </div>
+        </Formik>
     )
 }
 
