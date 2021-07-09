@@ -63,13 +63,11 @@ function Login() {
                             />
                             <label htmlFor="email">Email address</label>
 
-
-
                             {/* {formik.touched.email && formik.errors.email ? (<div className="error"> {formik.errors.email} </div>) : null} */}
-                            <ErrorMessage name='email' />
+                            
+                        <ErrorMessage name='email' render={msg => <div className = "error">{msg}</div>}/>
 
                         </div>
-
 
                         <div className="form-label-group form-control">
                             <Field type="password" name="password" id="password" placeholder="Password"
@@ -78,7 +76,7 @@ function Login() {
                             />
                             <label htmlFor="password">Password</label>
 
-                            <ErrorMessage name="password" />
+                            <ErrorMessage name="password" render={msg => <div className = "error">{msg}</div>}/>
                         </div>
                         <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
 

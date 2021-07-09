@@ -51,7 +51,7 @@ class Header extends Component {
 							<Nav.Link href ="/profile">
 								<div className="cart"> 
 								
-									<img src="./profile-user.png" alt="profile" />
+									<img src="./user.png" alt="profile" />
 								</div>
 							</Nav.Link>
 
