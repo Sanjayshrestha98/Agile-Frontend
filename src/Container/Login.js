@@ -1,35 +1,61 @@
 import { Component } from "react";
 import axios from "axios";
 import React from "react";
-import { useFormik } from 'formik';
+import { useFormik, Formik } from 'formik';
 import { values } from "lodash";
+
+
+const initialValues = {
+    email: '',
+    password: ''
+}
+
+const onSubmit = values => {
+    console.log('Form Data', values)
+}
+const validate = values => {
+    let errors = {}
+
+    if (!values.email) {
+        errors.email = "Required"
+    } else if (!/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i.test(values.email)) {
+        errors.email = "Invalid email"
+    }
+
+    if (!values.password) {
+        errors.password = "Required"
+    }
+
+    return errors
+}
+
 
 
 function Login() {
 
     const formik = useFormik({
-        initialValues: {
-            email: '',
-            password: ''
-        },
-        onSubmit: values => {
-            console.log('Form Data', values)
-        },
-        validate: values => {
-            let errors = {}
+        // initialValues: {
+        //     email: '',
+        //     password: ''
+        // },
+        // onSubmit: values => {
+        //     console.log('Form Data', values)
+        // },
+        // validate: values => {
+        //     let errors = {}
 
-            if (!values.email) {
-                errors.email = "Required"
-            } else if (!/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i.test(values.email)) {
-                errors.email = "Invalid email"
-            }
+        //     if (!values.email) {
+        //         errors.email = "Required"
+        //     } else if (!/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i.test(values.email)) {
+        //         errors.email = "Invalid email"
+        //     }
 
-            if (!values.password) {
-                errors.password = "Required"
-            }
+        //     if (!values.password) {
+        //         errors.password = "Required"
+        //     }
 
-            return errors
-        }
+        //     return errors
+        // }
     })
 
     console.log('form errors', formik.errors)
@@ -45,7 +71,7 @@ function Login() {
 
                         <div className="form-label-group form-control">
 
-                            
+
                             <input type="email" name="email" id="email" placeholder="Email address"
                                 // onBlur={formik.handleBlur}
                                 // onChange={formik.handleChange} 
