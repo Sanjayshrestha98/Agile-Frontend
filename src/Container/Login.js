@@ -26,6 +26,7 @@ const onSubmit = values => {
     const response = axios
         .post(`http://localhost:90/login`, values).then(result => {
             if (result.data.success) {
+                window.location.href('/home')
 
             } else {
                 notify()
