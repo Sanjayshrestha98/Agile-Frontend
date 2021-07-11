@@ -13,25 +13,25 @@ const initialValues = {
 
 const notify = () => toast.error("Invalid Credentials", {
     position: "top-center",
-autoClose: 5000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
 });
 
 const onSubmit = values => {
     console.log('Form Data', values)
-    const response =  axios
+    const response = axios
         .post(`http://localhost:90/login`, values).then(result => {
-            if(result.data.success) {
+            if (result.data.success) {
 
-            }else {
+            } else {
                 notify()
             }
         }).catch(error => {
-            console.error("Error loggin in" , error)
+            console.error("Error loggin in", error)
         })
 
 
@@ -61,62 +61,62 @@ function Login() {
 
     return (
         <>
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
-        >
-            <div className="loginform">
-                <div className="col-md-12 col-lg-12">
-                    <h3 className="form-heading mb-4">Welcome Back ! Login to Continue</h3>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+            >
+                <div className="loginform">
+                    <div className="col-md-12 col-lg-12">
+                        <h3 className="form-heading mb-4">Welcome Back ! Login to Continue</h3>
 
-                    <Form>
-                        <div className="form-label-group form-control">
+                        <Form>
+                            <div className="form-label-group form-control">
 
-                            <Field
-                                type="email" name="email" id="email" placeholder="Email address"
-                            // onBlur={formik.handleBlur}
-                            // onChange={formik.handleChange} 
-                            // value={formik.values.email}  Alternative with { ... formik.getFieldProps('name')}
-                            // {...formik.getFieldProps('email')}
-                            />
-                            <label htmlFor="email">Email address</label>
+                                <Field
+                                    type="email" name="email" id="email" placeholder="Email address"
+                                // onBlur={formik.handleBlur}
+                                // onChange={formik.handleChange} 
+                                // value={formik.values.email}  Alternative with { ... formik.getFieldProps('name')}
+                                // {...formik.getFieldProps('email')}
+                                />
+                                <label htmlFor="email">Email address</label>
 
-                            {/* {formik.touched.email && formik.errors.email ? (<div className="error"> {formik.errors.email} </div>) : null} */}
-                            
-                        <ErrorMessage name='email' render={msg => <div className = "error">{msg}</div>}/>
+                                {/* {formik.touched.email && formik.errors.email ? (<div className="error"> {formik.errors.email} </div>) : null} */}
 
-                        </div>
+                                <ErrorMessage name='email' render={msg => <div className="error">{msg}</div>} />
 
-                        <div className="form-label-group form-control">
-                            <Field type="password" name="password" id="password" placeholder="Password"
+                            </div>
 
-                            // {...formik.getFieldProps('password')}
-                            />
-                            <label htmlFor="password">Password</label>
+                            <div className="form-label-group form-control">
+                                <Field type="password" name="password" id="password" placeholder="Password"
 
-                            <ErrorMessage name="password" render={msg => <div className = "error">{msg}</div>}/>
-                        </div>
-                        <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                // {...formik.getFieldProps('password')}
+                                />
+                                <label htmlFor="password">Password</label>
 
-                            type="submit"
-                        >
-                            Log in
-                        </button>
+                                <ErrorMessage name="password" render={msg => <div className="error">{msg}</div>} />
+                            </div>
+                            <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
 
-                        <div className="text-center">
-                            <a className="small" href="/login">Forgot password?</a></div>
+                                type="submit"
+                            >
+                                Log in
+                            </button>
 
-                        <p className="registerprompt">Not an User, Register Now. Click<a href="/register">Here</a></p>
-                    </Form>
+                            <div className="text-center">
+                                <a className="small" href="/login">Forgot password?</a></div>
+
+                            <p className="registerprompt">Not an User, Register Now. Click<a href="/register">Here</a></p>
+                        </Form>
+                    </div>
                 </div>
-            </div>
-            
 
-        </Formik>
-          <ToastContainer />
-          </>
-        
+
+            </Formik>
+            <ToastContainer />
+        </>
+
     )
 }
 
