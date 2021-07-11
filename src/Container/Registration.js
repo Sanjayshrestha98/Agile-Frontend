@@ -43,7 +43,8 @@ const onSubmit = values => {
     console.log('Formdata', values)
     const response = axios
         .post(`http://localhost:90/signup`, values).then(result => {
-            if (result.data.sucess) {
+            console.log(result.data)
+            if (result.data.success) {
 
             } else {
                 notify()
