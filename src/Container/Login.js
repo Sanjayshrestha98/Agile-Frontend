@@ -1,20 +1,38 @@
 import { Component } from "react";
 import axios from "axios";
 import React, { useContext, useState } from "react";
-
+import { ToastContainer, toast } from 'react-toastify';
 import { useFormik, Formik, Form, Field, ErrorMessage } from 'formik';
 import { values } from "lodash";
 import * as Yup from "yup";
-
+import 'react-toastify/dist/ReactToastify.css';
 const initialValues = {
     email: '',
     password: ''
 }
 
+const notify = () => toast.error("Invalid Credentials", {
+    position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
+
 const onSubmit = values => {
     console.log('Form Data', values)
     const response =  axios
-        .post("http://localhost:90/login", values).catch
+        .post(`http://localhost:90/login`, values).then(result => {
+            if(result.data.success) {
+
+            }else {
+                notify()
+            }
+        }).catch(error => {
+            console.error("Error loggin in" , error)
+        })
 
 
 }
@@ -42,6 +60,7 @@ function Login() {
     // }
 
     return (
+        <>
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -92,8 +111,12 @@ function Login() {
                     </Form>
                 </div>
             </div>
+            
 
         </Formik>
+          <ToastContainer />
+          </>
+        
     )
 }
 

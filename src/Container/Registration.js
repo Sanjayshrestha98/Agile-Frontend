@@ -1,17 +1,24 @@
 import { Component } from "react";
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import { useFormik, Formik, Form, Field, ErrorMessage } from 'formik';
+import React from "react";
+import * as Yup from "yup";
 
-class Register extends Component {
 
-    state = {
-        fullname: "",
+const initialValues = {
+    fullname: "",
         email: "",
         phone: "",
         address: "",
         gender: "",
         username: "",
         password: "",
-    }
+}
+
+class Register extends Component {
+
+
     registerUser = (e) => {
         e.preventDefault();
         console.log("try")
@@ -26,8 +33,12 @@ class Register extends Component {
         }
         console.log(data)
         axios.post("http://localhost:90/signup", data)
-            .catch()
+        .then(result => {
+
+        }).catch(err => 
+            console.error(err))
     }
+
     render() {
         return (
             <div className="registerform">
@@ -101,7 +112,6 @@ class Register extends Component {
                         <p className="registerprompt">Already an User ? Login Now. Click<a href="/login">Here</a></p>
                     </form>
                 </div>
-
             </div>
         )
     }
