@@ -1,10 +1,9 @@
-import { Component } from "react";
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import { useFormik, Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import React from "react";
 import * as Yup from "yup";
-import { values } from "lodash";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const initialValues = {
@@ -31,32 +30,32 @@ const notify = () => toast.error("Invalid Credentials", {
 const validationSchema = Yup.object({
     fullname: Yup.string().required('Required'),
     email: Yup.string().email('Invalid Email Format').required('Field cannot be empty'),
-    phone: Yup.strig().phone('required'),
-    address: Yup.string().address('Required'),
-    gender: Yup.string().gender('required'),
-    username: Yup.string().username('Required'),
-    password: Yup.string().required('Required')
-})
+    phone: Yup.string().required('required'),
+    address: Yup.string().required('Required'),
+    gender: Yup.string().required('required'),
+    username: Yup.string().required('Required'),
+    password: Yup.string().required('Required'),
+    confirmpassword: Yup.string().required('Required'),
 
+})
 
 const onSubmit = values => {
     console.log('Formdata', values)
-    const response = axios.post(`http://localhost:90/signup`, values).then(result => {
-        if (result.data.sucess) {
+    const response = axios
+        .post(`http://localhost:90/signup`, values).then(result => {
+            if (result.data.sucess) {
 
-        } else {
-            notify()
-        }
-    }).catch(error => {
-        console.error("Error Registering User", error)
-    })
+            } else {
+                notify()
+            }
+        }).catch(error => {
+            console.error("Error Registering User", error)
+        })
 }
+function Register() {
 
-class Register extends Component {
-
-    render() {
-        return (
-
+    return (
+        <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -67,56 +66,79 @@ class Register extends Component {
                     <div className="col-md-12 col-lg-12">
                         <h3 className="form-heading mb-4">Fill out the details below.</h3>
                         <Form>
-                            <div className="form-label-group">
-                                <Field type="text" name="Fullname" id="Fullname" placeholder="Fullname"
+                            <div className="form-label-group form-control">
+                                <Field
+                                    type="text" name="fullname" id="Fullname" placeholder="Fullname"
                                 />
                                 <label htmlFor="Fullname">Full Name</label>
+
+                                <ErrorMessage name='fullname' render={msg => <div className="error">{msg}</div>} />
                             </div>
 
-                            <div className="form-label-group">
+                            <div className="form-label-group form-control">
                                 <Field type="text" name="address" id="address" placeholder="Address"
                                 />
                                 <label htmlFor="address">Address</label>
+
+                                <ErrorMessage name='address' render={msg => <div className="error">{msg}</div>} />
                             </div>
 
-                            <div className="form-label-group">
-                                <Field type="number" name="phone" id="phone" className="form-control" placeholder="Phone Number"
+                            <div className="form-label-group form-control">
+                                <Field type="number" name="phone" id="phone" placeholder="Phone Number"
                                 />
                                 <label htmlFor="phone">Phone Number</label>
+
+                                <ErrorMessage name='phone' render={msg => <div className="error">{msg}</div>} />
                             </div>
 
 
-                            <div className="form-label-group">
-                                <Field type="text" name="gender" id="inputgender" className="form-control" placeholder="Gender"
+                            <div className="form-label-group form-control">
+                                <Field type="text" name="gender" id="gender" placeholder="Gender"
                                 />
-                                <label htmlFor="inputgender">Gender</label>
+                                <label htmlFor="gender">Gender</label>
+                                <ErrorMessage name='gender' render={msg => <div className="error">{msg}</div>} />
                             </div>
 
-                            <div className="form-label-group">
-                                <Field type="email" name="email" id="email" className="form-control" placeholder="Email" />
+                            <div className="form-label-group form-control">
+                                <Field type="email" name="email" id="email" placeholder="Email" />
                                 <label htmlFor="email">Email</label>
+                                <ErrorMessage name='email' render={msg => <div className="error">{msg}</div>} />
                             </div>
 
-                            <div className="form-label-group">
+                            <div className="form-label-group form-control">
                                 <Field type="text" name="username" id="username"
-                                    className="form-control" placeholder="username"
+                                    placeholder="username"
                                 />
                                 <label htmlFor="username">Username</label>
+                                <ErrorMessage name='username' render={msg => <div className="error">{msg}</div>} />
                             </div>
 
-                            <div className="form-label-group">
-                                <Field type="password" name="password" id="inputPassword" className="form-control" placeholder="Password" />
+                            <div className="form-label-group form-control">
+                                <Field type="password" name="password" id="password" placeholder="Password"
+
+                                />
                                 <label htmlFor="password">Password</label>
+
+                                <ErrorMessage name="password" render={msg => <div className="error">{msg}</div>} />
                             </div>
 
-                            <div className="form-label-group">
-                                <Field type="password" name="confirmpassword" id="confirmpassword" className="form-control"
-                                    placeholder="Re-Enter Password" required />
-                                <label htmlFor="confirmpassword">Re-Enter Password</label>
+                            <div className="form-label-group form-control">
+                                <Field type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirm password"
+
+                                />
+                                <label htmlFor="confirmpassword">Confirm Password</label>
+
+                                <ErrorMessage name="confirmpassword" render={msg => <div className="error">{msg}</div>} />
                             </div>
 
-                            <button className="btn btn-lg btn-primary btn-block btn-register text-uppercase font-weight-bold mb-2" type="submit"
-                            >Confirm</button>
+                            
+
+                            <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+
+                                type="submit"
+                            >
+                               Confirm
+                            </button>
 
                             <p className="registerprompt">Already an User ? Login Now. Click<a href="/login">Here</a></p>
                         </Form>
@@ -124,7 +146,9 @@ class Register extends Component {
                 </div>
 
             </Formik>
-        )
-    }
+            <ToastContainer />
+        </>
+    )
+
 }
 export default Register;

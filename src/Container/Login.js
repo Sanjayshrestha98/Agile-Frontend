@@ -72,7 +72,6 @@ function Login() {
 
                         <Form>
                             <div className="form-label-group form-control">
-
                                 <Field
                                     type="email" name="email" id="email" placeholder="Email address"
                                 // onBlur={formik.handleBlur}
