@@ -6,12 +6,13 @@ import { useFormik, Formik, Form, Field, ErrorMessage } from 'formik';
 import { values } from "lodash";
 import * as Yup from "yup";
 import 'react-toastify/dist/ReactToastify.css';
+
 const initialValues = {
-    email: '',
+    username: '',
     password: ''
 }
 
-const notify = () => toast.error("Invalid Credentials", {
+const notify = () => toast.error("Invalasdasdid Credentials", {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,
@@ -24,10 +25,14 @@ const notify = () => toast.error("Invalid Credentials", {
 const onSubmit = values => {
     console.log('Form Data', values)
     const response = axios
-        .post(`http://localhost:90/login`, values).then(result => {
-            if (result.data.success) {
-                window.location.href('/home')
+        .post(`http://localhost:90/login`, values)
+        .then(result => {
 
+            localStorage.setItem('token',response.data.token)
+            localStorage.setItem('userid',response.data.userid)
+
+            if (result.data.success) {
+                window.location.href = '/home'
             } else {
                 notify()
             }
@@ -39,7 +44,8 @@ const onSubmit = values => {
 }
 
 const validationSchema = Yup.object({
-    email: Yup.string().email('Invalid Email Format').required('Field cannot be empty'),
+    // email: Yup.string().email('Invalid Email Format').required('Field cannot be empty'),
+    username: Yup.string().required('Required'),
     password: Yup.string().required('Required')
 })
 
@@ -74,17 +80,17 @@ function Login() {
                         <Form>
                             <div className="form-label-group form-control">
                                 <Field
-                                    type="email" name="email" id="email" placeholder="Email address"
+                                    type="username" name="username" id="username" placeholder="Username"
                                 // onBlur={formik.handleBlur}
                                 // onChange={formik.handleChange} 
                                 // value={formik.values.email}  Alternative with { ... formik.getFieldProps('name')}
                                 // {...formik.getFieldProps('email')}
                                 />
-                                <label htmlFor="email">Email address</label>
+                                <label htmlFor="username">Username</label>
 
                                 {/* {formik.touched.email && formik.errors.email ? (<div className="error"> {formik.errors.email} </div>) : null} */}
 
-                                <ErrorMessage name='email' render={msg => <div className="error">{msg}</div>} />
+                                <ErrorMessage name='username' render={msg => <div className="error">{msg}</div>} />
 
                             </div>
 

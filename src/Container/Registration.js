@@ -92,15 +92,11 @@ function Register() {
                             </div>
 
 
-                            {/* <div className="form-label-group form-control">
+                            <div className="form-label-group form-control">
                                 <Field type="text" name="gender" id="gender" placeholder="Gender"
                                 />
                                 <label htmlFor="gender">Gender</label>
                                 <ErrorMessage name='gender' render={msg => <div className="error">{msg}</div>} />
-                            </div> */}
-
-                            <div id="my-radio-group" >
-
                             </div>
 
                             <div className="form-label-group form-control">
