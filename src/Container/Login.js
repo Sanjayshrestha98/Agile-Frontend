@@ -28,10 +28,11 @@ const onSubmit = values => {
         .post(`http://localhost:90/login`, values)
         .then(result => {
 
-            localStorage.setItem('token',response.data.token)
-            localStorage.setItem('userid',response.data.userid)
-
-            if (result.data.success) {
+           
+            if (result.data.success) { 
+                localStorage.setItem('token',result.data.token)
+                localStorage.setItem('userid',result.data.userid)
+    
                 window.location.href = '/home'
             } else {
                 notify()
