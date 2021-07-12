@@ -5,7 +5,9 @@ function AdminDashboard() {
     return(
 
         <div>
-            
+            <div className="sidenav">
+
+            </div>
         </div>
 
     )
