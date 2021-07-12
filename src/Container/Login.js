@@ -12,7 +12,7 @@ const initialValues = {
     password: ''
 }
 
-const notify = () => toast.error("Invalasdasdid Credentials", {
+const notify = () => toast.error("Invalid Credentials", {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,

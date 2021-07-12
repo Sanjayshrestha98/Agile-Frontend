@@ -21,7 +21,7 @@ class Header extends Component {
 			<div>
 				<Navbar collapseOnSelect expand="lg" variant="light">
 					<Navbar.Brand>
-						<img src="./logogo.png" alt="logo" height="70px" />
+						<img src="./logo.png" alt="logo" height="70px" />
 					</Navbar.Brand>
 
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -59,7 +59,7 @@ class Header extends Component {
 
 							<Nav.Link href="/profile">
 								<div className="righticons">
-									<img src="./profile.png" alt="profile" />
+									<img src="./user.png" alt="profile" />
 								</div>
 							</Nav.Link>
 
@@ -83,7 +83,7 @@ class Header extends Component {
 			<div>
 				<Navbar collapseOnSelect expand="lg" variant="light">
 					<Navbar.Brand>
-						<img src="./logogo.png" alt="logo" height="70px" />
+						<img src="./logo.png" alt="logo" height="70px" />
 					</Navbar.Brand>
 
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
