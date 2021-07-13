@@ -10,21 +10,18 @@ import AdminSideNav from './AdminSideNav';
 const AdminContainer = () => {
 
     const [toggle, setToggle] = useState(true)
-
-
-    const toggleSidenav = () => { 
+    const toggleSidenav = () => {
         setToggle(!toggle)
     }
 
-
-    return(
+    return (
         <>
-        <AdminSideNav  toggle = {toggle} toggleSidenav = {toggleSidenav} />
-            <div className = {`admin-wrapper ${toggle && "wrapper-toggle"}`}>
-            <Route path="/admin/dashboard" component = {AdminDashboard}/>
-                <Route path="/admin/product" component = {AddProduct}/>
+            <AdminSideNav toggle={toggle} toggleSidenav={toggleSidenav} />
+            <div className={`admin-wrapper ${toggle && "wrapper-toggle"}`}>
+                <Route path="/admin/dashboard" component={AdminDashboard} />
+                <Route path="/admin/addproduct" component={AddProduct} />
             </div>
-                </>
+        </>
     )
 
 }

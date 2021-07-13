@@ -73,9 +73,9 @@ function AddProduct() {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
-                <div className="loginform">
+                <div className="addproductform">
                     <div className="col-md-12 col-lg-12">
-                        <h3 className="form-heading mb-4">Add Products</h3>
+                        <h3 className="adminpage-headers mb-4">Add Products</h3>
 
                         <Form>
                             <div className="form-label-group form-control">
@@ -133,7 +133,7 @@ function AddProduct() {
                             </div>
 
 
-                            <div className="form-control">
+                            <div className=" form-label-group form-control">
                             <label htmlFor="system_requirements">System Requirements</label>
 
                                 <Field

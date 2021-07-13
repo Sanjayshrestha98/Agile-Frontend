@@ -22,26 +22,26 @@ function AdminSideNav({toggle, toggleSidenav}) {
         </div>
         <ul class="nav-links">
           <li>
-            <a href="#" class="active">
+            <a href="/admin/dashboard" class="active">
               <i class='bx bx-grid-alt'></i>
               <span class="links_name">Dashboard</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/admin/addproduct">
               <i class='bx bx-box'></i>
               <span class="links_name">Product</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/admin/order">
               <i class='bx bx-list-ul'></i>
               <span class="links_name">Order list</span>
             </a>
           </li>
 
           <li class="log_out">
-            <a href="#">
+            <a href="">
               <i class='bx bx-log-out'></i>
               <span class="links_name">Log out</span>
             </a>
