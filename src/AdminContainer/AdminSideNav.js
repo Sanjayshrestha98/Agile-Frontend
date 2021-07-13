@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 
-function AdminSideNav() {
+function AdminSideNav({toggle, toggleSidenav}) {
+
+  const [sideToggle, setSideToggle] = useState(toggle)
+
+
+  useEffect(() => {
+    setSideToggle(toggle)
+  },[toggle])
+
+
   return (
-    <div className="sidenavcontainer">
-      <div class="sidebar">
+    <div className={`sidenavcontainer `}>
+      <div class={`sidebar ${sideToggle && "toggle-on"}`}>
         <div class="logo-details">
           <i class='bx bxl-c-plus-plus'></i>
-          <span class="logo_name">Gaming</span>
+          <span class="logo_name" onClick = {() => toggleSidenav()}>Gaming</span>
         </div>
         <ul class="nav-links">
           <li>
