@@ -9,6 +9,11 @@ import AdminSideNav from './AdminContainer/AdminSideNav';
 import AddProduct from './AdminContainer/AddProduct';
 import AdminContainer from './AdminContainer/AdminContainer';
 
+import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import 'bootstrap-css-only/css/bootstrap.min.css'; 
+import 'mdbreact/dist/css/mdb.css';
+
+
 function App() {
 
   const [isAdmin, setIsAdmin] = useState(false);
