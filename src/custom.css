@@ -883,7 +883,6 @@ nav .profile-details i{
 
 }
 
-
 .toggle-on .navicons-toggle-on{
   visibility: visible !important;
   transition: 2s ease-in-out;
@@ -908,4 +907,15 @@ float: left;
 
 .btn-addproduct{
   margin-top: 30px;
+  width: 30%;
+}
+
+.addproductform{
+  height: fit-content;
+  /* margin-bottom: 20px; */
+}
+
+.bottombutton{
+  /* margin-top: 200px; */
+  text-align: center;
 }

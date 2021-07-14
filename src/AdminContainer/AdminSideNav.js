@@ -5,8 +5,9 @@ import { useState } from 'react'
 import { BiLogOut } from 'react-icons/bi';
 import { RiDashboardFill, RiFileList3Fill, RiShoppingCartFill } from 'react-icons/ri';
 import { ImMenu } from 'react-icons/im';
-import { BiChevronDownCircle } from 'react-icons/bi'
-
+import { BiChevronDownCircle } from 'react-icons/bi';
+import { IoMdPersonAdd } from 'react-icons/io';
+import { CgUserList } from 'react-icons/cg';
 
 
 function AdminSideNav({ toggle, toggleSidenav }) {
@@ -42,7 +43,7 @@ function AdminSideNav({ toggle, toggleSidenav }) {
           <p className="sidenav-title">   Products  <BiChevronDownCircle /> </p>
 
           <li>
-            <a href="/admin/addproduct">
+            <a href="/admin/viewproduct">
               <i className='navicons-toggle-on'> <RiShoppingCartFill /> </i>
               <span className="links_name"> View Product</span>
               <i className='navicons'> <RiShoppingCartFill /> </i>
@@ -61,28 +62,28 @@ function AdminSideNav({ toggle, toggleSidenav }) {
 
           <p className="sidenav-title">   User  <BiChevronDownCircle /> </p>
           <li>
-            <a href="/admin/order">
-              <i className='navicons-toggle-on'> <RiFileList3Fill /> </i>
+            <a href="/admin/viewuser">
+              <i className='navicons-toggle-on'> <CgUserList /> </i>
 
               <span className="links_name">User list</span>
-              <i className='navicons'> <RiFileList3Fill /> </i>
+              <i className='navicons'> <CgUserList /> </i>
 
             </a>
           </li>
 
           <li>
-            <a href="/admin/order">
-              <i className='navicons-toggle-on'> <RiFileList3Fill /> </i>
+            <a href="/admin/adduser">
+              <i className='navicons-toggle-on'> <IoMdPersonAdd /> </i>
 
               <span className="links_name">Add User</span>
-              <i className='navicons'> <RiFileList3Fill /> </i>
+              <i className='navicons'> <IoMdPersonAdd /> </i>
 
             </a>
           </li>
 
           <p className="sidenav-title">   Order  <BiChevronDownCircle /> </p>
           <li>
-            <a href="/admin/order">
+            <a href="/admin/vieworder">
               <i className='navicons-toggle-on'> <RiFileList3Fill /> </i>
               <span className="links_name">Order list</span>
               <i className='navicons'> <RiFileList3Fill /> </i>
@@ -91,7 +92,7 @@ function AdminSideNav({ toggle, toggleSidenav }) {
 
           <p className="sidenav-title">   FAQs  <BiChevronDownCircle /> </p>
           <li>
-            <a href="/admin/order">
+            <a href="/admin/faq">
               <i className='navicons-toggle-on'> <RiFileList3Fill /> </i>
               <span className="links_name">FAQ list</span>
               <i className='navicons'> <RiFileList3Fill /> </i>
@@ -105,8 +106,6 @@ function AdminSideNav({ toggle, toggleSidenav }) {
               <i className='navicons'> <BiLogOut /> </i>
             </a>
           </li>
-
-
         </ul>
       </div>
     </div>
