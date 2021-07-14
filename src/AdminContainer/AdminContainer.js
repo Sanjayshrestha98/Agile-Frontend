@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 
 import { Route } from "react-router-dom";
-import AddProduct from './AddProduct';
+import AddProduct from './Product/AddProduct';
 import AdminDashboard from './AdminDashboard';
 import AdminSideNav from './AdminSideNav';
 import Orderlist from './Orderlist';
