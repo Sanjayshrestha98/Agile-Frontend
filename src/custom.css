@@ -119,7 +119,6 @@ color: red;
     padding: var(--input-padding-y) var(--input-padding-x);
     height: auto;
     width: 100%;
-    /* border-radius: 2rem; */
   }
   
   .form-label-group>label {
@@ -127,7 +126,7 @@ color: red;
     top: 0px;
     left: 6px;
     display: block;
-    /* width: 100%; */
+    width: 100%;
     margin-bottom: 0;
     /* Override default `<label>` margin */
     line-height: 1.5;
@@ -442,7 +441,8 @@ color: red;
 .sidebar .nav-links li{
   position: relative;
   list-style: none;
-  height: 50px;
+  height: 60px;
+  margin-left: -33px;
 }
 .sidebar .nav-links li a{
   height: 100%;
@@ -460,20 +460,21 @@ color: red;
 }
 .sidebar .nav-links li i{
   min-width: 60px;
+  margin-left: auto;
   text-align: center;
-  font-size: 18px;
+  font-size: 24px;
   color: #fff;
 }
 .sidebar .nav-links li a .links_name{
   color: #fff;
-  font-size: 15px;
+  font-size: 15px; 
   font-weight: 400;
   white-space: nowrap;
 }
 .sidebar .nav-links .log_out{
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 90%;
 }
 .home-section{
   position: relative;
@@ -748,8 +749,10 @@ nav .profile-details i{
   font-weight: 400;
   color: #333;
 }
+
+
 /* Responsive Media Query */
-@media (max-width: 1240px) {
+/* @media (max-width: 1240px) {
   .sidebar{
     width: 60px;
   }
@@ -761,7 +764,7 @@ nav .profile-details i{
     left: 60px;
   }
   .sidebar.active ~ .home-section{
-    /* width: calc(100% - 220px); */
+    width: calc(100% - 220px);
     overflow: hidden;
     left: 220px;
   }
@@ -815,23 +818,94 @@ nav .profile-details i{
   .sidebar.active ~ .home-section nav .profile-details{
     display: none;
   }
+} */
+
+.logo_name{
+  background-color: transparent;
+  width: 100%;
+  border: none;
 }
 
 .admin-wrapper{
   padding: 50px;
-  margin-left: 150px;
+  margin-left: 50px;
+  transition: 0.4s ease;
 }
 
 .sidebar{
-  left: -100px;
+  left: -175px;
+  z-index: 1;
   transition: 0.4s ease;
 }
 .toggle-on{
   left: 0;
+  z-index: 1;
   transition: 0.4s ease;
 }
 
 .wrapper-toggle{
   margin-left: 12%;
   transition: 0.4s ease;
+}
+
+.navicons{
+  float: right;
+}
+
+.sidenavcontainer{
+  z-index: 1;
+}
+
+
+.sidenav-title{
+  color: white;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: -5px;
+  opacity: 0.5;
+}
+
+
+.sidebar .navicons{
+  visibility: visible; 
+}
+
+
+.toggle-on .navicons{
+  visibility: hidden !important;
+  transition: ease-in-out;
+}
+
+.sidebar .navicons-toggle-on{
+  visibility: hidden; 
+  margin: auto;
+  transition: 2s ease-in-out;
+
+}
+
+
+.toggle-on .navicons-toggle-on{
+  visibility: visible !important;
+  transition: 2s ease-in-out;
+}
+
+.bottomicon{
+  bottom: 0 !important;
+  position: absolute !important;
+  width: 100%;
+}
+
+.leftfields{
+width: 49%;
+float: left;
+}
+
+.rightfields{
+  width: 49%;
+  float: right;
+
+}
+
+.btn-addproduct{
+  margin-top: 30px;
 }

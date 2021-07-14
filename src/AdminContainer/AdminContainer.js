@@ -6,6 +6,7 @@ import { Route } from "react-router-dom";
 import AddProduct from './AddProduct';
 import AdminDashboard from './AdminDashboard';
 import AdminSideNav from './AdminSideNav';
+import Orderlist from './Orderlist';
 
 const AdminContainer = () => {
 
@@ -20,6 +21,7 @@ const AdminContainer = () => {
             <div className={`admin-wrapper ${toggle && "wrapper-toggle"}`}>
                 <Route path="/admin/dashboard" component={AdminDashboard} />
                 <Route path="/admin/addproduct" component={AddProduct} />
+                <Route path = "/admin/order" component = {Orderlist}/>
             </div>
         </>
     )

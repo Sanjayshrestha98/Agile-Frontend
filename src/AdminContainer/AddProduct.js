@@ -73,113 +73,129 @@ function AddProduct() {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
-                <div className="addproductform">
-                    <div className="col-md-12 col-lg-12">
-                        <h3 className="adminpage-headers mb-4">Add Products</h3>
+                <div>
+                    <Form>
+                        <div className="addproductform">
 
-                        <Form>
-                            <div className="form-label-group form-control">
-                                <Field
-                                    type="text" name="productname" id="productname" placeholder="Productname"
+                            <h3 className="adminpage-headers mb-4">Add Products</h3>
 
-                                />
-                                <label htmlFor="productname">Product Name</label>
-                                <ErrorMessage name='productname' render={msg => <div className="error">{msg}</div>} />
+                            <div className="leftfields">
+                                <p>
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="text" name="productname" id="productname" placeholder="Productname"
+
+                                        />
+                                        <label htmlFor="productname">Product Name</label>
+                                        <ErrorMessage name='productname' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="text" name="platform" id="platform" placeholder="Platform"
+
+                                        />
+                                        <label htmlFor="platform">Platform</label>
+                                        <ErrorMessage name='platform' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="publisher" name="publisher" id="publisher" placeholder="publisher"
+
+                                        />
+                                        <label htmlFor="publisher">Publisher</label>
+                                        <ErrorMessage name='publisher' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="file" name="image" id="image" placeholder="Image"
+
+                                        />
+                                        <label htmlFor="image">Image</label>
+                                        <ErrorMessage name='image' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="genre" name="genre" id="genre" placeholder="Genre"
+
+                                        />
+                                        <label htmlFor="genre">Genre</label>
+                                        <ErrorMessage name='genre' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+                                </p>
                             </div>
 
-                            <div className="form-label-group form-control">
-                                <Field
-                                    type="text" name="platform" id="platform" placeholder="Platform"
+                            <div className="rightfields">
+                                <p>
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="text" name="release_date" id="release_date" placeholder="Released On"
 
-                                />
-                                <label htmlFor="platform">Platform</label>
-                                <ErrorMessage name='platform' render={msg => <div className="error">{msg}</div>} />
+                                        />
+                                        <label htmlFor="release_date">Released On</label>
+                                        <ErrorMessage name='release_date' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+
+
+                                    <div className=" form-label-group form-control">
+                                        <label htmlFor="system_requirements">System Requirements</label>
+
+                                        <Field
+                                            type="textarea" name="system_requirements" id="system_requirements" placeholder="System Requirements"
+
+                                        />
+                                        <ErrorMessage name='system_requirements' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="text" name="instock" id="instock" placeholder="In Stock"
+
+                                        />
+                                        <label htmlFor="instock">In Stock</label>
+
+                                        <ErrorMessage name='instock' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="textarea" name="description" id="description" placeholder="Description"
+
+                                        />
+                                        <label htmlFor="description">Description</label>
+                                        <ErrorMessage name='description' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+
+                                    <div className="form-label-group form-control">
+                                        <Field type="file" name="trailer" id="trailer" placeholder="Trailer"
+                                        />
+                                        <label htmlFor="trailer">Trailer</label>
+
+                                        <ErrorMessage name="trailer" render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="addproductform">
+
+                            <div className="col-md-12 col-lg-12">
+                                <button className="btn btn-lg btn-primary btn-block btn-addproduct text-uppercase font-weight-bold mb-2"
+                                    type="submit" >
+                                    Add Product
+                                </button>
+                                <p className="registerprompt">View Your Added Products   <a href="#">Here</a></p>
+
                             </div>
 
-                            <div className="form-label-group form-control">
-                                <Field
-                                    type="publisher" name="publisher" id="publisher" placeholder="publisher"
-
-                                />
-                                <label htmlFor="publisher">Publisher</label>
-                                <ErrorMessage name='publisher' render={msg => <div className="error">{msg}</div>} />
-                            </div>
-
-                            <div className="form-label-group form-control">
-                                <Field
-                                    type="file" name="image" id="image" placeholder="Image"
-
-                                />
-                                <label htmlFor="image">Image</label>
-                                <ErrorMessage name='image' render={msg => <div className="error">{msg}</div>} />
-                            </div>
-
-                            <div className="form-label-group form-control">
-                                <Field
-                                    type="genre" name="genre" id="genre" placeholder="Genre"
-
-                                />
-                                <label htmlFor="genre">Genre</label>
-                                <ErrorMessage name='genre' render={msg => <div className="error">{msg}</div>} />
-                            </div>
-
-                            <div className="form-label-group form-control">
-                                <Field
-                                    type="text" name="release_date" id="release_date" placeholder="Released On"
-
-                                />
-                                <label htmlFor="release_date">Released On</label>
-                                <ErrorMessage name='productname' render={msg => <div className="error">{msg}</div>} />
-                            </div>
-
-
-                            <div className=" form-label-group form-control">
-                            <label htmlFor="system_requirements">System Requirements</label>
-
-                                <Field
-                                    type="textarea" name="system_requirements" id="system_requirements" placeholder="System Requirements"
-
-                                />
-                                <ErrorMessage name='productname' render={msg => <div className="error">{msg}</div>} />
-                            </div>
-
-                            <div className="form-label-group form-control">
-                                <Field
-                                    type="text" name="instock" id="instock" placeholder="In Stock"
-
-                                />
-                                <label htmlFor="instock">In Stock</label>
-
-                                <ErrorMessage name='instock' render={msg => <div className="error">{msg}</div>} />
-                            </div>
-
-                            <div className="form-label-group form-control">
-                                <Field
-                                    type="textarea" name="description" id="description" placeholder="Description"
-
-                                />
-                                <label htmlFor="description">Description</label>
-                                <ErrorMessage name='description' render={msg => <div className="error">{msg}</div>} />
-                            </div>
-
-                            <div className="form-label-group form-control">
-                                <Field type="file" name="trailer" id="trailer" placeholder="Trailer"
-                                />
-                                <label htmlFor="trailer">Trailer</label>
-
-                                <ErrorMessage name="trailer" render={msg => <div className="error">{msg}</div>} />
-                            </div>
-
-                            <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                                type="submit"
-                            >
-                                Add Product
-                            </button>
-                            <p className="registerprompt">View Your Added Products   <a href="#">Here</a></p>
-                        </Form>
-                    </div>
+                        </div>
+                    </Form>
                 </div>
             </Formik>
+
             <ToastContainer />
         </>
     )

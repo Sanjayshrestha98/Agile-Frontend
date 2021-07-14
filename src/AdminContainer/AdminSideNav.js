@@ -1,55 +1,114 @@
+import { Button } from 'bootstrap'
 import React, { Component } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { BiLogOut } from 'react-icons/bi';
+import { RiDashboardFill, RiFileList3Fill, RiShoppingCartFill } from 'react-icons/ri';
+import { ImMenu } from 'react-icons/im';
+import { BiChevronDownCircle } from 'react-icons/bi'
 
 
-function AdminSideNav({toggle, toggleSidenav}) {
+
+function AdminSideNav({ toggle, toggleSidenav }) {
 
   const [sideToggle, setSideToggle] = useState(toggle)
-
-
   useEffect(() => {
     setSideToggle(toggle)
-  },[toggle])
-
+  }, [toggle])
 
   return (
+
     <div className={`sidenavcontainer `}>
-      <div class={`sidebar ${sideToggle && "toggle-on"}`}>
-        <div class="logo-details">
-          <i class='bx bxl-c-plus-plus'></i>
-          <span class="logo_name" onClick = {() => toggleSidenav()}>Gaming</span>
+
+      <div className={`sidebar ${sideToggle && "toggle-on"}`}>
+        <div className="logo-details" >
+          <button className="logo_name"> Admin </button>
+          <i onClick={() => toggleSidenav()} className='navicons-toggle'> <ImMenu /> </i>
         </div>
-        <ul class="nav-links">
+        <ul className="nav-links">
+
+          <p className="sidenav-title">   Dashboard  <BiChevronDownCircle /> </p>
+
           <li>
             <a href="/admin/dashboard" class="active">
-              <i class='bx bx-grid-alt'></i>
-              <span class="links_name">Dashboard</span>
+              <i className='navicons-toggle-on'> <RiDashboardFill /> </i>
+
+              <img /><span className="links_name">Dashboard</span>
+              <i className='navicons'> <RiDashboardFill /> </i>
+
+            </a>
+          </li>
+
+          <p className="sidenav-title">   Products  <BiChevronDownCircle /> </p>
+
+          <li>
+            <a href="/admin/addproduct">
+              <i className='navicons-toggle-on'> <RiShoppingCartFill /> </i>
+              <span className="links_name"> View Product</span>
+              <i className='navicons'> <RiShoppingCartFill /> </i>
+
             </a>
           </li>
           <li>
             <a href="/admin/addproduct">
-              <i class='bx bx-box'></i>
-              <span class="links_name">Product</span>
+              <i className='navicons-toggle-on'> <RiShoppingCartFill /> </i>
+
+              <span className="links_name"> Add Product</span>
+              <i className='navicons'> <RiShoppingCartFill /> </i>
+
             </a>
           </li>
+
+          <p className="sidenav-title">   User  <BiChevronDownCircle /> </p>
           <li>
             <a href="/admin/order">
-              <i class='bx bx-list-ul'></i>
-              <span class="links_name">Order list</span>
+              <i className='navicons-toggle-on'> <RiFileList3Fill /> </i>
+
+              <span className="links_name">User list</span>
+              <i className='navicons'> <RiFileList3Fill /> </i>
+
             </a>
           </li>
 
-          <li class="log_out">
-            <a href="">
-              <i class='bx bx-log-out'></i>
-              <span class="links_name">Log out</span>
+          <li>
+            <a href="/admin/order">
+              <i className='navicons-toggle-on'> <RiFileList3Fill /> </i>
+
+              <span className="links_name">Add User</span>
+              <i className='navicons'> <RiFileList3Fill /> </i>
+
             </a>
           </li>
+
+          <p className="sidenav-title">   Order  <BiChevronDownCircle /> </p>
+          <li>
+            <a href="/admin/order">
+              <i className='navicons-toggle-on'> <RiFileList3Fill /> </i>
+              <span className="links_name">Order list</span>
+              <i className='navicons'> <RiFileList3Fill /> </i>
+            </a>
+          </li>
+
+          <p className="sidenav-title">   FAQs  <BiChevronDownCircle /> </p>
+          <li>
+            <a href="/admin/order">
+              <i className='navicons-toggle-on'> <RiFileList3Fill /> </i>
+              <span className="links_name">FAQ list</span>
+              <i className='navicons'> <RiFileList3Fill /> </i>
+            </a>
+          </li>
+
+          <li className="bottomicon">
+            <a href="">
+              <i className='navicons-toggle-on'> <BiLogOut /> </i>
+              <span className="links_name">Log out</span>
+              <i className='navicons'> <BiLogOut /> </i>
+            </a>
+          </li>
+
+
         </ul>
       </div>
-
-
     </div>
   )
 }
