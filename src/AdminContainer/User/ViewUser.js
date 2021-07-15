@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { MDBDataTable, } from 'mdbreact';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
-import { FaEdit } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md'
 
 function ViewUser() {
+
+  const [rowdata, setRowData] = useState([]);
+
+  useEffect(() => {
+
+    axios.get('http://localhost:90/getallusers')
+      .then((response) => {
+        setRowData(response.data)
+        console.log(response.data)
+
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+  }, [])
   const data = {
     columns: [
       {
@@ -49,54 +65,8 @@ function ViewUser() {
         width: 100
       }
     ],
-    rows: [
-      {
-        fullname: 'Sanjay Shrestha',
-        gender: 'Male',
-        email: 'sanjayshrestha969@gmail.com',
-        phone: '9861774998',
-        address: 'Kathmandu',
-        username: 'shrestha45',
-        action: <div><FaEdit className="editicon" />   <MdDelete className="deleteicon" /> </div>,
-      },
-      {
-        fullname: 'Safall Shakya',
-        gender: 'Male',
-        email: 'safall@gmail.com',
-        phone: '9861281474',
-        address: 'Baneshwor',
-        username: 'safall12',
-        action: <div><FaEdit className="editicon" />   <MdDelete className="deleteicon" /> </div>,
 
-      },
-      {
-        fullname: 'Sariyan Magar',
-        gender: 'Female',
-        email: 'sariyanmagar@gmail.com',
-        phone: '9861908460',
-        address: 'Gokarna',
-        username: 'sariyan09',
-        action: <div><FaEdit className="editicon" />   <MdDelete className="deleteicon" /> </div>,
-      },
-      {
-        fullname: 'Nikita Ojha',
-        gender: 'Female',
-        email: 'nikita2018@gmail.com',
-        phone: '9811276221',
-        address: 'Biratnagar',
-        username: 'ojha2018',
-        action: <div><FaEdit className="editicon" />   <MdDelete className="deleteicon" /> </div>,
-      },
-      {
-        fullname: 'Bhumika Lama',
-        gender: 'Female',
-        email: 'bhumikalama@gmail.com',
-        phone: '9811276221',
-        address: 'Swayambhu',
-        username: 'bhumikalama44',
-        action: <div><FaEdit className="editicon" />   <MdDelete className="deleteicon" /> </div>,
-      },
-    ]
+    rows: rowdata
 
   };
 
@@ -113,6 +83,7 @@ function ViewUser() {
       />
 
     </div>
+
   )
 
 }
