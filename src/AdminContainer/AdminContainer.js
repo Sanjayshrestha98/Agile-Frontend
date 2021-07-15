@@ -1,13 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
-
-
 import { Route } from "react-router-dom";
 import AddProduct from './Product/AddProduct';
 import AdminDashboard from './AdminDashboard';
 import AdminSideNav from './AdminSideNav';
 import Orderlist from './Orderlist';
 import ViewUser from './User/ViewUser';
+import AddUser from './User/AddUser';
 
 const AdminContainer = () => {
 
@@ -15,7 +14,6 @@ const AdminContainer = () => {
     const toggleSidenav = () => {
         setToggle(!toggle)
     }
-
     return (
         <>
             <AdminSideNav toggle={toggle} toggleSidenav={toggleSidenav} />
@@ -24,11 +22,10 @@ const AdminContainer = () => {
                 <Route path="/admin/addproduct" component={AddProduct} />
                 <Route path = "/admin/order" component = {Orderlist}/>
                 <Route path = "/admin/viewuser" component = {ViewUser}/>
-                
+                <Route path = "/admin/adduser" component= {AddUser}/>
             </div>
         </>
     )
-
 }
 
 

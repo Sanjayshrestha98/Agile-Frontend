@@ -1,10 +1,11 @@
 import { Button } from 'bootstrap'
 import React, { Component } from 'react'
-import { useEffect } from 'react'
+import { useEffect, Tooltip, OverlayTrigger } from 'react'
 import { useState } from 'react'
 import { BiLogOut } from 'react-icons/bi';
 import { RiDashboardFill, RiFileList3Fill, RiShoppingCartFill } from 'react-icons/ri';
 import { ImMenu } from 'react-icons/im';
+
 import { BiChevronDownCircle } from 'react-icons/bi';
 import { IoMdPersonAdd } from 'react-icons/io';
 import { CgUserList } from 'react-icons/cg';
@@ -104,10 +105,12 @@ function AdminSideNav({ toggle, toggleSidenav }) {
               <i className='navicons-toggle-on'> <BiLogOut /> </i>
               <span className="links_name">Log out</span>
               <i className='navicons'> <BiLogOut /> </i>
+
             </a>
           </li>
         </ul>
       </div>
+
     </div>
   )
 }

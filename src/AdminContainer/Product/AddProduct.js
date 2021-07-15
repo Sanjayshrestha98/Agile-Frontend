@@ -21,7 +21,6 @@ function AddProduct() {
         instock: '',
         description: '',
         trailer: '',
-
     }
 
     const notify = () => toast.error("Product Not Inserted", {
