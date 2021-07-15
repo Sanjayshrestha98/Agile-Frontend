@@ -5,14 +5,13 @@ import { useState } from 'react'
 import { BiLogOut } from 'react-icons/bi';
 import { RiDashboardFill, RiFileList3Fill, RiShoppingCartFill } from 'react-icons/ri';
 import { ImMenu } from 'react-icons/im';
-
 import { BiChevronDownCircle } from 'react-icons/bi';
+import { MdAddShoppingCart } from 'react-icons/md';
 import { IoMdPersonAdd } from 'react-icons/io';
 import { CgUserList } from 'react-icons/cg';
-
+import { AiFillQuestionCircle } from 'react-icons/ai';
 
 function AdminSideNav({ toggle, toggleSidenav }) {
-
   const [sideToggle, setSideToggle] = useState(toggle)
   useEffect(() => {
     setSideToggle(toggle)
@@ -53,10 +52,10 @@ function AdminSideNav({ toggle, toggleSidenav }) {
           </li>
           <li>
             <a href="/admin/addproduct">
-              <i className='navicons-toggle-on'> <RiShoppingCartFill /> </i>
+              <i className='navicons-toggle-on'> <MdAddShoppingCart /> </i>
 
               <span className="links_name"> Add Product</span>
-              <i className='navicons'> <RiShoppingCartFill /> </i>
+              <i className='navicons'> <MdAddShoppingCart /> </i>
 
             </a>
           </li>
@@ -94,9 +93,9 @@ function AdminSideNav({ toggle, toggleSidenav }) {
           <p className="sidenav-title">   FAQs  <BiChevronDownCircle /> </p>
           <li>
             <a href="/admin/faq">
-              <i className='navicons-toggle-on'> <RiFileList3Fill /> </i>
+              <i className='navicons-toggle-on'> <AiFillQuestionCircle /> </i>
               <span className="links_name">FAQ list</span>
-              <i className='navicons'> <RiFileList3Fill /> </i>
+              <i className='navicons'> <AiFillQuestionCircle /> </i>
             </a>
           </li>
 

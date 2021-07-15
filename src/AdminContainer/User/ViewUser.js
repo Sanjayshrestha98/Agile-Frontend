@@ -1,6 +1,8 @@
 import React from 'react';
 import { MDBDataTable, } from 'mdbreact';
 
+import { FaEdit } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md'
 
 function ViewUser() {
   const data = {
@@ -42,9 +44,9 @@ function ViewUser() {
         width: 100
       },
       {
-        label:'Action',
-        field:'action',
-        width:100
+        label: 'Action',
+        field: 'action',
+        width: 100
       }
     ],
     rows: [
@@ -55,8 +57,7 @@ function ViewUser() {
         phone: '9861774998',
         address: 'Kathmandu',
         username: 'shrestha45',
-        action:<div><button className="editbtn"> editbtn </button> <button className="deletebtn"> deletebtn </button> </div>,
-
+        action: <div><FaEdit className="editicon" />   <MdDelete className="deleteicon" /> </div>,
       },
       {
         fullname: 'Safall Shakya',
@@ -65,8 +66,7 @@ function ViewUser() {
         phone: '9861281474',
         address: 'Baneshwor',
         username: 'safall12',
-        action:<div><button className="editbtn"> editbtn </button> <button className="deletebtn"> deletebtn </button> </div>,
-        
+        action: <div><FaEdit className="editicon" />   <MdDelete className="deleteicon" /> </div>,
 
       },
       {
@@ -76,9 +76,7 @@ function ViewUser() {
         phone: '9861908460',
         address: 'Gokarna',
         username: 'sariyan09',
-        action:<div><button className="editbtn"> editbtn </button> <button className="deletebtn"> deletebtn </button> </div>,
-
-
+        action: <div><FaEdit className="editicon" />   <MdDelete className="deleteicon" /> </div>,
       },
       {
         fullname: 'Nikita Ojha',
@@ -87,9 +85,7 @@ function ViewUser() {
         phone: '9811276221',
         address: 'Biratnagar',
         username: 'ojha2018',
-        action:<div><button className="editbtn"> editbtn </button> <button className="deletebtn"> deletebtn </button> </div>,
-
-
+        action: <div><FaEdit className="editicon" />   <MdDelete className="deleteicon" /> </div>,
       },
       {
         fullname: 'Bhumika Lama',
@@ -98,11 +94,10 @@ function ViewUser() {
         phone: '9811276221',
         address: 'Swayambhu',
         username: 'bhumikalama44',
-        action:<div><button className="editbtn"> editbtn </button> <button className="deletebtn"> deletebtn </button> </div>,
-
+        action: <div><FaEdit className="editicon" />   <MdDelete className="deleteicon" /> </div>,
       },
     ]
-    
+
   };
 
   return (
