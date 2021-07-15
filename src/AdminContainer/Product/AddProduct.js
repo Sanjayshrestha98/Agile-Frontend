@@ -1,26 +1,24 @@
 import React from 'react';
 import axios from 'axios';
-
 import { ToastContainer, toast } from 'react-toastify';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from "yup";
 
 function AddProduct() {
-
     const initialValues = {
         productname: '',
         platform: '',
         price: '',
         publisher: '',
-        image: '',
-        screenshots: '',
+        // image: '',
+        // screenshots: '',
         genre: '',
         release_date: '',
         system_requirements: '',
         instock: '',
         description: '',
-        trailer: '',
+        // trailer: '',
     }
 
     const notify = () => toast.error("Product Not Inserted", {
@@ -34,19 +32,17 @@ function AddProduct() {
     });
 
     const onSubmit = values => {
-        console.log('Form Data', values)
+        console.log('Formdata', values)
         const response = axios
-            .post(`http://localhost:90/addproduct`, values)
-            .then(result => {
+            .post(`http://localhost:90/add/product`, values).then(result => {
+                console.log(result.data)
                 if (result.data.success) {
-                    localStorage.setItem('token', result.data.token)
-                    localStorage.setItem('userid', result.data.userid)
-                    window.location.href = '/home'
-                } else {
+
+                } else {    
                     notify()
                 }
             }).catch(error => {
-                console.error("Error loggin in", error)
+                console.error("Error Registering User", error)
             })
     }
 
@@ -55,14 +51,14 @@ function AddProduct() {
         platform: Yup.string().required('Required'),
         price: Yup.string().required('Required'),
         publisher: Yup.string().required('Required'),
-        image: Yup.string().required('Required'),
-        screenshots: Yup.string().required('Required'),
+        // image: Yup.string().required('Required'),
+        // screenshots: Yup.string().required('Required'),
         genre: Yup.string().required('Required'),
         release_date: Yup.string().required('Required'),
         system_requirements: Yup.string().required('Required'),
         instock: Yup.string().required('Required'),
         description: Yup.string().required('Required'),
-        trailer: Yup.string().required('Required'),
+        // trailer: Yup.string().required('Required'),
     })
 
     return (
@@ -80,8 +76,9 @@ function AddProduct() {
                     <div className="addproductform">
 
                         <div className="row">
-                            <div className="col-md-6">
-                                <Form>
+                            <Form>
+                                <div className="col-md-6">
+
 
                                     <div className="form-label-group form-control">
                                         <Field
@@ -127,11 +124,10 @@ function AddProduct() {
                                         <label htmlFor="genre">Genre</label>
                                         <ErrorMessage name='genre' render={msg => <div className="error">{msg}</div>} />
                                     </div>
-                                </Form>
 
-                            </div>
-                            <div className="col-md-6">
-                                <Form>
+                                </div>
+                                <div className="col-md-6">
+
                                     <div className="form-label-group form-control">
                                         <Field
                                             type="text" name="release_date" id="release_date" placeholder="Released On"
@@ -177,21 +173,17 @@ function AddProduct() {
 
                                         <ErrorMessage name="trailer" render={msg => <div className="error">{msg}</div>} />
                                     </div>
-                                </Form>
-                            </div>
+                                </div>
+                            </Form>
                         </div>
-
-
 
                     </div>
 
                     <div className="bottombutton">
                         <button className="btn btn-lg btn-primary btn-block btn-addproduct text-uppercase font-weight-bold"
-                            type="submit" > Add Product </button>
+                            type="submit"> Add Product </button>
                     </div>
-
                     <p className="registerprompt">View Your Added Products   <a href="#">Here</a></p>
-
                 </div>
 
             </Formik>
