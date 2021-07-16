@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function ViewUser() {
 
-  const [rowdata, setRowData] = useState([]);
+  const [data, setRowData] = useState([]);
 
   useEffect(() => {
 
@@ -21,7 +21,25 @@ function ViewUser() {
       })
 
   }, [])
-  const data = {
+
+  const rowdata = data.map(d =>{
+    return({
+      fullname: d.fullname,
+      gender: d.gender,
+      email : d.email,
+      phone : d.phone,
+      address : d.address,
+      username : d.username,
+      action: <div>
+        <button>
+          edit
+        </button>
+      </div>
+    } 
+    )
+  })  
+
+  const dataTable = {
     columns: [
       {
         label: 'Fullname',
@@ -79,7 +97,7 @@ function ViewUser() {
       <MDBDataTable
         striped
         hover
-        data={data}
+        data={dataTable}
       />
 
     </div>

@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from "yup";
 
 function AddProduct() {
+
     const initialValues = {
         productname: '',
         platform: '',
@@ -31,20 +32,6 @@ function AddProduct() {
         progress: undefined,
     });
 
-    const onSubmit = values => {
-        console.log('Formdata', values)
-        const response = axios
-            .post(`http://localhost:90/add/product`, values).then(result => {
-                console.log(result.data)
-                if (result.data.success) {
-
-                } else {    
-                    notify()
-                }
-            }).catch(error => {
-                console.error("Error Registering User", error)
-            })
-    }
 
     const validationSchema = Yup.object({
         productname: Yup.string().required('Required'),
@@ -60,6 +47,21 @@ function AddProduct() {
         description: Yup.string().required('Required'),
         // trailer: Yup.string().required('Required'),
     })
+
+    const onSubmit = values => {
+        console.log('Formdata', values)
+        const result = axios
+            .post(`http://localhost:90/add/product`, values).then(result => {
+                console.log(result.data)
+                if (result.data.success) {
+
+                } else {
+                    notify()
+                }
+            }).catch(error => {
+                console.error("Error Registering User", error)
+            })
+    }
 
     return (
         <>
@@ -77,9 +79,7 @@ function AddProduct() {
 
                         <div className="row">
                             <Form>
-                                <div className="col-md-6">
-
-
+                                <div className="col-md-5">
                                     <div className="form-label-group form-control">
                                         <Field
                                             type="text" name="productname" id="productname" placeholder="Productname"
@@ -126,7 +126,8 @@ function AddProduct() {
                                     </div>
 
                                 </div>
-                                <div className="col-md-6">
+
+                                <div className="col-md-5">
 
                                     <div className="form-label-group form-control">
                                         <Field
@@ -174,15 +175,17 @@ function AddProduct() {
                                         <ErrorMessage name="trailer" render={msg => <div className="error">{msg}</div>} />
                                     </div>
                                 </div>
+
+                                <div className="bottombutton">
+                                    <button className="btn btn-lg btn-primary btn-block btn-addproduct text-uppercase font-weight-bold"
+                                        type="submit"> Add Product </button>
+                                </div>
                             </Form>
                         </div>
 
                     </div>
 
-                    <div className="bottombutton">
-                        <button className="btn btn-lg btn-primary btn-block btn-addproduct text-uppercase font-weight-bold"
-                            type="submit"> Add Product </button>
-                    </div>
+
                     <p className="registerprompt">View Your Added Products   <a href="#">Here</a></p>
                 </div>
 
@@ -191,4 +194,5 @@ function AddProduct() {
         </>
     )
 }
+
 export default AddProduct
