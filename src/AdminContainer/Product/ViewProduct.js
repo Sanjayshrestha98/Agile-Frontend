@@ -8,7 +8,7 @@ import { MdDelete } from 'react-icons/md'
 
 function ViewProduct() {
 
-    const [rowdata, setRowData] = useState([]);
+    const [data, setRowData] = useState([]);
 
     useEffect(() => {
 
@@ -23,50 +23,109 @@ function ViewProduct() {
             })
 
     }, [])
-    const data = {
+
+    const rowdata = data.map(d => {
+        return ({
+            productname: d.productname,
+            platform: d.platform,
+            price: d.price,
+            publisher: d.publisher,
+            image: d.image,
+            screenshots: d.screenshots,
+            genre: d.genre,
+            release_date: d.release_date,
+            system_requirements: d.system_requirements,
+            instock: d.instock,
+            description: d.description,
+            trailer: d.trailer,
+            action: <div>
+                <FaEdit className="editicon" />
+                <MdDelete className="deleteicon" />
+            </div>
+        }
+        )
+    })
+
+    const dataTable = {
         columns: [
             {
-                label: 'Fullname',
-                field: 'fullname',
+                label: 'Product Name',
+                field: 'productname',
                 sort: 'asc',
                 width: 150
             },
             {
-                label: 'Gender',
-                field: 'gender',
+                label: 'Platform',
+                field: 'platform',
                 sort: 'asc',
                 width: 270
             },
             {
-                label: 'Email',
-                field: 'email',
+                label: 'Price',
+                field: 'price',
                 sort: 'asc',
                 width: 200
             },
             {
-                label: 'Phone',
-                field: 'phone',
+                label: 'Publisher',
+                field: 'publisher',
                 sort: 'asc',
                 width: 100
             },
             {
-                label: 'Address',
-                field: 'address',
+                label: 'Image',
+                field: 'image',
                 sort: 'asc',
                 width: 150
             },
             {
-                label: 'Username',
-                field: 'username',
+                label: 'screenshots',
+                field: 'screenshots',
                 sort: 'asc',
                 width: 100
             },
             {
-                label: 'Action',
-                field: 'action',
+                label: 'genre',
+                field: 'genre',
                 width: 100
-            }
-        ],
+            },
+            {
+                label: 'release_date',
+                field: 'release_date',
+                sort: 'asc',
+                width: 100
+            },
+            {
+                label: 'system_requirements',
+                field: 'system_requirements',
+                sort: 'asc',
+                width: 100
+            },
+            {
+                label: 'instock',
+                field: 'instock',
+                sort: 'asc',
+                width: 100
+            },
+            {
+                label: 'description',
+                field: 'description',
+                sort: 'asc',
+                width: 100
+            },
+            {
+                label: 'trailer',
+                field: 'trailer',
+                sort: 'asc',
+                width: 100
+            },
+            {
+                label: 'action',
+                field: 'action',
+                sort: 'asc',
+                width: 100
+            },
+       ],
 
         rows: rowdata
 
@@ -81,7 +140,7 @@ function ViewProduct() {
             <MDBDataTable
                 striped
                 hover
-                data={data}
+                data={dataTable}
             />
 
         </div>

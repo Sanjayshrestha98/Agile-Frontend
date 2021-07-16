@@ -2,6 +2,8 @@ import React, { Component, useEffect, useState } from 'react';
 import { MDBDataTable, } from 'mdbreact';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { FaEdit } from 'react-icons/fa';
+import {MdDelete} from 'react-icons/md';
 
 
 function ViewUser() {
@@ -31,9 +33,8 @@ function ViewUser() {
       address : d.address,
       username : d.username,
       action: <div>
-        <button>
-          edit
-        </button>
+          <FaEdit className="editicon" />
+          <MdDelete className="deleteicon"/>
       </div>
     } 
     )

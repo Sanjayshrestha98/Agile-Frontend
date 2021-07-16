@@ -12,14 +12,11 @@ function AddProduct() {
         platform: '',
         price: '',
         publisher: '',
-        // image: '',
-        // screenshots: '',
         genre: '',
         release_date: '',
         system_requirements: '',
         instock: '',
         description: '',
-        // trailer: '',
     }
 
     const notify = () => toast.error("Product Not Inserted", {
@@ -36,16 +33,13 @@ function AddProduct() {
     const validationSchema = Yup.object({
         productname: Yup.string().required('Required'),
         platform: Yup.string().required('Required'),
-        price: Yup.string().required('Required'),
+        price: Yup.number().required('Required'),
         publisher: Yup.string().required('Required'),
-        // image: Yup.string().required('Required'),
-        // screenshots: Yup.string().required('Required'),
         genre: Yup.string().required('Required'),
         release_date: Yup.string().required('Required'),
         system_requirements: Yup.string().required('Required'),
         instock: Yup.string().required('Required'),
         description: Yup.string().required('Required'),
-        // trailer: Yup.string().required('Required'),
     })
 
     const onSubmit = values => {
@@ -54,6 +48,8 @@ function AddProduct() {
             .post(`http://localhost:90/add/product`, values).then(result => {
                 console.log(result.data)
                 if (result.data.success) {
+
+                    alert('akcjask')
 
                 } else {
                     notify()
@@ -87,6 +83,15 @@ function AddProduct() {
                                         />
                                         <label htmlFor="productname">Product Name</label>
                                         <ErrorMessage name='productname' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="number" name="price" id="price" placeholder="Price"
+
+                                        />
+                                        <label htmlFor="price">Price</label>
+                                        <ErrorMessage name='prie' render={msg => <div className="error">{msg}</div>} />
                                     </div>
 
                                     <div className="form-label-group form-control">
