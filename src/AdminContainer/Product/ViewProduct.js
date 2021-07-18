@@ -12,7 +12,6 @@ function ViewProduct({history}) {
     const [data, setRowData] = useState([]);
 
     useEffect(() => {
-
         axios.get('http://localhost:90/getallproducts')
             .then((response) => {
                 setRowData(response.data)
@@ -69,12 +68,6 @@ function ViewProduct({history}) {
     const dataTable = {
         columns: [
             {
-                label: 'Product ID',
-                field: 'productId',
-                sort: 'asc',
-                width: 150
-            },
-            {
                 label: 'Product Name',
                 field: 'productname',
                 sort: 'asc',
@@ -104,12 +97,12 @@ function ViewProduct({history}) {
                 sort: 'asc',
                 width: 150
             },
-            {
-                label: 'Screenshots',
-                field: 'screenshots',
-                sort: 'asc',
-                width: 100
-            },
+            // {
+            //     label: 'Screenshots',
+            //     field: 'screenshots',
+            //     sort: 'asc',
+            //     width: 100
+            // },
             {
                 label: 'Genre',
                 field: 'genre',
@@ -139,12 +132,12 @@ function ViewProduct({history}) {
                 sort: 'asc',
                 width: 100
             },
-            {
-                label: 'Trailer',
-                field: 'trailer',
-                sort: 'asc',
-                width: 100
-            },
+            // {
+            //     label: 'Trailer',
+            //     field: 'trailer',
+            //     sort: 'asc',
+            //     width: 100
+            // },
             {
                 label: 'Action',
                 field: 'action',

@@ -5,9 +5,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from "yup";
 
-function EditProduct({location}) { 
+function EditProduct({ location }) {
 
-const [data, setData] = useState({})
+    const [data, setData] = useState({})
 
     const errornotify = () => toast.error("Product Not Inserted", {
         position: "top-center",
@@ -28,7 +28,7 @@ const [data, setData] = useState({})
         draggable: true,
         progress: undefined,
     });
-    
+
     const validationSchema = Yup.object({
         productname: Yup.string().required('Required'),
         platform: Yup.string().required('Required'),
@@ -42,9 +42,11 @@ const [data, setData] = useState({})
     })
 
     const onSubmit = values => {
- 
+        const id = location.state.id
+
         const result = axios
-            .post(`http://localhost:90/update/product/:id`, values).then(result => {
+            .put(`http://localhost:90/update/product/` + id, values)
+            .then(result => {
                 console.log(result.data)
                 if (result.data.success) {
                     successnotify()
@@ -56,35 +58,35 @@ const [data, setData] = useState({})
             })
     }
 
-    const getData = () => { 
+    const getData = () => {
         const id = location.state.id
         axios
-        .get(`http://localhost:90/getsingleproduct/`+id ).then(result => {
-           console.log(result.data.productData)
-            if (result.data.success) {
-                setData(result.data.productData)
-                successnotify()
-            } else {
-                errornotify()
-            }
-        }).catch(error => {
-            console.error("Error Inserting Product", error)
-        })
+            .get(`http://localhost:90/getsingleproduct/` + id).then(result => {
+                console.log(result.data.productData)
+                if (result.data.success) {
+                    setData(result.data.productData)
+                    successnotify()
+                } else {
+                    errornotify()
+                }
+            }).catch(error => {
+                console.error("Error Inserting Product", error)
+            })
     }
 
     useEffect(() => {
         getData()
     }, [])
 
-    return(
-       <>
+    return (
+        <>
             <Formik
-            enableReinitialize={true}
+                enableReinitialize={true}
                 initialValues={{
                     productname: data?.productname,
                     platform: data?.platform,
                     price: data?.price,
-                    publisher: data?.price, 
+                    publisher: data?.publisher,
                     screenshots: '',
                     genre: data?.genre,
                     release_date: data?.release_date,
@@ -92,7 +94,7 @@ const [data, setData] = useState({})
                     instock: data?.instock,
                     description: data?.description,
                 }
-            }
+                }
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
@@ -111,14 +113,14 @@ const [data, setData] = useState({})
                                         <ErrorMessage name='productname' render={msg => <div className="error">{msg}</div>} />
                                     </div>
 
-                                    <div className="form-label-group form-control">
+                                    {/* <div className="form-label-group form-control">
                                         <Field
                                             type="number" name="price" id="price" placeholder="Price"
 
                                         />
                                         <label htmlFor="price">Price</label>
                                         <ErrorMessage name='prie' render={msg => <div className="error">{msg}</div>} />
-                                    </div>
+                                    </div> */}
 
                                     <div className="form-label-group form-control">
                                         <Field
@@ -147,17 +149,16 @@ const [data, setData] = useState({})
                                         <ErrorMessage name='image' render={msg => <div className="error">{msg}</div>} />
                                     </div>
 
-                                    <div className="form-label-group form-control">
+                                    {/* <div className="form-label-group form-control">
                                         <Field
                                             type="text" name="genre" id="genre" placeholder="Genre"
 
                                         />
                                         <label htmlFor="genre">Genre</label>
                                         <ErrorMessage name='genre' render={msg => <div className="error">{msg}</div>} />
-                                    </div>
+                                    </div> */}
 
                                 </div>
-
                                 <div className="col-md-5">
 
                                     <div className="form-label-group form-control">
@@ -209,13 +210,13 @@ const [data, setData] = useState({})
 
                                 <div className="bottombutton">
                                     <button className="btn btn-lg btn-primary btn-block btn-addproduct text-uppercase font-weight-bold"
-                                        type="submit"> Add Product </button>
+                                        type="submit"> Update Product </button>
                                 </div>
                             </Form>
                         </div>
 
                     </div>
-                    <p className="registerprompt">View Your Added Products   <a href="#">Here</a></p>
+                    <p className="registerprompt">View Your Added Products   <a href="/admin/viewproduct">Here</a></p>
                 </div>
 
             </Formik>

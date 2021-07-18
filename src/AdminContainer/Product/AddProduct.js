@@ -62,7 +62,16 @@ const imageInputRef = React.useRef();
         const formData = new FormData();
 
         formData.append("productname" , values.productname)
+        formData.append("platform" , values.platform)
+        formData.append("price" , values.price)
+        formData.append("publisher" , values.publisher)
         formData.append("image", image) 
+        formData.append("genre", values.genre) 
+        formData.append("screenshots" , multiple)
+        formData.append("release_date" , values.release_date)
+        formData.append("system_requirements" , values.system_requirements)
+        formData.append("instock" , values.instock)
+        formData.append("description" , values.description)
 
         console.log(formData)
 
