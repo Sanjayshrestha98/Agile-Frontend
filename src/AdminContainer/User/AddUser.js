@@ -93,10 +93,23 @@ function AddUser() {
                             </div>
 
 
-                            <div className="form-label-group form-control">
-                                <Field type="text" name="gender" id="gender" placeholder="Gender"
-                                />
+                            <div className="form-control">
+
                                 <label htmlFor="gender">Gender</label>
+                                <div role="group" aria-labelledby="my-radio-group">
+                                    <label>
+                                        <Field type="radio" name="gender" value="Male" />
+                                        Male
+                                    </label>
+                                    <label style = {{marginLeft : "20px"}}>
+                                        <Field type="radio" name="gender" value="Female" />
+                                        Female
+                                    </label>
+                                    <label style = {{marginLeft : "20px"}}>
+                                        <Field type="radio" name="gender" value="Other" />
+                                        Other
+                                    </label>
+                                </div>
                                 <ErrorMessage name='gender' render={msg => <div className="error">{msg}</div>} />
                             </div>
 

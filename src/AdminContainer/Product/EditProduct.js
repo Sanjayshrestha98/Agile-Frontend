@@ -4,25 +4,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from "yup";
-import { MdDelete } from 'react-icons/md'
 
-function AddProduct() {
-const [multiple, setMultiple] = useState([])
-const [image, setImage] = useState();
-const imageInputRef = React.useRef();
-    const initialValues = {
-        productname: '',
-        platform: '',
-        price: '',
-        publisher: '',
-        image: '',
-        screenshots: '',
-        genre: '',
-        release_date: '',
-        system_requirements: '',
-        instock: '',
-        description: '',
-    }
+function EditProduct({location}) { 
+
+const [data, setData] = useState({})
 
     const errornotify = () => toast.error("Product Not Inserted", {
         position: "top-center",
@@ -34,7 +19,7 @@ const imageInputRef = React.useRef();
         progress: undefined,
     });
 
-    const successnotify = () => toast.error("Product Inserted Successfully", {
+    const successnotify = () => toast.error("Product Loaded Successfully", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -43,8 +28,7 @@ const imageInputRef = React.useRef();
         draggable: true,
         progress: undefined,
     });
-
-
+    
     const validationSchema = Yup.object({
         productname: Yup.string().required('Required'),
         platform: Yup.string().required('Required'),
@@ -58,16 +42,9 @@ const imageInputRef = React.useRef();
     })
 
     const onSubmit = values => {
-        console.log('Formdata', values)
-        const formData = new FormData();
-
-        formData.append("productname" , values.productname)
-        formData.append("image", image) 
-
-        console.log(formData)
-
-         axios
-            .post(`http://localhost:90/add/product`, formData).then(result => {
+ 
+        const result = axios
+            .post(`http://localhost:90/update/product/:id`, values).then(result => {
                 console.log(result.data)
                 if (result.data.success) {
                     successnotify()
@@ -79,39 +56,48 @@ const imageInputRef = React.useRef();
             })
     }
 
-    const addMultiple = (e) => {
- 
-
-        for (var i = 0; i <  e.currentTarget.files.length; i++) {
-            let val =  e.currentTarget.files[i]
-            let url = URL.createObjectURL(val)
-            
-            let checkFile = multiple.indexOf(url)
-            if(checkFile === -1){ 
-                setMultiple(old => [...old, url])
+    const getData = () => { 
+        const id = location.state.id
+        axios
+        .get(`http://localhost:90/getsingleproduct/`+id ).then(result => {
+           console.log(result.data.productData)
+            if (result.data.success) {
+                setData(result.data.productData)
+                successnotify()
+            } else {
+                errornotify()
             }
-        }
-      
+        }).catch(error => {
+            console.error("Error Inserting Product", error)
+        })
     }
 
-    const removeFromMultiple = (index) => {
-        multiple.splice(index, 1)
-        setMultiple(old => [...old])
-        imageInputRef.current.value = "";
-    }
- 
-    return (
-        <>
+    useEffect(() => {
+        getData()
+    }, [])
+
+    return(
+       <>
             <Formik
-                initialValues={initialValues}
+            enableReinitialize={true}
+                initialValues={{
+                    productname: data?.productname,
+                    platform: data?.platform,
+                    price: data?.price,
+                    publisher: data?.price, 
+                    screenshots: '',
+                    genre: data?.genre,
+                    release_date: data?.release_date,
+                    system_requirements: data?.system_requirements,
+                    instock: data?.instock,
+                    description: data?.description,
+                }
+            }
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
                 <div>
-
-                    <h3 className="adminpage-headers mb-4"> Add Products </h3>
-
-
+                    <h3 className="adminpage-headers mb-4"> Edit Products </h3>
                     <div className="addproductform">
 
                         <div className="row">
@@ -120,8 +106,7 @@ const imageInputRef = React.useRef();
                                     <div className="form-label-group form-control">
                                         <Field
                                             type="text" name="productname" id="productname" placeholder="Productname"
-
-                                        />
+                                        ></Field>
                                         <label htmlFor="productname">Product Name</label>
                                         <ErrorMessage name='productname' render={msg => <div className="error">{msg}</div>} />
                                     </div>
@@ -154,36 +139,13 @@ const imageInputRef = React.useRef();
                                     </div>
 
                                     <div className="form-label-group form-control">
-                                        <input
+                                        <Field
                                             type="file" name="image" id="image" placeholder="Image"
-                                                onChange = {(e) => {setImage(e.currentTarget.files[0])
-                                                        console.log(e.currentTarget.files[0])}}
+
                                         />
                                         <label htmlFor="image">Image</label>
                                         <ErrorMessage name='image' render={msg => <div className="error">{msg}</div>} />
                                     </div>
-
-                                    <div className="form-label-group form-control">
-                                        <input
-                                            type="file" name="screen" id="screen" placeholder="Image"
-                                            multiple
-                                            onChange = {(e) => addMultiple(e)}
-                                            ref = {imageInputRef}
-                                        />
-                                        <label htmlFor="screen">Screenshots</label>
-                                        <ErrorMessage name='screen' render={msg => <div className="error">{msg}</div>} />
-
-
-                                        {multiple.length > 0 && multiple.map((val, index) => (
-                                            <div style = {{position : "relative", width : "200px"}}>
-                                         <MdDelete  className="deleteicon" style = {{position : "absolute", right : "0",fontSize : "40px", background : "white", cursor : "pointer"}}
-                                         onClick = {() => removeFromMultiple(index)}/>
-                                            <img src = {val} className = "img-fluid ml-5" style = {{height : "200px", width : "100%"}}/>
-                                            </div>
-                                        ))}
-                                    </div>
-
-
 
                                     <div className="form-label-group form-control">
                                         <Field
@@ -253,8 +215,6 @@ const imageInputRef = React.useRef();
                         </div>
 
                     </div>
-
-
                     <p className="registerprompt">View Your Added Products   <a href="#">Here</a></p>
                 </div>
 
@@ -264,4 +224,4 @@ const imageInputRef = React.useRef();
     )
 }
 
-export default AddProduct
+export default EditProduct

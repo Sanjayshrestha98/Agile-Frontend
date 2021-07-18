@@ -11,7 +11,6 @@ function ViewUser() {
   const [data, setRowData] = useState([]);
 
   useEffect(() => {
-
     axios.get('http://localhost:90/getallusers')
       .then((response) => {
         setRowData(response.data)

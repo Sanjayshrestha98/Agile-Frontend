@@ -5,8 +5,9 @@ import axios from 'axios';
 import { MDBDataTable, } from 'mdbreact';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md'
+import { withRouter } from 'react-router-dom';
 
-function ViewProduct() {
+function ViewProduct({history}) {
 
     const [data, setRowData] = useState([]);
 
@@ -24,13 +25,32 @@ function ViewProduct() {
 
     }, [])
 
+   const deletepro = (_id)=>{
+       console.log(_id)
+        axios.delete('http://localhost:90/deleteproduct/' + _id)
+        .then((response)=>{
+            console.log(response.data.message)
+            window.location.reload()
+        }).catch((err)=>{
+
+            console.log(err.message)
+        })
+   }
+
+   const goToEdit = (id) => {
+    history.push("/admin/editproduct", {
+        id : id
+    })
+   }
+
     const rowdata = data.map(d => {
         return ({
+            productId: d._id,
             productname: d.productname,
             platform: d.platform,
             price: d.price,
             publisher: d.publisher,
-            image: d.image,
+            image: <img src = {`http://localhost:90/${d.image}`} style = {{height : "200px"}}/>,
             screenshots: d.screenshots,
             genre: d.genre,
             release_date: d.release_date,
@@ -39,8 +59,8 @@ function ViewProduct() {
             description: d.description,
             trailer: d.trailer,
             action: <div>
-                <FaEdit className="editicon" />
-                <MdDelete className="deleteicon" />
+                <FaEdit onClick = {() => goToEdit(d._id)} className="editicon" />
+                <button onClick={() => deletepro(d._id)}><MdDelete  className="deleteicon" /></button>
             </div>
         }
         )
@@ -48,6 +68,12 @@ function ViewProduct() {
 
     const dataTable = {
         columns: [
+            {
+                label: 'Product ID',
+                field: 'productId',
+                sort: 'asc',
+                width: 150
+            },
             {
                 label: 'Product Name',
                 field: 'productname',
@@ -79,48 +105,48 @@ function ViewProduct() {
                 width: 150
             },
             {
-                label: 'screenshots',
+                label: 'Screenshots',
                 field: 'screenshots',
                 sort: 'asc',
                 width: 100
             },
             {
-                label: 'genre',
+                label: 'Genre',
                 field: 'genre',
                 width: 100
             },
             {
-                label: 'release_date',
+                label: 'Release Date',
                 field: 'release_date',
                 sort: 'asc',
                 width: 100
             },
             {
-                label: 'system_requirements',
+                label: 'System Requirements',
                 field: 'system_requirements',
                 sort: 'asc',
                 width: 100
             },
             {
-                label: 'instock',
+                label: 'In-Stock',
                 field: 'instock',
                 sort: 'asc',
                 width: 100
             },
             {
-                label: 'description',
+                label: 'Description',
                 field: 'description',
                 sort: 'asc',
                 width: 100
             },
             {
-                label: 'trailer',
+                label: 'Trailer',
                 field: 'trailer',
                 sort: 'asc',
                 width: 100
             },
             {
-                label: 'action',
+                label: 'Action',
                 field: 'action',
                 sort: 'asc',
                 width: 100
@@ -148,4 +174,4 @@ function ViewProduct() {
     )
 }
 
-export default ViewProduct
+export default withRouter(ViewProduct)

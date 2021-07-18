@@ -9,6 +9,7 @@ import ViewUser from './User/ViewUser';
 import AddUser from './User/AddUser';
 import ViewProduct from './Product/ViewProduct'
 import AdminLogin from './AdminLogin';
+import EditProduct from './Product/EditProduct';
 
 const AdminContainer = () => {
 
@@ -27,6 +28,8 @@ const AdminContainer = () => {
                 <Route path = "/admin/adduser" component= {AddUser}/>
                 <Route path = "/admin/login" component = {AdminLogin}/>
                 <Route path = "/admin/viewproduct" component= {ViewProduct}/>
+                <Route path = "/admin/editproduct" component= {EditProduct}/>
+
             </div>
         </>
     )

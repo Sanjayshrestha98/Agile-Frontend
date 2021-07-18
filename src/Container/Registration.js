@@ -35,20 +35,21 @@ const validationSchema = Yup.object({
     gender: Yup.string().required('required'),
     username: Yup.string().required('Required'),
     password: Yup.string().required('Required'),
+    confirmpassword: Yup.string().required('Required'),
     confirmpassword: Yup.string().when("password", {
         is: val => (val && val.length > 0 ? true : false),
         then: Yup.string().oneOf(
-          [Yup.ref("password")],
-          "Both password need to be the same"
+            [Yup.ref("password")],
+            "Both password need to be the same"
         )
-      })
+    })
 
 })
 
 const onSubmit = values => {
     console.log('Formdata', values)
     const response = axios
-        .post(`http://localhost:90/signup`, values).then(result => {
+        .post(`https://gogo-gaming.herokuapp.com/signup`, values).then(result => {
             console.log(result.data)
             if (result.data.success) {
 
@@ -70,7 +71,6 @@ function Register() {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
-
                 <div className="registerform">
                     <div className="col-md-12 col-lg-12">
                         <h3 className="form-heading mb-4">Fill out the details below.</h3>
@@ -140,13 +140,11 @@ function Register() {
                                 <ErrorMessage name="confirmpassword" render={msg => <div className="error">{msg}</div>} />
                             </div>
 
-                            
-
                             <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
 
                                 type="submit"
                             >
-                               Confirm
+                                Confirm
                             </button>
 
                             <p className="registerprompt">Already an User ? Login Now. Click<a href="/login">Here</a></p>
