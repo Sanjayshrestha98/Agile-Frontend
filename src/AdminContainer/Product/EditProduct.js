@@ -32,7 +32,8 @@ function EditProduct({ location }) {
     const validationSchema = Yup.object({
         productname: Yup.string().required('Required'),
         platform: Yup.string().required('Required'),
-        price: Yup.number().required('Required'),
+        buy_price: Yup.number().required('Required'),
+        rent_price: Yup.number().required('Required'),
         publisher: Yup.string().required('Required'),
         genre: Yup.string().required('Required'),
         release_date: Yup.string().required('Required'),
@@ -50,6 +51,7 @@ function EditProduct({ location }) {
                 console.log(result.data)
                 if (result.data.success) {
                     successnotify()
+                    window.location.href = '/admin/viewproduct';
                 } else {
                     errornotify()
                 }
@@ -85,7 +87,8 @@ function EditProduct({ location }) {
                 initialValues={{
                     productname: data?.productname,
                     platform: data?.platform,
-                    price: data?.price,
+                    rent_price: data?.rent_price,
+                    buy_price: data?.buy_price,
                     publisher: data?.publisher,
                     screenshots: '',
                     genre: data?.genre,
@@ -113,14 +116,23 @@ function EditProduct({ location }) {
                                         <ErrorMessage name='productname' render={msg => <div className="error">{msg}</div>} />
                                     </div>
 
-                                    {/* <div className="form-label-group form-control">
+                                    <div className="form-label-group form-control">
                                         <Field
-                                            type="number" name="price" id="price" placeholder="Price"
+                                            type="number" name="buy_price" id="buy_price" placeholder="Buy Price"
 
                                         />
-                                        <label htmlFor="price">Price</label>
-                                        <ErrorMessage name='prie' render={msg => <div className="error">{msg}</div>} />
-                                    </div> */}
+                                        <label htmlFor="buy_prie">Buy Price</label>
+                                        <ErrorMessage name='buy_price' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
+
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="number" name="rent_price" id="rent_price" placeholder="Rent Price"
+
+                                        />
+                                        <label htmlFor="rent_price">Price</label>
+                                        <ErrorMessage name='rent_price' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
 
                                     <div className="form-label-group form-control">
                                         <Field
@@ -139,7 +151,7 @@ function EditProduct({ location }) {
                                         <label htmlFor="publisher">Publisher</label>
                                         <ErrorMessage name='publisher' render={msg => <div className="error">{msg}</div>} />
                                     </div>
-
+{/* 
                                     <div className="form-label-group form-control">
                                         <Field
                                             type="file" name="image" id="image" placeholder="Image"
@@ -147,7 +159,7 @@ function EditProduct({ location }) {
                                         />
                                         <label htmlFor="image">Image</label>
                                         <ErrorMessage name='image' render={msg => <div className="error">{msg}</div>} />
-                                    </div>
+                                    </div> */}
 
                                     {/* <div className="form-label-group form-control">
                                         <Field
@@ -199,13 +211,13 @@ function EditProduct({ location }) {
                                         <ErrorMessage name='description' render={msg => <div className="error">{msg}</div>} />
                                     </div>
 
-                                    <div className="form-label-group form-control">
+                                    {/* <div className="form-label-group form-control">
                                         <Field type="file" name="trailer" id="trailer" placeholder="Trailer"
                                         />
                                         <label htmlFor="trailer">Trailer</label>
 
                                         <ErrorMessage name="trailer" render={msg => <div className="error">{msg}</div>} />
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <div className="bottombutton">

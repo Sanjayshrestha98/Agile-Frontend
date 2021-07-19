@@ -28,8 +28,8 @@ function ViewProduct({history}) {
             productId: d._id,
             productname: d.productname,
             platform: d.platform,
-            buyprice: d.buyprice,
-            rentprice: d.rentprice,
+            buy_price: d.buy_price,
+            rent_price: d.rent_price,
             publisher: d.publisher,
             image: <img src = {`http://localhost:90/${d.image}`} style = {{height : "200px"}}/>,
             screenshots: d.screenshots,
@@ -82,13 +82,13 @@ function ViewProduct({history}) {
             },
             {
                 label: 'Buy Price',
-                field: 'buyprice',
+                field: 'buy_price',
                 sort: 'asc',
                 width: 200
             },
             {
                 label: 'Rent Price',
-                field: 'rentprice',
+                field: 'rent_price',
                 sort: 'asc',
                 width: 200
             },
