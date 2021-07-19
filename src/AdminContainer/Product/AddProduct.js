@@ -7,9 +7,9 @@ import * as Yup from "yup";
 import { MdDelete } from 'react-icons/md'
 
 function AddProduct() {
-const [multiple, setMultiple] = useState([])
-const [image, setImage] = useState();
-const imageInputRef = React.useRef();
+    const [multiple, setMultiple] = useState([])
+    const [image, setImage] = useState();
+    const imageInputRef = React.useRef();
 
     const initialValues = {
         productname: '',
@@ -51,7 +51,7 @@ const imageInputRef = React.useRef();
         productname: Yup.string().required('Required'),
         rent_price: Yup.number().required('Required'),
         buy_price: Yup.number().required('Required'),
-        platform: Yup.string().required('Required'),
+        // platform: Yup.string().required('Required'),
         publisher: Yup.string().required('Required'),
         genre: Yup.string().required('Required'),
         release_date: Yup.string().required('Required'),
@@ -63,22 +63,22 @@ const imageInputRef = React.useRef();
     const onSubmit = values => {
         console.log('Formdata', values)
         const formData = new FormData();
-        formData.append("productname" , values.productname)
-        formData.append("platform" , values.platform)
-        formData.append("rent_price" , values.rent_price)
-        formData.append("buy_price" , values.buy_price)
-        formData.append("publisher" , values.publisher)
-        formData.append("image", image) 
-        formData.append("genre", values.genre) 
-        formData.append("screenshots" , multiple)
-        formData.append("release_date" , values.release_date)
-        formData.append("system_requirements" , values.system_requirements)
-        formData.append("instock" , values.instock)
-        formData.append("description" , values.description)
+        formData.append("productname", values.productname)
+        formData.append("platform", values.platform)
+        formData.append("rent_price", values.rent_price)
+        formData.append("buy_price", values.buy_price)
+        formData.append("publisher", values.publisher)
+        formData.append("image", image)
+        formData.append("genre", values.genre)
+        formData.append("screenshots", multiple)
+        formData.append("release_date", values.release_date)
+        formData.append("system_requirements", values.system_requirements)
+        formData.append("instock", values.instock)
+        formData.append("description", values.description)
 
         console.log(formData)
 
-         axios
+        axios
             .post(`http://localhost:90/add/product`, formData).then(result => {
                 console.log(result.data)
                 if (result.data.success) {
@@ -93,16 +93,16 @@ const imageInputRef = React.useRef();
 
     const addMultiple = (e) => {
 
-        for (var i = 0; i <  e.currentTarget.files.length; i++) {
-            let val =  e.currentTarget.files[i]
+        for (var i = 0; i < e.currentTarget.files.length; i++) {
+            let val = e.currentTarget.files[i]
             let url = URL.createObjectURL(val)
-            
+
             let checkFile = multiple.indexOf(url)
-            if(checkFile === -1){ 
+            if (checkFile === -1) {
                 setMultiple(old => [...old, url])
             }
         }
-      
+
     }
 
     const removeFromMultiple = (index) => {
@@ -110,7 +110,7 @@ const imageInputRef = React.useRef();
         setMultiple(old => [...old])
         imageInputRef.current.value = "";
     }
- 
+
     return (
         <>
             <Formik
@@ -156,13 +156,30 @@ const imageInputRef = React.useRef();
                                     </div>
 
                                     <div className="form-label-group form-control">
-                                        <Field
+                                        {/* <Field
                                             type="text" name="platform" id="platform" placeholder="Platform"
 
-                                        />
-                                        <label htmlFor="platform">Platform</label>
+                                        /> */}
+
+                                        {/* <label htmlFor="platform">Platform</label> */}
+
+                                        <select
+                                            name="platform"
+                                            id="platform"
+                                            style={{ display: 'block' }}
+                                        >
+                                            <option value="" label="Select a Platform" />
+                                            <option value="PC" label="PC" />
+                                            <option value="XBOX" label="XBox" />
+                                            <option value="PS4" label="PS4" />
+                                        </select>
+
+
+
                                         <ErrorMessage name='platform' render={msg => <div className="error">{msg}</div>} />
                                     </div>
+
+
 
                                     <div className="form-label-group form-control">
                                         <Field
@@ -176,8 +193,10 @@ const imageInputRef = React.useRef();
                                     <div className="form-label-group form-control">
                                         <input
                                             type="file" name="image" id="image" placeholder="Image"
-                                                onChange = {(e) => {setImage(e.currentTarget.files[0])
-                                                        console.log(e.currentTarget.files[0])}}
+                                            onChange={(e) => {
+                                                setImage(e.currentTarget.files[0])
+                                                console.log(e.currentTarget.files[0])
+                                            }}
                                         />
                                         <label htmlFor="image">Image</label>
                                         <ErrorMessage name='image' render={msg => <div className="error">{msg}</div>} />
@@ -187,18 +206,18 @@ const imageInputRef = React.useRef();
                                         <input
                                             type="file" name="screen" id="screen" placeholder="Image"
                                             multiple
-                                            onChange = {(e) => addMultiple(e)}
-                                            ref = {imageInputRef}
+                                            onChange={(e) => addMultiple(e)}
+                                            ref={imageInputRef}
                                         />
                                         <label htmlFor="screen">Screenshots</label>
                                         <ErrorMessage name='screen' render={msg => <div className="error">{msg}</div>} />
 
 
                                         {multiple.length > 0 && multiple.map((val, index) => (
-                                            <div style = {{position : "relative", width : "200px"}}>
-                                         <MdDelete  className="deleteicon" style = {{position : "absolute", right : "0",fontSize : "40px", background : "white", cursor : "pointer"}}
-                                         onClick = {() => removeFromMultiple(index)}/>
-                                            <img src = {val} className = "img-fluid ml-5" style = {{height : "200px", width : "100%"}}/>
+                                            <div style={{ position: "relative", width: "200px" }}>
+                                                <MdDelete className="deleteicon" style={{ position: "absolute", right: "0", fontSize: "40px", background: "white", cursor: "pointer" }}
+                                                    onClick={() => removeFromMultiple(index)} />
+                                                <img src={val} className="img-fluid ml-5" style={{ height: "200px", width: "100%" }} />
                                             </div>
                                         ))}
                                     </div>

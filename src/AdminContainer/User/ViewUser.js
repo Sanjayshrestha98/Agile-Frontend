@@ -13,15 +13,26 @@ function ViewUser() {
   useEffect(() => {
     axios.get('http://localhost:90/getallusers')
       .then((response) => {
-        setRowData(response.data)
+        setRowData(response.data.data)
         console.log(response.data)
-
       })
       .catch((err) => {
         console.log(err)
       })
-
   }, [])
+
+
+  const deleteuser = (_id)=>{
+    console.log(_id)
+     axios.delete('http://localhost:90/userdelete/' + _id)
+     .then((response)=>{
+         console.log(response.data.message)
+         window.location.reload()
+     }).catch((err)=>{
+
+         console.log(err.message)
+     })
+}
 
   const rowdata = data.map(d =>{
     return({
@@ -32,12 +43,15 @@ function ViewUser() {
       address : d.address,
       username : d.username,
       action: <div>
-          <FaEdit className="editicon" />
-          <MdDelete className="deleteicon"/>
+          <FaEdit  className="editicon" />
+          <MdDelete onClick={()=>deleteuser(d._id)} className="deleteicon"/>
       </div>
     } 
     )
   })  
+
+  
+
 
   const dataTable = {
     columns: [
