@@ -14,7 +14,7 @@ function ViewProduct({history}) {
     useEffect(() => {
         axios.get('http://localhost:90/getallproducts')
             .then((response) => {
-                setRowData(response.data)
+                setRowData(response.data.productData)
                 console.log(response.data)
 
             })
@@ -23,6 +23,28 @@ function ViewProduct({history}) {
             })
 
     }, [])
+
+    const rowdata = data?.map(d => {
+        return ({
+            productId: d._id,
+            productname: d.productname,
+            platform: d.platform,
+            price: d.price,
+            publisher: d.publisher,
+            image: <img src = {`http://localhost:90/${d.image}`} style = {{height : "200px"}}/>,
+            screenshots: d.screenshots,
+            genre: d.genre,
+            release_date: d.release_date,
+            system_requirements: d.system_requirements,
+            instock: d.instock,
+            description: d.description,
+            trailer: d.trailer,
+            action: <div>
+                <button onClick = {() => goToEdit(d._id)}><FaEdit  className="editicon" /></button>
+                <button onClick={() => deletepro(d._id)}><MdDelete  className="deleteicon" /></button>
+            </div>
+        })
+    })
 
    const deletepro = (_id)=>{
        console.log(_id)
@@ -42,28 +64,7 @@ function ViewProduct({history}) {
     })
    }
 
-    const rowdata = data.map(d => {
-        return ({
-            productId: d._id,
-            productname: d.productname,
-            platform: d.platform,
-            price: d.price,
-            publisher: d.publisher,
-            image: <img src = {`http://localhost:90/${d.image}`} style = {{height : "200px"}}/>,
-            screenshots: d.screenshots,
-            genre: d.genre,
-            release_date: d.release_date,
-            system_requirements: d.system_requirements,
-            instock: d.instock,
-            description: d.description,
-            trailer: d.trailer,
-            action: <div>
-                <FaEdit onClick = {() => goToEdit(d._id)} className="editicon" />
-                <button onClick={() => deletepro(d._id)}><MdDelete  className="deleteicon" /></button>
-            </div>
-        }
-        )
-    })
+    
 
     const dataTable = {
         columns: [

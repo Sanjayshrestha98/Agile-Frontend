@@ -13,7 +13,8 @@ const imageInputRef = React.useRef();
     const initialValues = {
         productname: '',
         platform: '',
-        price: '',
+        buyprice: '',
+        rentprice: '',
         publisher: '',
         image: '',
         screenshots: '',
@@ -48,7 +49,8 @@ const imageInputRef = React.useRef();
     const validationSchema = Yup.object({
         productname: Yup.string().required('Required'),
         platform: Yup.string().required('Required'),
-        price: Yup.number().required('Required'),
+        buyprice: Yup.number().required('Required'),
+        rentprice: Yup.number().required('Required'),
         publisher: Yup.string().required('Required'),
         genre: Yup.string().required('Required'),
         release_date: Yup.string().required('Required'),
@@ -63,7 +65,8 @@ const imageInputRef = React.useRef();
 
         formData.append("productname" , values.productname)
         formData.append("platform" , values.platform)
-        formData.append("price" , values.price)
+        formData.append("buyprice" , values.buyprice)
+        formData.append("rentprice" , values.rentprice)
         formData.append("publisher" , values.publisher)
         formData.append("image", image) 
         formData.append("genre", values.genre) 
@@ -89,7 +92,6 @@ const imageInputRef = React.useRef();
     }
 
     const addMultiple = (e) => {
- 
 
         for (var i = 0; i <  e.currentTarget.files.length; i++) {
             let val =  e.currentTarget.files[i]
@@ -137,13 +139,21 @@ const imageInputRef = React.useRef();
 
                                     <div className="form-label-group form-control">
                                         <Field
-                                            type="number" name="price" id="price" placeholder="Price"
+                                            type="number" name="buyprice" id="buyprice" placeholder="Buy Price"
 
                                         />
-                                        <label htmlFor="price">Price</label>
+                                        <label htmlFor="buyprice">Buy Price</label>
                                         <ErrorMessage name='prie' render={msg => <div className="error">{msg}</div>} />
                                     </div>
 
+                                    <div className="form-label-group form-control">
+                                        <Field
+                                            type="number" name="rentprice" id="rentprice" placeholder="Rent Price"
+
+                                        />
+                                        <label htmlFor="rentprice">Rent Price</label>
+                                        <ErrorMessage name='rentprice' render={msg => <div className="error">{msg}</div>} />
+                                    </div>
                                     <div className="form-label-group form-control">
                                         <Field
                                             type="text" name="platform" id="platform" placeholder="Platform"

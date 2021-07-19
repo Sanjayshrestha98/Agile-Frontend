@@ -46,6 +46,7 @@ function AddUser() {
             .post(`http://localhost:90/signup`, values).then(result => {
                 console.log(result.data)
                 if (result.data.success) {
+                    window.location.href('/login')
 
                 } else {
                     notify()
