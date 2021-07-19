@@ -14,9 +14,8 @@ function ViewProduct({history}) {
     useEffect(() => {
         axios.get('http://localhost:90/getallproducts')
             .then((response) => {
-                setRowData(response.data.productData)
+                setRowData(response.data.productdata)
                 console.log(response.data)
-
             })
             .catch((err) => {
                 console.log(err)
@@ -29,7 +28,8 @@ function ViewProduct({history}) {
             productId: d._id,
             productname: d.productname,
             platform: d.platform,
-            price: d.price,
+            buyprice: d.buyprice,
+            rentprice: d.rentprice,
             publisher: d.publisher,
             image: <img src = {`http://localhost:90/${d.image}`} style = {{height : "200px"}}/>,
             screenshots: d.screenshots,
@@ -81,8 +81,14 @@ function ViewProduct({history}) {
                 width: 270
             },
             {
-                label: 'Price',
-                field: 'price',
+                label: 'Buy Price',
+                field: 'buyprice',
+                sort: 'asc',
+                width: 200
+            },
+            {
+                label: 'Rent Price',
+                field: 'rentprice',
                 sort: 'asc',
                 width: 200
             },

@@ -13,8 +13,8 @@ const imageInputRef = React.useRef();
     const initialValues = {
         productname: '',
         platform: '',
-        buyprice: '',
-        rentprice: '',
+        rent_price: '',
+        buy_price: '',
         publisher: '',
         image: '',
         screenshots: '',
@@ -49,8 +49,8 @@ const imageInputRef = React.useRef();
     const validationSchema = Yup.object({
         productname: Yup.string().required('Required'),
         platform: Yup.string().required('Required'),
-        buyprice: Yup.number().required('Required'),
-        rentprice: Yup.number().required('Required'),
+        buy_price: Yup.number().required('Required'),
+        rent_price: Yup.number().required('Required'),
         publisher: Yup.string().required('Required'),
         genre: Yup.string().required('Required'),
         release_date: Yup.string().required('Required'),
@@ -62,7 +62,6 @@ const imageInputRef = React.useRef();
     const onSubmit = values => {
         console.log('Formdata', values)
         const formData = new FormData();
-
         formData.append("productname" , values.productname)
         formData.append("platform" , values.platform)
         formData.append("buyprice" , values.buyprice)
