@@ -1,5 +1,5 @@
 import React from 'react';
-import { Component, useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { MDBDataTable, } from 'mdbreact';
@@ -63,8 +63,6 @@ function ViewProduct({history}) {
         id : id
     })
    }
-
-    
 
     const dataTable = {
         columns: [
@@ -161,7 +159,7 @@ function ViewProduct({history}) {
         <div>
 
             <div>
-                <h3 className="adminpage-headers mb-4"> List of Users </h3>
+                <h3 className="adminpage-headers mb-4"> List of Products </h3>
             </div>
             <MDBDataTable
                 striped

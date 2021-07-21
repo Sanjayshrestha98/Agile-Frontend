@@ -944,3 +944,47 @@ float: left;
   margin-left: 5px;
   margin-right: 10px;
 }
+
+.content {
+  margin-left: 78px;
+  margin-bottom: 75px;
+  box-shadow: 1px 2px 16px 4px #888888;
+  width: 455px !important;
+  align-content: center;
+  padding: 25px;
+}
+
+.product-name {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 3rem;
+}
+
+
+
+.productimage{
+  width: 90%;
+  min-height: 365px;
+}
+
+.product-name {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 3rem;
+}
+
+.product-type {
+  color: #938784;
+}
+
+.price-and-buy {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.price {
+margin-top: 10px;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
