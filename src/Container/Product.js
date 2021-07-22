@@ -38,7 +38,6 @@ function Product() {
                         <div>
                             <div className="productimage">
                                 <img className="img-thumbnail align-middle" src={`http://localhost:90/public/`} alt=" ProductImage" />
-
                             </div>
                             <h1 className="product-name">{}</h1>
                             <h4 className="product-type">{}</h4>

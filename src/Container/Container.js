@@ -4,6 +4,7 @@ import Login from "./Login";
 import { Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Product from "./Product";
+import CheckoutPage from "./Cart/CheckoutPage";
 
 
 class Container extends Component{
@@ -14,8 +15,7 @@ class Container extends Component{
                 <Route path="/register" component = {Registration}/>
                 <Route path="/login" component = {Login}/>
                 <Route path="/products" component = {Product}/>
-
-                
+                <Route path="/checkoutpage" component = {CheckoutPage}/>                
             </div>
         )
     }
