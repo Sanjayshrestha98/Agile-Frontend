@@ -29,17 +29,17 @@ function EditProduct({ location }) {
         progress: undefined,
     });
 
-    const validationSchema = Yup.object({
-        productname: Yup.string().required('Required'),
-        platform: Yup.string().required('Required'),
-        price: Yup.number().required('Required'),
-        publisher: Yup.string().required('Required'),
-        genre: Yup.string().required('Required'),
-        release_date: Yup.string().required('Required'),
-        system_requirements: Yup.string().required('Required'),
-        instock: Yup.string().required('Required'),
-        description: Yup.string().required('Required'),
-    })
+    // const validationSchema = Yup.object({
+    //     productname: Yup.string().required('Required'),
+    //     platform: Yup.string().required('Required'),
+    //     price: Yup.number().required('Required'),
+    //     publisher: Yup.string().required('Required'),
+    //     genre: Yup.string().required('Required'),
+    //     // release_date: Yup.string().required('Required'),
+    //     system_requirements: Yup.string().required('Required'),
+    //     instock: Yup.string().required('Required'),
+    //     description: Yup.string().required('Required'),
+    // })
 
     const onSubmit = values => {
         const id = location.state.id
@@ -82,20 +82,23 @@ function EditProduct({ location }) {
         <>
             <Formik
                 enableReinitialize={true}
+
                 initialValues={{
                     productname: data?.productname,
                     platform: data?.platform,
-                    price: data?.price,
+                    // price: data?.price,
                     publisher: data?.publisher,
-                    screenshots: '',
-                    genre: data?.genre,
-                    release_date: data?.release_date,
+                    // screenshots: '',
+                    // genre: data?.genre,
+                    // release_date: data?.release_date,
                     system_requirements: data?.system_requirements,
                     instock: data?.instock,
                     description: data?.description,
+                    image: <img src = {`http://localhost:90/${data.image}`} style = {{height : "200px"}}/>,
                 }
+
                 }
-                validationSchema={validationSchema}
+                // validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
                 <div>
@@ -133,22 +136,23 @@ function EditProduct({ location }) {
 
                                     <div className="form-label-group form-control">
                                         <Field
-                                            type="publisher" name="publisher" id="publisher" placeholder="publisher"
+                                            type="text" name="publisher" id="publisher" placeholder="publisher"
 
                                         />
                                         <label htmlFor="publisher">Publisher</label>
                                         <ErrorMessage name='publisher' render={msg => <div className="error">{msg}</div>} />
                                     </div>
 
-                                    <div className="form-label-group form-control">
+                                    {/* <div className="form-label-group form-control">
                                         <Field
                                             type="file" name="image" id="image" placeholder="Image"
 
                                         />
                                         <label htmlFor="image">Image</label>
                                         <ErrorMessage name='image' render={msg => <div className="error">{msg}</div>} />
-                                    </div>
-
+                                    </div> */}
+                                    
+                                    <img src = {`http://localhost:90/${data.image}`} style = {{height : "200px"}}/>
                                     {/* <div className="form-label-group form-control">
                                         <Field
                                             type="text" name="genre" id="genre" placeholder="Genre"
@@ -161,20 +165,20 @@ function EditProduct({ location }) {
                                 </div>
                                 <div className="col-md-5">
 
-                                    <div className="form-label-group form-control">
+                                    {/* <div className="form-label-group form-control">
                                         <Field
                                             type="text" name="release_date" id="release_date" placeholder="Released On"
 
                                         />
                                         <label htmlFor="release_date">Released On</label>
                                         <ErrorMessage name='release_date' render={msg => <div className="error">{msg}</div>} />
-                                    </div>
+                                    </div> */}
 
                                     <div className=" form-label-group form-control">
                                         <label htmlFor="system_requirements">System Requirements</label>
 
                                         <Field
-                                            type="textarea" name="system_requirements" id="system_requirements" placeholder="System Requirements"
+                                            type="text" name="system_requirements" id="system_requirements" placeholder="System Requirements"
 
                                         />
                                         <ErrorMessage name='system_requirements' render={msg => <div className="error">{msg}</div>} />
@@ -192,20 +196,20 @@ function EditProduct({ location }) {
 
                                     <div className="form-label-group form-control">
                                         <Field
-                                            type="textarea" name="description" id="description" placeholder="Description"
+                                            type="text" name="description" id="description" placeholder="Description"
 
                                         />
                                         <label htmlFor="description">Description</label>
                                         <ErrorMessage name='description' render={msg => <div className="error">{msg}</div>} />
                                     </div>
 
-                                    <div className="form-label-group form-control">
-                                        <Field type="file" name="trailer" id="trailer" placeholder="Trailer"
+                                    {/* <div className="form-label-group form-control">
+                                        <Field type="text" name="trailer" id="trailer" placeholder="Trailer"
                                         />
                                         <label htmlFor="trailer">Trailer</label>
 
                                         <ErrorMessage name="trailer" render={msg => <div className="error">{msg}</div>} />
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <div className="bottombutton">

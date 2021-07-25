@@ -5,6 +5,9 @@ import { Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Product from "./Product";
 import CheckoutPage from "./Cart/CheckoutPage";
+import Cartpage from "./Cart/Cartpage";
+import SingleProduct from "./SingleProduct";
+import RentCart from "./Cart/RentCart";
 
 
 class Container extends Component{
@@ -16,6 +19,10 @@ class Container extends Component{
                 <Route path="/login" component = {Login}/>
                 <Route path="/products" component = {Product}/>
                 <Route path="/checkoutpage" component = {CheckoutPage}/>                
+                <Route path="/cartpage" component = {Cartpage}/>                
+                <Route path="/productdetail" component = {SingleProduct}/>  
+                <Route path="/rentcart" component = {RentCart}/>  
+
             </div>
         )
     }

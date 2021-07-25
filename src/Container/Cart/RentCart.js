@@ -1,33 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios'
+import React from 'react';
+
+function RentCart() {
+    return(
 
 
-function Cartpage() {
 
-    const[data,setdata] = useState([]);
 
-    useEffect(() => {
-        let config = {
-            headers : {
-                'authorization' : `Bearer ${localStorage.getItem("token")}`
-            }
-        }
-        axios.get('http://localhost:90/get/buycart',config)
-          .then((response) => {
-            setdata(response.data.data)
-            console.log(response.data.data)
-    
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-    
-      }, [])
-
-    return (
+        
         <div>
             <div className="title">
-                <h1>Your Buy Cart</h1>
+                <h1>Your Rent Cart</h1>
             </div>
             <div className="checkout">
 
@@ -39,24 +21,25 @@ function Cartpage() {
                             <th scope="col"> Products </th>
                             <th scope="col"> Quantity </th>
                             <th scope="col"> Price (Rs) </th>
+                            <th scope="col"> Rented for </th>
                             <th scope="col"> Actions </th>
                         </tr>
                     </thead>
                     <tbody>{
 
-                      data.length > 0 &&  data.map((p) => (
+                        // this.state.product.map((p) => (
                         <tr>
                             {/* <th scope="row">1</th> */}
-                            <td><img width="50px" src = {`http://localhost:90/${p.product.image}`} alt="productimage" /></td>
-                            <td>{p.product.productname}</td>
+                            <td><img width="50px" alt="productimage" /></td>
+                            <td>product_name</td>
                             {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
-                            <td>{p.quantity}</td>
-                            <td>{p.product.price}</td>
+                            <td>quantity</td>
+                            <td>price</td>
                             {/* {this.calculateSubTotal(p.product.product_price, p.quantity)} */}
                             <td><button >Remove</button></td>
                         </tr>
 
-                        ))
+                        // ))
 
                     }</tbody>
                 </table>
@@ -79,7 +62,7 @@ function Cartpage() {
                 </div>
 
                 <div>
-                    <a href="/checkoutpage">
+                    <a href="/checkout">
                         <button type="button" className="btn btn-primary btn-lg"> Checkout </button>
                     </a>
                 </div>
@@ -90,4 +73,4 @@ function Cartpage() {
     )
 }
 
-export default Cartpage
+export default RentCart
