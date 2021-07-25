@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
+
 
 function RentCart() {
+
+    const[data,setdata] = useState([]);
+
+    useEffect(() => {
+        let config = {
+            headers : {
+                'authorization' : `Bearer ${localStorage.getItem("token")}`
+            }
+        }
+        axios.get('http://localhost:90/get/rentcart',config)
+          .then((response) => {
+            setdata(response.data.data)
+            console.log(response.data.data)
+    
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+    
+      }, [])
+
+
+
     return(
 
-
-
-
-        
         <div>
             <div className="title">
                 <h1>Your Rent Cart</h1>
@@ -19,27 +40,23 @@ function RentCart() {
                             {/* <th scope="col">S.N </th> */}
                             <th scope="col"> Product Image </th>
                             <th scope="col"> Products </th>
-                            <th scope="col"> Quantity </th>
                             <th scope="col"> Price (Rs) </th>
-                            <th scope="col"> Rented for </th>
                             <th scope="col"> Actions </th>
                         </tr>
                     </thead>
                     <tbody>{
 
-                        // this.state.product.map((p) => (
+                      data.length > 0 &&  data.map((p) => (
                         <tr>
                             {/* <th scope="row">1</th> */}
-                            <td><img width="50px" alt="productimage" /></td>
-                            <td>product_name</td>
+                            <td><img width="50px" src = {`http://localhost:90/${p.product.image}`} alt="productimage" /></td>
+                            <td>{p.product.productname}</td>
                             {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
-                            <td>quantity</td>
-                            <td>price</td>
+                            <td>{p.product.rent_price}</td>
                             {/* {this.calculateSubTotal(p.product.product_price, p.quantity)} */}
                             <td><button >Remove</button></td>
                         </tr>
-
-                        // ))
+                        ))
 
                     }</tbody>
                 </table>

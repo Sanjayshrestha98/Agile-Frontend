@@ -24,6 +24,19 @@ function Cartpage() {
     
       }, [])
 
+
+      const deletepro = (_id)=>{
+        console.log(_id)
+         axios.delete('http://localhost:90/delete/buycart/' + _id)
+         .then((response)=>{
+             console.log(response.data.message)
+             window.location.reload()
+         }).catch((err)=>{
+ 
+             console.log(err.message)
+         })
+    }
+
     return (
         <div>
             <div className="title">
@@ -51,9 +64,9 @@ function Cartpage() {
                             <td>{p.product.productname}</td>
                             {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
                             <td>{p.quantity}</td>
-                            <td>{p.product.price}</td>
+                            <td>{p.product.buy_price}</td>
                             {/* {this.calculateSubTotal(p.product.product_price, p.quantity)} */}
-                            <td><button >Remove</button></td>
+                            <td><button onClick={() => deletepro(p._id)} >Remove</button></td>
                         </tr>
 
                         ))
