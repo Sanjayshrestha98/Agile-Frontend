@@ -26,6 +26,23 @@ function RentCart() {
 
 
 
+      const deletepro = (_id)=>{
+        let config = {
+            headers : {
+                'authorization' : `Bearer ${localStorage.getItem("token")}`
+            }
+        }
+        console.log(_id)
+         axios.delete('http://localhost:90/delete/rentcart/' + _id, config)
+         .then((response)=>{
+             console.log(response.data.message)
+             window.location.reload()
+         }).catch((err)=>{
+ 
+             console.log(err.message)
+         })
+    }
+
     return(
 
         <div>
@@ -54,7 +71,7 @@ function RentCart() {
                             {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
                             <td>{p.product.rent_price}</td>
                             {/* {this.calculateSubTotal(p.product.product_price, p.quantity)} */}
-                            <td><button >Remove</button></td>
+                            <td><button  onClick={(e) => deletepro(p._id)} >Remove</button></td>
                         </tr>
                         ))
 
@@ -70,8 +87,6 @@ function RentCart() {
 
                         <h4>
                             {/* <>{this.calculateTotal()}</> */}
-
-                            21321
 
                         </h4>
                     </div>

@@ -35,10 +35,10 @@ function Product({ history }) {
                         {/* <Link to={"/selected/"} style={{ textDecoration: "none" }}> */}
                         <div>
                             <div className="productimage">
-                                <img className="img-thumbnail align-middle" src={`http://localhost:90/${value.image}`} alt=" ProductImage" />
+                                <img className="img-thumbnail align-middle"   src={`http://localhost:90/${value.image}`} alt=" ProductImage" />
                             </div>
                             <h1 className="product-name">{value.productname}</h1>
-                            {/* <h4 className="product-type">{value.description}</h4> */}
+                            <h4 className="product-type">{value.platform}</h4>
                             <h4 className="product-type">{ }</h4>
                         </div>
                         {/* </Link> */}

@@ -22,7 +22,7 @@ function SingleProduct({ location }) {
         progress: undefined,
     });
 
-    const succesnotify = () => toast.error("User Reistered Succesfully", {
+    const succesnotify = () => toast.error("Product Has Been Added", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -36,7 +36,6 @@ function SingleProduct({ location }) {
     const addtoCart = (id) => {
         let data = {
             productId: id,
-
         }
         let config = {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
@@ -48,7 +47,33 @@ function SingleProduct({ location }) {
                 console.log(result.data)
                 if (result.data.success) {
                     // window.location.href('/login')
-                    succesnotify()
+                    succesnotify()  
+
+                } else {
+                    errornotify()
+                }
+            }).catch(error => {
+                console.error("Error Adding to Cart", error)
+            })
+    }
+
+    const addtoFav = (id) => {
+        let data = {
+            productId: id,
+
+        }
+        let config = {
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+          }
+        const response = axios
+            .post(`http://localhost:90/add/favourite`, data,
+                config
+            ).then(result => {
+                console.log(result.data)
+                if (result.data.success) {
+                    // window.location.href('/login')
+                    succesnotify()  
+
                 } else {
                     errornotify()
                 }
@@ -85,20 +110,26 @@ function SingleProduct({ location }) {
         <div>
             <main className="maincontainer">
                 <div className="row">
-                    <div className="product">
-                        <img className="productimage" alt="productimage" src={`http://localhost:90/${product?.image}`} max-width="300px" />
+                    <div className="product col-md-6">
+                        <img className="singleproductimage" alt="productimage" src={`http://localhost:90/${product?.image}`}  max-width="300px" />
                     </div>
 
                     <div className="dots">
                         <span className="dot dot-color-1 active"></span>
                         <span className="dot dot-color-2"></span>
                     </div>
+                    </div>
+                    <div className="row">
 
-                    <div className="info col-md-5">
+                    <div className="info col-md-6">
                         <div className="product-info">
                             <span className="info-subtitle">Product Name :</span>
                             <h1 className="product-title"> {product?.productname}</h1>
                             <p className="product-description"> {product?.description} </p>
+
+                            <span className="info-subtitle">System Requirements :</span>
+
+                            <p className="product-description"> {product?.system_requirements} </p>
                         </div>
 
                         <div className="info-down">
@@ -120,15 +151,22 @@ function SingleProduct({ location }) {
                                 addtoCart(product?._id)
                             }}>ADD TO CART </button>
                         </div>
-
                         <div className="price">
-                            <a href="/cartpage" className="price-button" onClick = {(e) => {
+                            <button className="price-button" onClick={(e) => {
+                                e.preventDefault()
+                                addtoFav(product?._id)
+                            }}>ADD TO Favourite </button>
+                        </div>
+                        <div className="price">
+                            <button href="/cartpage" className="price-button" onClick = {(e) => {
                                 e.preventDefault();
                                 addtoRentCart(product?._id)
-                            }}>Rent this Product</a>
+                            }}>Rent this Product</button>
                         </div>
 
                     </div>
+
+                    <ToastContainer/>
                 </div>
             </main>
         </div>

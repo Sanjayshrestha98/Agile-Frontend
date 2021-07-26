@@ -9,8 +9,8 @@ function CheckoutPage() {
                             {/* <th scope="col">S.N </th> */}
                             <th scope="col"> Products </th>
                             <th scope="col"> Quantity </th>
-                            <th scope="col"> Rent Price (Rs/Day) </th>
-                            <th scope="col"> Buy Price </th>
+                            <th scope="col"> Buy Price (Rs) </th>
+                            {/* <th scope="col"> Buy Price </th> */}
                         </tr>
                     </thead>
                     <tbody>{
@@ -19,9 +19,9 @@ function CheckoutPage() {
                             <tr>
                                 {/* <th scope="row">1</th> */}
                                 <td>FIFA 21</td>
-                                <td>13</td>
-                                <td>123</td>
-                                <td>0</td>
+                                <td>1</td>
+                                <td>6590</td>
+                                {/* <td>0</td>   */}
                                 {/* {this.calculateSubTotal( )} */}
                             </tr>
                         // ))
@@ -33,7 +33,8 @@ function CheckoutPage() {
                     <thead>
                         <tr>
                             <th scope="col">Sub-Total</th>
-                            <td></td>
+                            
+                            <td>6590</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +48,7 @@ function CheckoutPage() {
                         </tr>
                         <tr>
                             <th scope="row">Grand Total</th>
-                            <th></th>
+                            <th>6590</th>
                         </tr>
                     </tbody>
                 </table>

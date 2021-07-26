@@ -11,19 +11,18 @@ function AddProduct() {
     const [image, setImage] = useState();
     const imageInputRef = React.useRef();
 
-    const dt = null;
+    // const dt = null;
 
-    const [cdate, setDate] = useState(dt);
-    const handelDate = () => {
-        let dt = new Date().toLocaleDateString();
-        setDate(dt);
-    }
+    // const [cdate, setDate] = useState(dt);
+    // const handelDate = () => {
+    //     let dt = new Date().toLocaleDateString();
+    //     setDate(dt);
+    // }
 
-    useEffect(() => {
+    // useEffect(() => {
 
         
-
-    }, [])
+    // }, [])
 
     const initialValues = {
         productname: '',
@@ -33,7 +32,7 @@ function AddProduct() {
         publisher: '',
         genre: '',
         release_date: '',
-        added_Date: { cdate },
+        added_Date: '',
         system_requirements: '',
         instock: '',
         description: '',
@@ -73,7 +72,7 @@ function AddProduct() {
 
     const onSubmit = values => {
         alert("Asd")
-        handelDate()
+        // handelDate()
         console.log('Formdata', values)
         const formData = new FormData();
         formData.append("productname", values.productname)
@@ -134,7 +133,7 @@ function AddProduct() {
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
-                onSubmit={onSubmit, handelDate}
+                onSubmit={onSubmit}
             >
                 <div>
 
@@ -143,10 +142,10 @@ function AddProduct() {
                     <div className="addproductform">
 
                         <div className="row">
-                            <h3>{cdate}</h3>
-                            <button onClick={handelDate}>Get Current date</button>
+                            {/* <h3>{cdate}</h3>
+                            <button onClick={handelDate}>Get Current date</button> */}
                             <Form>
-                                <div className="col-md-5">
+                                <div className="col-md-12">
 
                                     <div className="form-label-group form-control">
                                         <Field
@@ -237,7 +236,7 @@ function AddProduct() {
 
                                 </div>
 
-                                <div className="col-md-5">
+                                <div className="col-md-12">
 
                                     <div className="form-label-group form-control">
                                         {/* <Field
@@ -252,7 +251,7 @@ function AddProduct() {
                                         <label htmlFor="release_date">Released On</label>
                                         <ErrorMessage name='release_date' render={msg => <div className="error">{msg}</div>} />
                                     </div>
-
+{/* 
                                     <div className=" form-label-group form-control">
                                         <label htmlFor="added_Date">{cdate}</label>
 
@@ -261,7 +260,7 @@ function AddProduct() {
 
                                         />
                                         <ErrorMessage name='added_Date' render={msg => <div className="error">{msg}</div>} />
-                                    </div>
+                                    </div> */}
 
                                     <div className=" form-label-group form-control">
                                         <label htmlFor="system_requirements">System Requirements</label>

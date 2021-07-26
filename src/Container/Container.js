@@ -8,6 +8,7 @@ import CheckoutPage from "./Cart/CheckoutPage";
 import Cartpage from "./Cart/Cartpage";
 import SingleProduct from "./SingleProduct";
 import RentCart from "./Cart/RentCart";
+import Favourite from "./Cart/Favourite";
 
 
 class Container extends Component{
@@ -22,6 +23,8 @@ class Container extends Component{
                 <Route path="/cartpage" component = {Cartpage}/>                
                 <Route path="/productdetail" component = {SingleProduct}/>  
                 <Route path="/rentcart" component = {RentCart}/>  
+                <Route path="/favourite" component = {Favourite}/>  
+                
 
             </div>
         )

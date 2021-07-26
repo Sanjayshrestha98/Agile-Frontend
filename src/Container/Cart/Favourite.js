@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
-function Cartpage() {
-
+function Favourite() {
     const[data,setdata] = useState([]);
 
     useEffect(() => {
@@ -11,7 +10,7 @@ function Cartpage() {
                 'authorization' : `Bearer ${localStorage.getItem("token")}`
             }
         }
-        axios.get('http://localhost:90/get/buycart',config)
+        axios.get('http://localhost:90/get/favourite',config)
           .then((response) => {
             setdata(response.data.data)
             console.log(response.data.data)
@@ -31,7 +30,7 @@ function Cartpage() {
             }
         }
         console.log(_id)
-         axios.delete('http://localhost:90/delete/buycart/' + _id, config)
+         axios.delete('http://localhost:90/delete/favourite/' + _id, config)
          .then((response)=>{
              console.log(response.data.message)
              window.location.reload()
@@ -41,38 +40,22 @@ function Cartpage() {
          })
     }
 
-    const calculateSubTotal = (price, quantity) => {
-        var subtotal = price * quantity;
-        this.state.subtotal.push(subtotal);
 
-    }
-
-    const calculateTotal = () => {
-        var total = 0;
-        this.state.subtotal.map((value) => {
-            total = total + value;
-
-        })
-
-        return total
-
-    }
 
     return (
         <div>
             <div className="title">
-                <h1>Your Buy Cart</h1>
+                <h1>Your Favourites</h1>
             </div>
             <div className="checkout">
 
                 <table className="table table-borderless">
                     <thead>
                         <tr>
-                            {/* <th scope="col">S.N </th> */}
                             <th scope="col"> Product Image </th>
                             <th scope="col"> Products </th>
-                            <th scope="col"> Quantity </th>
-                            <th scope="col"> Price (Rs) </th>
+                            <th scope="col"> Buy Price (Rs) </th>
+                            <th scope="col"> Rent Price (per day) </th>
                             <th scope="col"> Actions </th>
                         </tr>
                     </thead>
@@ -80,13 +63,11 @@ function Cartpage() {
 
                       data.length > 0 &&  data.map((p) => (
                         <tr>
-                            {/* <th scope="row">1</th> */}
                             <td><img width="50px" src = {`http://localhost:90/${p.product.image}`} alt="productimage" /></td>
                             <td>{p.product.productname}</td>
                             {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
-                            <td>{p.quantity}</td>
                             <td>{p.product.buy_price}</td>
-                            {/* {calculateSubTotal(p.product.product_price, p.quantity)} */}
+                            <td>{p.product.rent_price}</td>
                             <td><button onClick={(e) => deletepro(p._id)} >Remove</button></td>
                         </tr>
 
@@ -94,19 +75,10 @@ function Cartpage() {
                     }</tbody>
                 </table>
 
-
-                
-
-                <div>
-                    <a href="/checkoutpage">
-                        <button type="button" className="btn btn-primary btn-lg"> Checkout </button>
-                    </a>
-                </div>
-
             </div>
 
         </div>
     )
 }
 
-export default Cartpage
+export default Favourite

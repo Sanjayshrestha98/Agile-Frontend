@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { NavDropdown } from "react-bootstrap";
+import {MdFavorite} from 'react-icons/md';
 
 class Header extends Component {
 
@@ -56,6 +57,12 @@ class Header extends Component {
 									<div className="righticons">
 										<img src="./cart.png" alt="cart" />
 										<p>Rent</p>
+									</div>
+								</Nav.Link>
+
+								<Nav.Link href="/favourite">
+									<div className="righticons">
+										<MdFavorite fontSize="24px"/>
 									</div>
 								</Nav.Link>
 
