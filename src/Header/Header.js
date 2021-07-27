@@ -4,7 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { NavDropdown } from "react-bootstrap";
-import {MdFavorite} from 'react-icons/md';
+import { MdFavorite } from 'react-icons/md';
+import ReactTooltip from 'react-tooltip';
+
 
 class Header extends Component {
 
@@ -31,22 +33,31 @@ class Header extends Component {
 								<Nav.Link href="/home">Home</Nav.Link>
 								<Nav.Link href="/products">Products</Nav.Link>
 
-								<NavDropdown title="Brands" id="collasible-nav-dropdown">
-									<NavDropdown.Item href="#action/3.1">Brand 1</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.2">Brand 2</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.3">Brand 3</NavDropdown.Item>
+								<NavDropdown title="Platform" id="collasible-nav-dropdown">
+									<NavDropdown.Item href="#action/3.1">XBox</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.2">PS4</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.3">PC</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.4">Nintendo</NavDropdown.Item>
 									<NavDropdown.Divider />
-									<NavDropdown.Item href="#action/3.4">Brand</NavDropdown.Item>
+									{/* <NavDropdown.Item href="#action/3.4">Brand</NavDropdown.Item> */}
 								</NavDropdown>
 
-								<NavDropdown title="Categories" id="collasible-nav-dropdown">
-									<NavDropdown.Item href="#action/3.1">Category 1</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.2">Category 2</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.3">Category 3</NavDropdown.Item>
+								<NavDropdown title="Genre" id="collasible-nav-dropdown">
+									<NavDropdown.Item href="#action/3.1">Sports</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.2">Shooter</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.3">Sandbox</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.4">Puzzle</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.5">Action</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.6">Adventure</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.7">Survival</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.8">Horror</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.9">Role-Playing</NavDropdown.Item>
 									<NavDropdown.Divider />
-									<NavDropdown.Item href="#action/3.4">Category</NavDropdown.Item>
+									{/* <NavDropdown.Item href="#action/3.4">Category</NavDropdown.Item> */}
 								</NavDropdown>
+
 								<Nav.Link href="/contact">Contact Us</Nav.Link>
+
 								<Nav.Link href="/faq">FAQ</Nav.Link>
 								<Nav.Link href="/order">Orders</Nav.Link>
 							</Nav>
@@ -54,15 +65,14 @@ class Header extends Component {
 							<Nav className="rightnav">
 
 								<Nav.Link href="/rentcart">
-									<div className="righticons">
-										<img src="./cart.png" alt="cart" />
-										<p>Rent</p>
+									<div data-tip="Rent Cart" className="righticons">
+										<img src="./rent.png" alt="cart" />
 									</div>
 								</Nav.Link>
 
 								<Nav.Link href="/favourite">
-									<div className="righticons">
-										<MdFavorite fontSize="24px"/>
+									<div data-tip="Favourites" className="righticons">
+										<MdFavorite fontSize="24px" />
 									</div>
 								</Nav.Link>
 
@@ -89,6 +99,8 @@ class Header extends Component {
 							</Nav>
 						</Navbar.Collapse>
 					</Navbar>
+
+					<ReactTooltip />
 				</div>
 			)
 		}
@@ -135,11 +147,10 @@ class Header extends Component {
 						</Navbar.Collapse>
 					</Navbar>
 
-
+					<ReactTooltip />
 				</div>
-
-
 			)
+
 		}
 	}
 }

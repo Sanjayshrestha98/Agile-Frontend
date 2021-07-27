@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 * {
-  margin: 3px;
+  margin-top: 1px;
 	box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
@@ -22,6 +22,7 @@ button {
 
 .rightnav{
 
+  padding-right : 16px;
   margin-top: 7px;
   margin-left: auto;
 }
