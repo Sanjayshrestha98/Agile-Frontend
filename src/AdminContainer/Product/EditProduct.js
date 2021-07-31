@@ -94,6 +94,7 @@ function EditProduct({ location }) {
                     system_requirements: data?.system_requirements,
                     instock: data?.instock,
                     description: data?.description,
+                    trailer:data?.trailer,
                     image: <img src = {`http://localhost:90/${data.image}`} style = {{height : "200px"}}/>,
                 }
 
@@ -203,13 +204,13 @@ function EditProduct({ location }) {
                                         <ErrorMessage name='description' render={msg => <div className="error">{msg}</div>} />
                                     </div>
 
-                                    {/* <div className="form-label-group form-control">
+                                    <div className="form-label-group form-control">
                                         <Field type="text" name="trailer" id="trailer" placeholder="Trailer"
                                         />
                                         <label htmlFor="trailer">Trailer</label>
 
                                         <ErrorMessage name="trailer" render={msg => <div className="error">{msg}</div>} />
-                                    </div> */}
+                                    </div>
                                 </div>
 
                                 <div className="bottombutton">

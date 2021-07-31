@@ -23,8 +23,8 @@ class Header extends Component {
 			return (
 				<div>
 					<Navbar collapseOnSelect expand="lg" variant="light">
-						<Navbar.Brand>
-							<img src="./logo.png" alt="logo" height="70px" />
+						<Navbar.Brand href="/home">
+							<img src="./logo.png"  alt="logo" height="70px" />
 						</Navbar.Brand>
 
 						<Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -77,19 +77,19 @@ class Header extends Component {
 								</Nav.Link>
 
 								<Nav.Link href="/cartpage">
-									<div className="righticons">
+									<div data-tip="Buy Cart" className="righticons">
 										<img src="./cart.png" alt="cart" />
 									</div>
 								</Nav.Link>
 
 								<Nav.Link href="/profile">
-									<div className="righticons">
+									<div data-tip="Profile" className="righticons">
 										<img src="./user.png" alt="profile" />
 									</div>
 								</Nav.Link>
 
 								<Nav.Link>
-									<div className="righticons">
+									<div data-tip="Logout" className="righticons">
 										<img src="./logout.png"
 											onClick={this.logout} alt="logout"
 										/>

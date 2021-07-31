@@ -11,19 +11,6 @@ function AddProduct() {
     const [image, setImage] = useState();
     const imageInputRef = React.useRef();
 
-    // const dt = null;
-
-    // const [cdate, setDate] = useState(dt);
-    // const handelDate = () => {
-    //     let dt = new Date().toLocaleDateString();
-    //     setDate(dt);
-    // }
-
-    // useEffect(() => {
-
-        
-    // }, [])
-
     const initialValues = {
         productname: '',
         platform: '',
@@ -36,6 +23,7 @@ function AddProduct() {
         system_requirements: '',
         instock: '',
         description: '',
+        trailer:''
     }
 
     const errornotify = () => toast.error("Product Not Inserted", {
@@ -68,10 +56,10 @@ function AddProduct() {
         genre: Yup.string().required('Required'),
         system_requirements: Yup.string().required('Required'),
         instock: Yup.string().required('Required'),
+        trailer: Yup.string().required('Required'),
     })
 
     const onSubmit = values => {
-        alert("Asd")
         // handelDate()
         console.log('Formdata', values)
         const formData = new FormData();
@@ -88,6 +76,7 @@ function AddProduct() {
         formData.append("system_requirements", values.system_requirements)
         formData.append("instock", values.instock)
         formData.append("description", values.description)
+        formData.append("trailer", values.trailer)
 
         console.log(formData)
 

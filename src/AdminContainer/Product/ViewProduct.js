@@ -14,7 +14,7 @@ function ViewProduct({history}) {
     useEffect(() => {
         axios.get('http://localhost:90/getallproducts')
             .then((response) => {
-                setRowData(response.data.productdata)
+                setRowData(response.data.data)
                 console.log(response.data)
             })
             .catch((err) => {
@@ -25,11 +25,12 @@ function ViewProduct({history}) {
 
     const rowdata = data?.map(d => {
         return ({
+            
             productId: d._id,
             productname: d.productname,
             platform: d.platform,
-            buyprice: d.buyprice,
-            rentprice: d.rentprice,
+            buyprice: d.buy_price,
+            rentprice: d.rent_price,
             publisher: d.publisher,
             image: <img src = {`http://localhost:90/${d.image}`} style = {{height : "200px"}}/>,
             screenshots: d.screenshots,
@@ -37,7 +38,7 @@ function ViewProduct({history}) {
             release_date: d.release_date,
             system_requirements: d.system_requirements,
             instock: d.instock,
-            description: d.description,
+            description: <p max-height='200px' >{d.description}</p>,
             trailer: d.trailer,
             action: <div>
                 <button onClick = {() => goToEdit(d._id)}><FaEdit  className="editicon" /></button>
@@ -137,12 +138,12 @@ function ViewProduct({history}) {
                 sort: 'asc',
                 width: 100
             },
-            // {
-            //     label: 'Trailer',
-            //     field: 'trailer',
-            //     sort: 'asc',
-            //     width: 100
-            // },
+            {
+                label: 'Trailer',
+                field: 'trailer',
+                sort: 'asc',
+                width: 100
+            },
             {
                 label: 'Action',
                 field: 'action',

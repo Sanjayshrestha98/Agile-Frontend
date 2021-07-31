@@ -3,60 +3,42 @@ import axios from 'axios'
 
 function Cartpage() {
 
-    const[data,setdata] = useState([]);
+    const [data, setdata] = useState([]);
 
     useEffect(() => {
         let config = {
-            headers : {
-                'authorization' : `Bearer ${localStorage.getItem("token")}`
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem("token")}`
             }
         }
-        axios.get('http://localhost:90/get/buycart',config)
-          .then((response) => {
-            setdata(response.data.data)
-            console.log(response.data.data)
-    
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-    
-      }, [])
+        axios.get('http://localhost:90/get/buycart', config)
+            .then((response) => {
+                setdata(response.data.data)
+                console.log(response.data.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
 
+    }, [])
 
-      const deletepro = (_id)=>{
+    const deletepro = (_id) => {
         let config = {
-            headers : {
-                'authorization' : `Bearer ${localStorage.getItem("token")}`
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem("token")}`
             }
         }
         console.log(_id)
-         axios.delete('http://localhost:90/delete/buycart/' + _id, config)
-         .then((response)=>{
-             console.log(response.data.message)
-             window.location.reload()
-         }).catch((err)=>{
- 
-             console.log(err.message)
-         })
+        axios.delete('http://localhost:90/delete/buycart/' + _id, config)
+            .then((response) => {
+                console.log(response.data.message)
+                window.location.reload()
+            }).catch((err) => {
+
+                console.log(err.message)
+            })
     }
 
-    const calculateSubTotal = (price, quantity) => {
-        var subtotal = price * quantity;
-        this.state.subtotal.push(subtotal);
-
-    }
-
-    const calculateTotal = () => {
-        var total = 0;
-        this.state.subtotal.map((value) => {
-            total = total + value;
-
-        })
-
-        return total
-
-    }
 
     return (
         <div>
@@ -78,24 +60,24 @@ function Cartpage() {
                     </thead>
                     <tbody>{
 
-                      data.length > 0 &&  data.map((p) => (
-                        <tr>
-                            {/* <th scope="row">1</th> */}
-                            <td><img width="50px" src = {`http://localhost:90/${p.product.image}`} alt="productimage" /></td>
-                            <td>{p.product.productname}</td>
-                            {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
-                            <td>{p.quantity}</td>
-                            <td>{p.product.buy_price}</td>
-                            {/* {calculateSubTotal(p.product.product_price, p.quantity)} */}
-                            <td><button onClick={(e) => deletepro(p._id)} >Remove</button></td>
-                        </tr>
+                        data.length > 0 && data.map((p) => (
+                            <tr>
+                                {/* <th scope="row">1</th> */}
+                                <td><img width="50px" src={`http://localhost:90/${p.product.image}`} alt="productimage" /></td>
+                                <td>{p.product.productname}</td>
+                                {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
+                                <td>{p.quantity}</td>
+                                <td>{p.product.buy_price}</td>
+                                {/* {calculateSubTotal(p.product.product_price, p.quantity)} */}
+                                <td><button onClick={(e) => deletepro(p._id)} >Remove</button></td>
+                            </tr>
 
                         ))
                     }</tbody>
                 </table>
 
 
-                
+
 
                 <div>
                     <a href="/checkoutpage">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import ReactPlayer from 'react-player';
 
 
 function SingleProduct({ location }) {
@@ -39,7 +40,7 @@ function SingleProduct({ location }) {
         }
         let config = {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-          }
+        }
         const response = axios
             .post(`http://localhost:90/add/buycart`, data,
                 config
@@ -47,7 +48,7 @@ function SingleProduct({ location }) {
                 console.log(result.data)
                 if (result.data.success) {
                     // window.location.href('/login')
-                    succesnotify()  
+                    succesnotify()
 
                 } else {
                     errornotify()
@@ -64,7 +65,7 @@ function SingleProduct({ location }) {
         }
         let config = {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-          }
+        }
         const response = axios
             .post(`http://localhost:90/add/favourite`, data,
                 config
@@ -72,7 +73,7 @@ function SingleProduct({ location }) {
                 console.log(result.data)
                 if (result.data.success) {
                     // window.location.href('/login')
-                    succesnotify()  
+                    succesnotify()
 
                 } else {
                     errornotify()
@@ -89,7 +90,7 @@ function SingleProduct({ location }) {
         }
         let config = {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-          }
+        }
         const response = axios
             .post(`http://localhost:90/add/rentcart`, data,
                 config
@@ -107,68 +108,70 @@ function SingleProduct({ location }) {
     }
 
     return (
-        <div>
-            <main className="maincontainer">
-                <div className="row">
-                    <div className="product col-md-6">
-                        <img className="singleproductimage" alt="productimage" src={`http://localhost:90/${product?.image}`}  max-width="300px" />
-                    </div>
-
-                    <div className="dots">
-                        <span className="dot dot-color-1 active"></span>
-                        <span className="dot dot-color-2"></span>
-                    </div>
-                    </div>
-                    <div className="row">
-
-                    <div className="info col-md-6">
-                        <div className="product-info">
-                            <span className="info-subtitle">Product Name :</span>
-                            <h1 className="product-title"> {product?.productname}</h1>
-                            <p className="product-description"> {product?.description} </p>
-
-                            <span className="info-subtitle">System Requirements :</span>
-
-                            <p className="product-description"> {product?.system_requirements} </p>
-                        </div>
-
-                        <div className="info-down">
-                            <div className="price">
-                                <h3 className="price-title"> Buy Price</h3>
-                                <span className="size-total active">{product?.buy_price}</span>
-
-                            </div>
-                            <div className="price">
-                                <h3 className="price-title"> Rent Price</h3>
-                                <span className="size-total active">{product?.rent_price}</span>
-
-                            </div>
-
-                        </div>
-                        <div className="price">
-                            <button className="price-button" onClick={(e) => {
-                                e.preventDefault()
-                                addtoCart(product?._id)
-                            }}>ADD TO CART </button>
-                        </div>
-                        <div className="price">
-                            <button className="price-button" onClick={(e) => {
-                                e.preventDefault()
-                                addtoFav(product?._id)
-                            }}>ADD TO Favourite </button>
-                        </div>
-                        <div className="price">
-                            <button href="/cartpage" className="price-button" onClick = {(e) => {
-                                e.preventDefault();
-                                addtoRentCart(product?._id)
-                            }}>Rent this Product</button>
-                        </div>
-
-                    </div>
-
-                    <ToastContainer/>
+        <div className="app">
+            <div className="details">
+                <div className="big-img">
+                    <img alt="productimage" src={`http://localhost:90/${product?.image}`} max-width="300px" />
                 </div>
-            </main>
+                <div>
+                    <ReactPlayer controls url={product.trailer}/>
+                </div>
+
+                <div className="dots">
+                    <span className="dot dot-color-1 active"></span>
+                    <span className="dot dot-color-2"></span>
+                </div>
+            </div>
+
+            <div className="box">
+                <div className="row">
+
+                    <span className="info-subtitle">Product Name :</span>
+                    <h1 className="product-title"> {product?.productname}</h1>
+                    <p className="product-description"> {product?.description} </p>
+
+                    <span className="info-subtitle">System Requirements :</span>
+
+                    <p className="product-description"> {product?.system_requirements} </p>
+
+                    {/* <div className="info-down"> */}
+                    {/* <div className="price"> */}
+                    <h3 className="price-title"> Buy Price</h3>
+                    <span className="size-total active">{product?.buy_price}</span>
+
+                    {/* </div> */}
+                    {/* <div className="price">/ */}
+                    <h3 className="price-title"> Rent Price</h3>
+                    <span className="size-total active">{product?.rent_price}</span>
+
+                    {/* </div> */}
+
+                    {/* </div> */}
+
+                    <div className="actionbuttons">
+                        <button className="cart" onClick={(e) => {
+                            e.preventDefault()
+                            addtoCart(product?._id)
+                        }}>ADD TO CART </button>
+
+
+                        <button className="cart" onClick={(e) => {
+                            e.preventDefault()
+                            addtoFav(product?._id)
+                        }}>ADD TO Favourite </button>
+
+
+                        <button href="/cartpage" className="cart" onClick={(e) => {
+                            e.preventDefault();
+                            addtoRentCart(product?._id)
+                        }}>Rent this Product</button>
+
+                    </div>
+
+
+                </div>
+                <ToastContainer />
+            </div>
         </div>
     )
 }
