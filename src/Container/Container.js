@@ -9,24 +9,27 @@ import Cartpage from "./Cart/Cartpage";
 import SingleProduct from "./SingleProduct";
 import RentCart from "./Cart/RentCart";
 import Favourite from "./Cart/Favourite";
+import RentBill from "./Cart/RentBill";
+import Genre from "./Genre";
 
 
 class Container extends Component{
     render(){
         return(
             <div>
-                  <Header></Header>
+                <Header></Header>
                 <Route path="/register" component = {Registration}/>
                 <Route path="/login" component = {Login}/>
-                {/* <Route path="/products" component = {Product}/> */}
-                <Route path="/products/:category" component = {Product}/>
+                <Route path="/products" component = {Product}/>
+                {/* <Route path="/products/:category" component = {Product}/> */}
                 <Route path="/checkoutpage" component = {CheckoutPage}/>                
                 <Route path="/cartpage" component = {Cartpage}/>                
                 <Route path="/productdetail" component = {SingleProduct}/>  
                 <Route path="/rentcart" component = {RentCart}/>  
                 <Route path="/favourite" component = {Favourite}/>  
-                
-
+                <Route path="/rentbill" component = {RentBill}/>  
+                <Route path="/genre/:category" component = {Genre}/>  
+            
             </div>
         )
     }

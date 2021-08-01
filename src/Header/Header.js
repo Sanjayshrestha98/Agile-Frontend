@@ -43,15 +43,15 @@ class Header extends Component {
 								</NavDropdown>
 
 								<NavDropdown title="Genre" id="collasible-nav-dropdown">
-									<NavDropdown.Item href="/products/Sports">Sports</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.2">Shooter</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.3">Sandbox</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.4">Puzzle</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.5">Action</NavDropdown.Item>
-									<NavDropdown.Item href="/products/Action-Adventure">Adventure</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.7">Survival</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.8">Horror</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.9">Role-Playing</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Sports">Sports</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Shooter">Shooter</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Sandbox">Sandbox</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Puzzle">Puzzle</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Action">Action</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Action-Adventure">Adventure</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Survival">Survival</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Horror">Horror</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Role-Playing">Role-Playing</NavDropdown.Item>
 									<NavDropdown.Divider />
 									{/* <NavDropdown.Item href="#action/3.4">Category</NavDropdown.Item> */}
 								</NavDropdown>

@@ -11,7 +11,6 @@ function RentCart() {
             headers : {
                 'authorization' : `Bearer ${localStorage.getItem("token")}`
             }
-// aslcaklsmcasc
         }
         axios.get('http://localhost:90/get/rentcart',config)
           .then((response) => {
@@ -65,12 +64,9 @@ function RentCart() {
 
                       data.length > 0 &&  data.map((p) => (
                         <tr>
-                            {/* <th scope="row">1</th> */}
                             <td><img width="50px" src = {`http://localhost:90/${p.product?.image}`} alt="productimage" /></td>
                             <td>{p.product?.productname}</td>
-                            {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
                             <td>{p.product?.rent_price}</td>
-                            {/* {this.calculateSubTotal(p.product.product_price, p.quantity)} */}
                             <td><button  onClick={(e) => deletepro(p._id)} >Remove</button></td>
                         </tr>
                         ))
@@ -94,7 +90,7 @@ function RentCart() {
                 </div>
 
                 <div>
-                    <a href="/checkout">
+                    <a href="/rentbill">
                         <button type="button" className="btn btn-primary btn-lg"> Checkout </button>
                     </a>
                 </div>

@@ -62,14 +62,11 @@ function Cartpage() {
 
                         data.length > 0 && data.map((p) => (
                             <tr>
-                                {/* <th scope="row">1</th> */}
-                                <td><img width="50px" src={`http://localhost:90/${p.product.image}`} alt="productimage" /></td>
-                                <td>{p.product.productname}</td>
-                                {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
-                                <td>{p.quantity}</td>
-                                <td>{p.product.buy_price}</td>
-                                {/* {calculateSubTotal(p.product.product_price, p.quantity)} */}
-                                <td><button onClick={(e) => deletepro(p._id)} >Remove</button></td>
+                                <td><img width="50px" src={`http://localhost:90/${p.product?.image}`} alt="productimage" /></td>
+                                <td>{p.product?.productname}</td>
+                                <td>{p?.quantity}</td>
+                                <td>{p.product?.buy_price}</td>
+                                <td><button onClick={(e) => deletepro(p?._id)} >Remove</button></td>
                             </tr>
 
                         ))

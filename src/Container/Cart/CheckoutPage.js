@@ -5,8 +5,12 @@ import axios from 'axios'
 function CheckoutPage() {
     
     const [data, setdata] = useState([]);
-    // const [subtotal, setSubtotal] = useState([])
-    const subtotal = []
+    const [subtotal, setSubtotal] = useState([])
+    const [promoError, setPromoError] = useState("")
+    const [promoCode, setPromoCode] = useState("")
+    const [promoPercent, setPromoPercent] = useState("")
+    const [grandTotal, setGrandTotal] = useState("")
+    const [hasEnteredPromo, setHasEnteredPromo] = useState(false)
 
     useEffect(() => {
         let config = {
@@ -16,71 +20,122 @@ function CheckoutPage() {
         }
         axios.get('http://localhost:90/get/buycart', config)
             .then((response) => {
+                
                 setdata(response.data.data)
+                response.data.data.map(val => { 
+                    calculateSubTotal(val.product.buy_price, val.quantity)
+                })
                 console.log(response.data.data)
             })
             .catch((err) => {
                 console.log(err)
             })
+ 
+    }, 
+    [])
 
-
-            return (() => {
-                subtotal=[]
-            })
-
-    }, [])
-
-    function calculateSubTotal(price, quantity) {
-        console.log("check", price , quantity)
-        var subtotall = price * quantity; 
-        subtotal.push(subtotall);
+    function calculateSubTotal(price, quantity) { 
+        var subtotall = price * quantity;  
+        setSubtotal(old => [...old, subtotall])
     }
  
     function calculateTotal() {
-        var total = 0;
+        var total = 0; 
          subtotal.map((value) => {
-            total = total + value;
-
+            total = total + parseInt(value); 
         })
 
-        return total
+        setGrandTotal(total)
+ 
 
     }
+
+    useEffect(() => {
+        console.log(subtotal)
+        calculateTotal()
+    }, [subtotal])
 
     const checkout = () => {
-        alert("Your Order Has Been Placed. You will be Contacted Soon !! ")
-        window.location.href = "/home"
+        alert('Order has been placed')
+        window.location.href = ('/home')
+        let config = {
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        }
+        axios.post('http://localhost:90/add/order', config)
+        .then((response) => {
+            setdata(response.data.data)
+            console.log(response.data.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+
     }
 
+    const calculateTotalAfterPromo = () => {
+        
+            if(promoPercent !== "") {
+                let promoTotal = grandTotal - (grandTotal * (parseInt(promoPercent) /100))
+               
+                setGrandTotal(promoTotal)
+            }
+    }
+
+    const checkPromoCode = () => {
+        let config = {
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        }
+        
+        axios.post('http://localhost:90/checkpromocode', {
+            code : promoCode
+        }, config).then((response) => {
+      if(response.data.success){
+          setPromoError("") 
+        if(response.data.data.active ){
+        setPromoPercent(response.data.percent)
+            
+          setHasEnteredPromo(true)
+        }else{
+            setPromoError("Promo Code Not Active!!")
+        }
+      }else{
+          setPromoError("Invalid Code!!")
+      }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    useEffect(() => {
+        calculateTotalAfterPromo()
+    }, [promoPercent])
+    
 
     return (
         <div className="checkout">
             <table className="table table-borderless">
                 <thead>
                     <tr>
-                        {/* <th scope="col">S.N </th> */}
                         <th scope="col"> Products </th>
                         <th scope="col"> Quantity </th>
                         <th scope="col"> Buy Price (Rs) </th>
-                        {/* <th scope="col"> Buy Price </th> */}
 
                     </tr>
                 </thead>
                 
                 <tbody>{
 
-                       data.length > 0 && data.map((p) => (
+                       data.length > 0 && data.map((p, index) => (
                             <tr>
-                                {/* {console.log(p)} */}
-                                {/* <th scope="row">1</th> */}
-                                {/* <td><img width="50px" src={`http://localhost:90/${p.product.image}`} alt="productimage" /></td> */}
                                 <td>{p.product.productname}</td>
-                                {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
                                 <td>{p.quantity}</td>
                                 <td>{p.product.buy_price}</td>
-                                {/* {calculateSubTotal(p.product.product_price, p.quantity)} */}
-                                {/* <td><button onClick={(e) => deletepro(p._id)} >Remove</button></td> */}
-                               {calculateSubTotal(p.product.buy_price, p.quantity)}
+                               <td>{subtotal[index]}</td>
                            
                             </tr>
 
@@ -93,23 +148,35 @@ function CheckoutPage() {
                 <thead>
                     <tr>
                         <th scope="col">Sub-Total</th>
-                        <td><>{calculateTotal()}</></td>
+                        <td><>{grandTotal}</></td>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">Tax ( 13% )</th>
+                        <th scope="row">Tax ( 13% ) </th>
                         <td><s>13% of Sub-total</s></td>
                     </tr>
                     <tr>
                         <th scope="row">Shipping Cost</th>
                         <td><s> Rs. 200</s></td>
                     </tr>
+
+                    <tr>
+                        <th scope="row">Promo Codes</th>
+                        <th><input type="text" disabled = {hasEnteredPromo && true} onChange = {(e) => setPromoCode(e.target.value)}/>  
+                        <button onClick = {() => checkPromoCode()}>Redeem</button></th>
+                    <span className = "danger-text">{promoError}</span>
+                    </tr>
+
                     <tr>
                         <th scope="row">Grand Total</th>
-                            <th><>{calculateTotal()}</></th>
+                            <th><>{grandTotal}</></th>
                     </tr>
+                    
+                    
+
+                   
                 </tbody>
             </table>
 

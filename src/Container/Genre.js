@@ -1,12 +1,12 @@
 import { Component, React, useEffect, useState } from 'react'
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import { useParams, withRouter } from 'react-router-dom';
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-function Product({ history, props }) {
-
+function Genre( { history } ){
     const [data, setRowData] = useState([]);
+    const {category} = useParams()
 
     // state = {
     //     products: [],
@@ -17,8 +17,12 @@ function Product({ history, props }) {
     // console.log(props)
 
     useEffect(() => {
-
-        axios.get('http://localhost:90/getallproducts')
+        // const category = path;
+        // var params = category
+        // console.log(category)
+        var path = category
+        
+        axios.get("http://localhost:90/get/genre/" + path)
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)
@@ -68,4 +72,5 @@ function Product({ history, props }) {
 
     )
 }
-export default withRouter(Product)
+
+export default withRouter(Genre)
