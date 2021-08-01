@@ -6,22 +6,17 @@ function RentCart() {
 
     const[data,setdata] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => { 
         let config = {
             headers : {
-                'authorization' : `Bearer ${localStorage.getItem("userid")}`
+                'authorization' : `Bearer ${localStorage.getItem("token")}`
             }
 // aslcaklsmcasc
         }
         axios.get('http://localhost:90/get/rentcart',config)
           .then((response) => {
-            setdata(response.data.data)
-            console.log()
-            console.log(response.data.data)
-            console.log(response.data.data)
-            console.log(response.data.data)
-            console.log(response.data.data)
-    
+            setdata(response.data.data)    
+            console.log(response.data)
           })
           .catch((err) => {
             console.log(err)
@@ -71,10 +66,10 @@ function RentCart() {
                       data.length > 0 &&  data.map((p) => (
                         <tr>
                             {/* <th scope="row">1</th> */}
-                            <td><img width="50px" src = {`http://localhost:90/${p.product.image}`} alt="productimage" /></td>
-                            <td>{p.product.productname}</td>
+                            <td><img width="50px" src = {`http://localhost:90/${p.product?.image}`} alt="productimage" /></td>
+                            <td>{p.product?.productname}</td>
                             {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
-                            <td>{p.product.rent_price}</td>
+                            <td>{p.product?.rent_price}</td>
                             {/* {this.calculateSubTotal(p.product.product_price, p.quantity)} */}
                             <td><button  onClick={(e) => deletepro(p._id)} >Remove</button></td>
                         </tr>
