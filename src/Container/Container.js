@@ -18,7 +18,8 @@ class Container extends Component{
                   <Header></Header>
                 <Route path="/register" component = {Registration}/>
                 <Route path="/login" component = {Login}/>
-                <Route path="/products" component = {Product}/>
+                {/* <Route path="/products" component = {Product}/> */}
+                <Route path="/products/:category" component = {Product}/>
                 <Route path="/checkoutpage" component = {CheckoutPage}/>                
                 <Route path="/cartpage" component = {Cartpage}/>                
                 <Route path="/productdetail" component = {SingleProduct}/>  

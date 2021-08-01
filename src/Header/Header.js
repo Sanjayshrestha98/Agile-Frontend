@@ -43,12 +43,12 @@ class Header extends Component {
 								</NavDropdown>
 
 								<NavDropdown title="Genre" id="collasible-nav-dropdown">
-									<NavDropdown.Item href="#action/3.1">Sports</NavDropdown.Item>
+									<NavDropdown.Item href="/products/Sports">Sports</NavDropdown.Item>
 									<NavDropdown.Item href="#action/3.2">Shooter</NavDropdown.Item>
 									<NavDropdown.Item href="#action/3.3">Sandbox</NavDropdown.Item>
 									<NavDropdown.Item href="#action/3.4">Puzzle</NavDropdown.Item>
 									<NavDropdown.Item href="#action/3.5">Action</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.6">Adventure</NavDropdown.Item>
+									<NavDropdown.Item href="/products/Action-Adventure">Adventure</NavDropdown.Item>
 									<NavDropdown.Item href="#action/3.7">Survival</NavDropdown.Item>
 									<NavDropdown.Item href="#action/3.8">Horror</NavDropdown.Item>
 									<NavDropdown.Item href="#action/3.9">Role-Playing</NavDropdown.Item>

@@ -5,7 +5,8 @@ import axios from 'axios'
 function CheckoutPage() {
     
     const [data, setdata] = useState([]);
-
+    // const [subtotal, setSubtotal] = useState([])
+    const subtotal = []
 
     useEffect(() => {
         let config = {
@@ -22,7 +23,35 @@ function CheckoutPage() {
                 console.log(err)
             })
 
+
+            return (() => {
+                subtotal=[]
+            })
+
     }, [])
+
+    function calculateSubTotal(price, quantity) {
+        console.log("check", price , quantity)
+        var subtotall = price * quantity; 
+        subtotal.push(subtotall);
+    }
+ 
+    function calculateTotal() {
+        var total = 0;
+         subtotal.map((value) => {
+            total = total + value;
+
+        })
+
+        return total
+
+    }
+
+    const checkout = () => {
+        alert("Your Order Has Been Placed. You will be Contacted Soon !! ")
+        window.location.href = "/home"
+    }
+
 
     return (
         <div className="checkout">
@@ -34,11 +63,15 @@ function CheckoutPage() {
                         <th scope="col"> Quantity </th>
                         <th scope="col"> Buy Price (Rs) </th>
                         {/* <th scope="col"> Buy Price </th> */}
+
                     </tr>
                 </thead>
+                
                 <tbody>{
+
                        data.length > 0 && data.map((p) => (
                             <tr>
+                                {/* {console.log(p)} */}
                                 {/* <th scope="row">1</th> */}
                                 {/* <td><img width="50px" src={`http://localhost:90/${p.product.image}`} alt="productimage" /></td> */}
                                 <td>{p.product.productname}</td>
@@ -47,6 +80,8 @@ function CheckoutPage() {
                                 <td>{p.product.buy_price}</td>
                                 {/* {calculateSubTotal(p.product.product_price, p.quantity)} */}
                                 {/* <td><button onClick={(e) => deletepro(p._id)} >Remove</button></td> */}
+                               {calculateSubTotal(p.product.buy_price, p.quantity)}
+                           
                             </tr>
 
                         ))
@@ -58,8 +93,8 @@ function CheckoutPage() {
                 <thead>
                     <tr>
                         <th scope="col">Sub-Total</th>
+                        <td><>{calculateTotal()}</></td>
 
-                        <td>6590</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,7 +108,7 @@ function CheckoutPage() {
                     </tr>
                     <tr>
                         <th scope="row">Grand Total</th>
-                        <th>6590</th>
+                            <th><>{calculateTotal()}</></th>
                     </tr>
                 </tbody>
             </table>
@@ -92,24 +127,13 @@ function CheckoutPage() {
 
                     </select>
 
-                    {/* <div>
-                            <img src="./esewa.png" width="150px" style={{ cursor: "not-allowed" }} />
-                        </div>
-
-                        <div>
-                            <img src="./fonepay_logo.png" width="150px" style={{ cursor: "not-allowed" }} />
-                        </div>
-
-                        <div>
-                            <button class="btn btn-secondary btn-lg" > Cash on Delivery </button>
-                        </div> */}
                 </div>
             </div>
 
 
 
             <div>
-                <button type="button" className="btn btn-primary btn-lg"> Confirm Order </button>
+                <button type="button" onClick={() => checkout()}  className="btn btn-primary btn-lg"> Confirm Order </button>
             </div>
 
 
