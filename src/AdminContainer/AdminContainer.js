@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { useState } from 'react';
 import { Route } from "react-router-dom";
@@ -18,7 +19,7 @@ const AdminContainer = () => {
         setToggle(!toggle)
     }
     return (
-        <>
+        <div>
             <AdminSideNav toggle={toggle} toggleSidenav={toggleSidenav} />
             <div className={`admin-wrapper ${toggle && "wrapper-toggle"}`}>
                 <Route path="/admin/dashboard" component={AdminDashboard} />
@@ -31,7 +32,7 @@ const AdminContainer = () => {
                 <Route path = "/admin/editproduct" component= {EditProduct}/>
 
             </div>
-        </>
+        </div>
     )
 }
 

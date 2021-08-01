@@ -9,12 +9,17 @@ function RentCart() {
     useEffect(() => {
         let config = {
             headers : {
-                'authorization' : `Bearer ${localStorage.getItem("token")}`
+                'authorization' : `Bearer ${localStorage.getItem("userid")}`
             }
+// aslcaklsmcasc
         }
         axios.get('http://localhost:90/get/rentcart',config)
           .then((response) => {
             setdata(response.data.data)
+            console.log()
+            console.log(response.data.data)
+            console.log(response.data.data)
+            console.log(response.data.data)
             console.log(response.data.data)
     
           })

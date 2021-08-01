@@ -4,15 +4,22 @@ import { withRouter } from 'react-router-dom';
 
 import { Link } from "react-router-dom";
 
-function Product({ history, props }) {
+function Product({ history }) {
 
     const [data, setRowData] = useState([]);
+
+    // state = {
+    //     products: [],
+    //     config: {
+    //         headers: { 'authorization': `Bearer ${localStorage.getItem('token')}` }
+    //     }
+    // }
     // console.log(props)
 
     useEffect(() => {
         // const category = props.match.params.category;
 
-        axios.get('http://localhost:90/getallproducts')
+        axios.get('http://localhost:90/getallproducts' )
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)

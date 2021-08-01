@@ -8,6 +8,8 @@ import ReactPlayer from 'react-player';
 function SingleProduct({ location }) {
     const [product, setProduct] = useState({});
 
+  
+
     useEffect(() => {
         console.log(location.state.product)
         setProduct(location.state.product)
