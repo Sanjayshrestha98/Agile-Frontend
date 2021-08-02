@@ -1,5 +1,5 @@
 import React from 'react';
-import { Component, useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { MDBDataTable, } from 'mdbreact';
@@ -14,7 +14,7 @@ function ViewProduct({history}) {
     useEffect(() => {
         axios.get('http://localhost:90/getallproducts')
             .then((response) => {
-                setRowData(response.data.productdata)
+                setRowData(response.data.data)
                 console.log(response.data)
             })
             .catch((err) => {
@@ -25,6 +25,7 @@ function ViewProduct({history}) {
 
     const rowdata = data?.map(d => {
         return ({
+            
             productId: d._id,
             productname: d.productname,
             platform: d.platform,
@@ -37,7 +38,7 @@ function ViewProduct({history}) {
             release_date: d.release_date,
             system_requirements: d.system_requirements,
             instock: d.instock,
-            description: d.description,
+            description: <p max-height='200px' >{d.description}</p>,
             trailer: d.trailer,
             action: <div>
                 <button onClick = {() => goToEdit(d._id)}><FaEdit  className="editicon" /></button>
@@ -63,8 +64,6 @@ function ViewProduct({history}) {
         id : id
     })
    }
-
-    
 
     const dataTable = {
         columns: [
@@ -139,12 +138,12 @@ function ViewProduct({history}) {
                 sort: 'asc',
                 width: 100
             },
-            // {
-            //     label: 'Trailer',
-            //     field: 'trailer',
-            //     sort: 'asc',
-            //     width: 100
-            // },
+            {
+                label: 'Trailer',
+                field: 'trailer',
+                sort: 'asc',
+                width: 100
+            },
             {
                 label: 'Action',
                 field: 'action',
@@ -161,7 +160,7 @@ function ViewProduct({history}) {
         <div>
 
             <div>
-                <h3 className="adminpage-headers mb-4"> List of Users </h3>
+                <h3 className="adminpage-headers mb-4"> List of Products </h3>
             </div>
             <MDBDataTable
                 striped

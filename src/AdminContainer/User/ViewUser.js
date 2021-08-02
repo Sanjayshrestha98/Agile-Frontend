@@ -14,13 +14,19 @@ function ViewUser() {
     axios.get('http://localhost:90/getallusers')
       .then((response) => {
         setRowData(response.data.data)
+<<<<<<< HEAD
         console.log(response.data)
+=======
+        console.log(response.data.data)
+
+>>>>>>> addtocart
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
 
+<<<<<<< HEAD
 
   const deleteuser = (_id)=>{
     console.log(_id)
@@ -33,6 +39,18 @@ function ViewUser() {
          console.log(err.message)
      })
 }
+=======
+  const deleteuser = (_id) =>{
+    axios.delete('http://localhost:90/userdelete/' + _id)
+    .then((response)=>{
+      console.log(response.data.message)
+      window.location.reload()
+    }).catch((err)=>{
+      console.log(err.message)
+    })
+  }
+
+>>>>>>> addtocart
 
   const rowdata = data.map(d =>{
     return({
@@ -43,11 +61,15 @@ function ViewUser() {
       address : d.address,
       username : d.username,
       action: <div>
+<<<<<<< HEAD
           <FaEdit  className="editicon" />
           <MdDelete onClick={()=>deleteuser(d._id)} className="deleteicon"/>
+=======
+          <button><FaEdit className="editicon" /></button>
+          <button onClick={() => deleteuser(d._id)}><MdDelete className="deleteicon"/></button>
+>>>>>>> addtocart
       </div>
-    } 
-    )
+    })
   })  
 
   

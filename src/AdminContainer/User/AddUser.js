@@ -7,7 +7,17 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 function AddUser() {
 
-    const notify = () => toast.error("Invalid Credentials", {
+    const errornotify = () => toast.error("Invalid Credentials", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    const succesnotify = () => toast.error("User Reistered Succesfully", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -46,10 +56,10 @@ function AddUser() {
             .post(`http://localhost:90/signup`, values).then(result => {
                 console.log(result.data)
                 if (result.data.success) {
-                    window.location.href('/login')
-
+                    // window.location.href('/login')
+                    succesnotify()
                 } else {
-                    notify()
+                    errornotify()
                 }
             }).catch(error => {
                 console.error("Error Registering User", error)

@@ -10,7 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const initialValues = {
     username: '',
     password: ''
-
 }
 
 const notify = () => toast.error("Invalid Credentials", {
@@ -29,13 +28,11 @@ const onSubmit = values => {
     const response = axios
         .post(`http://localhost:90/admin/login`, values)
         .then(result => {
-
-
             if (result.data.success) {
                 localStorage.setItem('token', result.data.token)
                 localStorage.setItem('adminid', result.data.adminId)
 
-                window.location.href = '/admin'
+                window.location.href = '/admin/dashboard'
             } else {
                 notify()
             }

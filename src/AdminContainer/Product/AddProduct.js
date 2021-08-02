@@ -17,13 +17,13 @@ function AddProduct() {
         rent_price: '',
         buy_price: '',
         publisher: '',
-        image: '',
-        screenshots: '',
         genre: '',
         release_date: '',
+        added_Date: '',
         system_requirements: '',
         instock: '',
         description: '',
+        trailer:''
     }
 
     const errornotify = () => toast.error("Product Not Inserted", {
@@ -54,13 +54,13 @@ function AddProduct() {
         // platform: Yup.string().required('Required'),
         publisher: Yup.string().required('Required'),
         genre: Yup.string().required('Required'),
-        release_date: Yup.string().required('Required'),
         system_requirements: Yup.string().required('Required'),
         instock: Yup.string().required('Required'),
-        description: Yup.string().required('Required'),
+        trailer: Yup.string().required('Required'),
     })
 
     const onSubmit = values => {
+        // handelDate()
         console.log('Formdata', values)
         const formData = new FormData();
         formData.append("productname", values.productname)
@@ -122,12 +122,14 @@ function AddProduct() {
 
                     <h3 className="adminpage-headers mb-4"> Add Products </h3>
 
-
                     <div className="addproductform">
 
                         <div className="row">
+                            {/* <h3>{cdate}</h3>
+                            <button onClick={handelDate}>Get Current date</button> */}
                             <Form>
-                                <div className="col-md-5">
+                                <div className="col-md-12">
+
                                     <div className="form-label-group form-control">
                                         <Field
                                             type="text" name="productname" id="productname" placeholder="Productname"
@@ -235,16 +237,31 @@ function AddProduct() {
 
                                 </div>
 
-                                <div className="col-md-5">
+                                <div className="col-md-12">
 
                                     <div className="form-label-group form-control">
-                                        <Field
+                                        {/* <Field
                                             type="text" name="release_date" id="release_date" placeholder="Released On"
+
+                                        /> */}
+
+                                        <Field
+                                            type="date" name="release_date" id="release_date" placeholder="Productname"
 
                                         />
                                         <label htmlFor="release_date">Released On</label>
                                         <ErrorMessage name='release_date' render={msg => <div className="error">{msg}</div>} />
                                     </div>
+{/* 
+                                    <div className=" form-label-group form-control">
+                                        <label htmlFor="added_Date">{cdate}</label>
+
+                                        <Field
+                                            type="text" name="added_Date" id="added_Date" placeholder="added_Date"
+
+                                        />
+                                        <ErrorMessage name='added_Date' render={msg => <div className="error">{msg}</div>} />
+                                    </div> */}
 
                                     <div className=" form-label-group form-control">
                                         <label htmlFor="system_requirements">System Requirements</label>
@@ -276,7 +293,7 @@ function AddProduct() {
                                     </div>
 
                                     <div className="form-label-group form-control">
-                                        <Field type="file" name="trailer" id="trailer" placeholder="Trailer"
+                                        <Field type="text" name="trailer" id="trailer" placeholder="Trailer"
                                         />
                                         <label htmlFor="trailer">Trailer</label>
 
@@ -303,4 +320,4 @@ function AddProduct() {
     )
 }
 
-export default AddProduct
+export default AddProduct\
