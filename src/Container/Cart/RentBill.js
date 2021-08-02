@@ -32,16 +32,23 @@ function RentBill() {
 
     }, [])
 
+    const checkout = () => {
+        alert('Order has been placed')
+        window.location.href = ('/home')
+
+    }
+
+
 
     function calculateSubTotal(price, quantity) {
-        console.log("check", price , quantity)
-        var subtotall = price * quantity; 
+        console.log("check", price, quantity)
+        var subtotall = price * quantity;
         subtotal.push(subtotall);
     }
- 
+
     function calculateTotal() {
         var total = 0;
-         subtotal.map((value) => {
+        subtotal.map((value) => {
             total = total + value;
 
         })
@@ -57,8 +64,11 @@ function RentBill() {
                 <thead>
                     <tr>
                         <th scope="col"> Products </th>
-                        <th scope="col"> Quantity </th>
-                        <th scope="col"> Buy Price (Rs) </th>
+                        {/* <th scope="col"> Quantity </th> */}
+                        <th scope="col"> Advance Required </th>
+                        <th scope="col"> Return Date </th>
+
+                        <th scope="col"> Rent Price (Rs) </th>
 
                     </tr>
                 </thead>
@@ -68,9 +78,14 @@ function RentBill() {
                     data.length > 0 && data.map((p) => (
                         <tr>
                             <td>{p.product.productname}</td>
-                            <td>{p.quantity}</td>
-                            <td>{p.product.buy_price}</td>
-                            {calculateSubTotal(p.product.buy_price, p.quantity)}
+
+                            {/* <td>{p.quantity}</td> */}
+                            <td>500</td>
+                            <td><input type="date"/> </td>
+
+
+                            <td>{p.product.rent_price}</td>
+                            {calculateSubTotal(p.product.rent_price, p.quantity)}
 
                         </tr>
 
@@ -82,24 +97,15 @@ function RentBill() {
             <table className="billing table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Sub-Total</th>
-                        <td><>{calculateTotal()}</></td>
+                        <th scope="col">Initial Amount to be paid</th>
+                        {/* <td><>{calculateTotal()}</></td> */}
+                        <td>600</td>
 
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">Tax ( 13% )</th>
-                        <td><s>13% of Sub-total</s></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Shipping Cost</th>
-                        <td><s> Rs. 200</s></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Grand Total</th>
-                        <th><>{calculateTotal()}</></th>
-                    </tr>
+
+                  
                 </tbody>
             </table>
 
@@ -123,7 +129,7 @@ function RentBill() {
 
 
             <div>
-                <button type="button" className="btn btn-primary btn-lg"> Confirm Order </button>
+                <button type="button" onClick={() => checkout()}  className="btn btn-primary btn-lg"> Confirm Order </button>
             </div>
 
 

@@ -11,6 +11,9 @@ import RentCart from "./Cart/RentCart";
 import Favourite from "./Cart/Favourite";
 import RentBill from "./Cart/RentBill";
 import Genre from "./Genre";
+import Profile from "./Profile";
+import Order from "./Order";
+import RentOrder from "./Cart/RentOrder";
 
 
 class Container extends Component{
@@ -29,6 +32,9 @@ class Container extends Component{
                 <Route path="/favourite" component = {Favourite}/>  
                 <Route path="/rentbill" component = {RentBill}/>  
                 <Route path="/genre/:category" component = {Genre}/>  
+                <Route path="/profile" component = {Profile}/>  
+                <Route path="/order" component = {Order}/>  
+                <Route path="/rentorder" component = {RentOrder}/>  
             
             </div>
         )

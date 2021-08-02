@@ -77,7 +77,6 @@ function RentCart() {
 
                 <div className="total">
 
-                    <h3>Your Total</h3>
 
                     <div className="amount">
 

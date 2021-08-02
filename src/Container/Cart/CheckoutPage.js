@@ -57,7 +57,7 @@ function CheckoutPage() {
 
     const checkout = () => {
         alert('Order has been placed')
-        window.location.href = ('/home')
+        window.location.href = ('/product')
         let config = {
             headers: {
                 'authorization': `Bearer ${localStorage.getItem("token")}`
@@ -135,7 +135,7 @@ function CheckoutPage() {
                                 <td>{p.product.productname}</td>
                                 <td>{p.quantity}</td>
                                 <td>{p.product.buy_price}</td>
-                               <td>{subtotal[index]}</td>
+                               {/* <td>{subtotal[index]}</td> */}
                            
                             </tr>
 
