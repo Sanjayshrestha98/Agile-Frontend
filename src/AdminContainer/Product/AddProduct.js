@@ -320,4 +320,4 @@ function AddProduct() {
     )
 }
 
-export default AddProduct\
+export default AddProduct
