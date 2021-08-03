@@ -311,7 +311,7 @@ function AddProduct() {
                     </div>
 
 
-                    <p className="registerprompt">View Your Added Products   <a href="#">Here</a></p>
+                    <p className="registerprompt">View Your Added Products <a href="#">Here</a></p>
                 </div>
 
             </Formik>
