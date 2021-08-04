@@ -14,6 +14,7 @@ import Genre from "./Genre";
 import Profile from "./Profile";
 import Order from "./Order";
 import RentOrder from "./Cart/RentOrder";
+import FAQ from "./FAQ";
 
 
 class Container extends Component{
@@ -35,6 +36,7 @@ class Container extends Component{
                 <Route path="/profile" component = {Profile}/>  
                 <Route path="/order" component = {Order}/>  
                 <Route path="/rentorder" component = {RentOrder}/>  
+                <Route path="/faq" component = {FAQ}/>  
             
             </div>
         )
