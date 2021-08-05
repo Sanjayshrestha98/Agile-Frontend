@@ -99,6 +99,15 @@ function AdminSideNav({ toggle, toggleSidenav }) {
             </a>
           </li>
 
+          <li>
+            <a href="/admin/addfaq">
+              <i className='navicons-toggle-on'> <img className="addfaqimg" src='/addfaq.png' />  </i>
+              <span className="links_name">Add FAQs</span>
+              <i className='navicons'> <img className="addfaqimg" src='/addfaq.png' /> </i>
+            </a>
+          </li>
+
+
           <li className="bottomicon">
             <a href="">
               <i className='navicons-toggle-on'> <BiLogOut /> </i>

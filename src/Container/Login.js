@@ -40,8 +40,6 @@ const onSubmit = values => {
         }).catch(error => {
             console.error("Error loggin in", error)
         })
-
-
 }
 
 const validationSchema = Yup.object({
