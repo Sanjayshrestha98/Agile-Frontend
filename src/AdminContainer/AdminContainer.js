@@ -11,6 +11,7 @@ import AddUser from './User/AddUser';
 import ViewProduct from './Product/ViewProduct'
 import AdminLogin from './AdminLogin';
 import EditProduct from './Product/EditProduct';
+import Faqlist from './FAQ/Faqlist';
 
 const AdminContainer = () => {
 
@@ -30,6 +31,7 @@ const AdminContainer = () => {
                 <Route path = "/admin/login" component = {AdminLogin}/>
                 <Route path = "/admin/viewproduct" component= {ViewProduct}/>
                 <Route path = "/admin/editproduct" component= {EditProduct}/>
+                <Route path = "/admin/faqlist" component= {Faqlist}/>
 
             </div>
         </div>

@@ -92,7 +92,7 @@ function AdminSideNav({ toggle, toggleSidenav }) {
 
           <p className="sidenav-title">   FAQs  <BiChevronDownCircle /> </p>
           <li>
-            <a href="/admin/faq">
+            <a href="/admin/faqlist">
               <i className='navicons-toggle-on'> <AiFillQuestionCircle /> </i>
               <span className="links_name">FAQ list</span>
               <i className='navicons'> <AiFillQuestionCircle /> </i>
