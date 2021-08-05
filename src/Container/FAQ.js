@@ -1,15 +1,15 @@
 import { Component, React, useEffect, useState } from 'react'
 
+import { ToastContainer, toast } from 'react-toastify';
+import { Field, ErrorMessage } from 'formik';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-
+import { Form, Formik } from 'formik';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +22,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+const notify = () => toast.error("Invalid Credentials", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+});
+
+const initialValues = {
+    question: "",
+}
+
+const onSubmit = values => {
+    console.log('Formdata', values)
+    const response = axios
+        .post(`http://localhost:90/add/faq`, values).then(result => {
+            console.log(result.data)
+            if (result.data.success) {
+
+            } else {
+                notify()
+            }
+        }).catch(error => {
+            console.error("Error Registering User", error)
+        })
+}
 
 
 function FAQ() {
@@ -32,7 +60,9 @@ function FAQ() {
 
     useEffect(() => {
 
-        axios.get('http://localhost:90/getallfaq')
+        // axios.get('http://localhost:90/getallfaq'
+        axios.post('http://localhost:90/getunanswered/' + true)
+
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)
@@ -79,13 +109,36 @@ function FAQ() {
 
 
             </div>
-
             <div className="ask">
-                <div className="title"> Ask A Question </div>
-                <input type="text" />
-                <button>
-                    Ask
-                </button>
+
+                <Formik
+                    initialValues={initialValues}
+                    //  validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                >
+                    <Form>
+                        <div className="title"> Ask A Question </div>
+
+                        <div className="form-label-group form-control">
+                            <Field
+                                type="text" name="question" id="question"
+                            />
+                            <label htmlFor="question">Ask Any Question </label>
+
+                            <ErrorMessage name='question' render={msg => <div className="error">{msg}</div>} />
+                        </div>
+
+                        <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+
+                            type="submit"
+                        >Ask
+                        </button>
+
+                    </Form>
+
+                </Formik>
+
+
             </div>
         </div>
 

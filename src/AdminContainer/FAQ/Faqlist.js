@@ -12,7 +12,9 @@ function Faqlist({history}){
     const [data, setRowData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:90/getallfaq')
+        // axios.get('http://localhost:90/getallfaq')
+        axios.post('http://localhost:90/getunanswered/'+ true)
+
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)

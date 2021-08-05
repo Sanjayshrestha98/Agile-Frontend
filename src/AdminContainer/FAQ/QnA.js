@@ -25,6 +25,19 @@ function QnA({ history }) {
 
     }, [])
 
+    const deletepro = (_id)=>{
+        console.log(_id)
+         axios.delete('http://localhost:90/deletefaq/' + _id)
+         .then((response)=>{
+             console.log(response.data.message)
+             window.location.reload()
+         }).catch((err)=>{
+ 
+             console.log(err.message)
+         })
+    }
+
+
 
 
     const rowdata = data?.map(d => {
@@ -33,7 +46,8 @@ function QnA({ history }) {
             question: d.question,
             status:<p>Un-Answered</p>,
             action: <div>
-                <button> Answer </button>
+                <button className="btn-primary"> Answer </button>
+                <button onClick={() => deletepro(d._id)}><MdDelete  className="deleteicon" /></button>
             </div>
         })
     })
@@ -50,7 +64,7 @@ function QnA({ history }) {
                 label: 'Status',
                 field: 'status',
                 sort: 'asc',
-                width: 270
+                width: 100
             },
             {
                 label: 'Action',

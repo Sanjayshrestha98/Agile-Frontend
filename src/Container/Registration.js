@@ -16,7 +16,17 @@ const initialValues = {
     password: "",
 }
 
-const notify = () => toast.error("Invalid Credentials", {
+const errornotify = () => toast.error("Invalid Credentials", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+});
+
+const successnotify = () => toast.error("User Registered Successfully", {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,
@@ -52,9 +62,9 @@ const onSubmit = values => {
         .post(`http://localhost:90/signup`, values).then(result => {
             console.log(result.data)
             if (result.data.success) {
-
+                successnotify()
             } else {
-                notify()
+                errornotify()
             }
         }).catch(error => {
             console.error("Error Registering User", error)
