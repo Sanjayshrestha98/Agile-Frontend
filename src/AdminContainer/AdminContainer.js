@@ -13,6 +13,7 @@ import AdminLogin from './AdminLogin';
 import EditProduct from './Product/EditProduct';
 import Faqlist from './FAQ/Faqlist';
 import Addfaq from './FAQ/AddFaq';
+import QnA from './FAQ/QnA';
 
 const AdminContainer = () => {
 
@@ -34,6 +35,7 @@ const AdminContainer = () => {
                 <Route path = "/admin/editproduct" component= {EditProduct}/>
                 <Route path = "/admin/faqlist" component= {Faqlist}/>
                 <Route path = "/admin/addfaq" component= {Addfaq}/>
+                <Route path = "/admin/QnA" component= {QnA}/>
 
             </div>
         </div>

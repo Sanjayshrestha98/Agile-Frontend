@@ -30,7 +30,6 @@ function FAQ() {
     const [data, setRowData] = useState([]);
 
 
-
     useEffect(() => {
 
         axios.get('http://localhost:90/getallfaq')

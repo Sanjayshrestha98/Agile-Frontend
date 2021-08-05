@@ -10,6 +10,7 @@ import { MdAddShoppingCart } from 'react-icons/md';
 import { IoMdPersonAdd } from 'react-icons/io';
 import { CgUserList } from 'react-icons/cg';
 import { AiFillQuestionCircle } from 'react-icons/ai';
+import { RiQuestionAnswerLine } from 'react-icons/ri';
 
 function AdminSideNav({ toggle, toggleSidenav }) {
   const [sideToggle, setSideToggle] = useState(toggle)
@@ -104,6 +105,14 @@ function AdminSideNav({ toggle, toggleSidenav }) {
               <i className='navicons-toggle-on'> <img className="addfaqimg" src='/addfaq.png' />  </i>
               <span className="links_name">Add FAQs</span>
               <i className='navicons'> <img className="addfaqimg" src='/addfaq.png' /> </i>
+            </a>
+          </li>
+
+          <li>
+            <a href="/admin/QnA">
+              <i className='navicons-toggle-on'> <RiQuestionAnswerLine /> </i>
+              <span className="links_name">QnA</span>
+              <i className='navicons'>  <RiQuestionAnswerLine />  </i>
             </a>
           </li>
 
