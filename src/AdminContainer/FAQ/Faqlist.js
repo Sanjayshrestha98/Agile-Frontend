@@ -50,7 +50,7 @@ function Faqlist({history}){
    }
 
    const goToEdit = (id) => {
-    history.push("/admin/editproduct", {
+    history.push("/admin/answer/", {
         id : id
     })
    }

@@ -21,8 +21,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const successnotify = () => toast.error("Your Question Has Been Delivered", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+});
 
-const notify = () => toast.error("Invalid Credentials", {
+
+const errornotify = () => toast.error("Error Sending Question", {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,
@@ -42,9 +52,9 @@ const onSubmit = values => {
         .post(`http://localhost:90/add/faq`, values).then(result => {
             console.log(result.data)
             if (result.data.success) {
-
+                successnotify()
             } else {
-                notify()
+                errornotify()
             }
         }).catch(error => {
             console.error("Error Registering User", error)
@@ -60,7 +70,6 @@ function FAQ() {
 
     useEffect(() => {
 
-        // axios.get('http://localhost:90/getallfaq'
         axios.post('http://localhost:90/getunanswered/' + true)
 
             .then((response) => {
@@ -137,6 +146,8 @@ function FAQ() {
                     </Form>
 
                 </Formik>
+
+                <ToastContainer/>
 
 
             </div>

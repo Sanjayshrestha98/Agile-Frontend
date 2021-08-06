@@ -37,8 +37,11 @@ function QnA({ history }) {
          })
     }
 
-
-
+    const answer = (id) => {
+        history.push("/admin/answer/", {
+            id : id
+        })
+       }
 
     const rowdata = data?.map(d => {
         return ({
@@ -46,7 +49,7 @@ function QnA({ history }) {
             question: d.question,
             status:<p>Un-Answered</p>,
             action: <div>
-                <button className="btn-primary"> Answer </button>
+                <button onClick={() => answer(d._id)} className="btn-primary"> Answer </button>
                 <button onClick={() => deletepro(d._id)}><MdDelete  className="deleteicon" /></button>
             </div>
         })
