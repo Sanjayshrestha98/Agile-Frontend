@@ -44,6 +44,7 @@ function AnswerQuestion({ location }) {
                 console.log(result.faqdata)
                 if (result.data.success) {
                     successnotify()
+                    window.location.href = "/admin/faqlist"
                 } else {
                     errornotify()
                 }
