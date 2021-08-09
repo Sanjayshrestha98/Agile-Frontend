@@ -12,6 +12,27 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 // import 'bootstrap-css-only/css/bootstrap.min.css'; 
 import 'mdbreact/dist/css/mdb.css';
 
+import { ThemeProvider } from 'react-bootstrap';
+
+
+const LightTheme = {
+  pageBackground: "white",
+  titleColor: "#dc658b",
+  tagLineColor: "black"
+};
+
+const DarkTheme = {
+  pageBackground: "#282c36",
+  titleColor: "lightpink",
+  tagLineColor: "lavender"
+}
+
+const themes = {
+  light: LightTheme,
+  dark: DarkTheme,
+}
+
+
 
 function App() {
 
@@ -33,6 +54,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
+        <ThemeProvider></ThemeProvider>
       
        {
          !isAdmin ? 
