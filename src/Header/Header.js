@@ -7,6 +7,10 @@ import { NavDropdown } from "react-bootstrap";
 import { MdFavorite } from 'react-icons/md';
 import ReactTooltip from 'react-tooltip';
 
+import { send } from '../Container/Notifications/Push'
+
+send("Push Notifications", "Push notification successfully sent to the browser! Check it out!")
+
 
 class Header extends Component {
 
@@ -24,7 +28,7 @@ class Header extends Component {
 				<div>
 					<Navbar collapseOnSelect expand="lg" variant="light">
 						<Navbar.Brand href="/home">
-							<img src="./logo.png"  alt="logo" height="70px" />
+							<img src="./logo.png" alt="logo" height="70px" />
 						</Navbar.Brand>
 
 						<Navbar.Toggle aria-controls="responsive-navbar-nav" />

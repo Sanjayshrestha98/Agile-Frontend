@@ -17,11 +17,13 @@ import RentOrder from "./Cart/RentOrder";
 import FAQ from "./FAQ";
 
 
+
 class Container extends Component {
     render() {
         return (
             <div>
                 <Header></Header>
+                
 
                 
 

@@ -25,6 +25,7 @@
     "react-toastify": "^7.0.4",
     "react-tooltip": "^4.2.21",
     "typography": "^0.16.21",
+    "web-push": "^3.4.5",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.9"
   },
