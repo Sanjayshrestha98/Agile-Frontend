@@ -15,7 +15,7 @@ import Profile from "./Profile";
 import Order from "./Order";
 import RentOrder from "./Cart/RentOrder";
 import FAQ from "./FAQ";
-
+import Homepage from "./Home";
 
 
 class Container extends Component {
@@ -23,11 +23,6 @@ class Container extends Component {
         return (
             <div>
                 <Header></Header>
-                
-
-                
-
-
                 <Route path="/register" component={Registration} />
                 <Route path="/login" component={Login} />
                 <Route path="/products" component={Product} />
@@ -43,6 +38,8 @@ class Container extends Component {
                 <Route path="/order" component={Order} />
                 <Route path="/rentorder" component={RentOrder} />
                 <Route path="/faq" component={FAQ} />
+
+                <Route path="/home" component={Homepage} />
 
             </div>
         )
