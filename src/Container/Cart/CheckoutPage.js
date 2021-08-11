@@ -91,6 +91,7 @@ function CheckoutPage() {
         }
         
         axios.post('http://localhost:90/checkpromocode', {
+            
             code : promoCode
         }, config).then((response) => {
       if(response.data.success){

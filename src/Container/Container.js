@@ -25,7 +25,6 @@ class Container extends Component {
 
                 
 
-
                 <Route path="/register" component={Registration} />
                 <Route path="/login" component={Login} />
                 <Route path="/products" component={Product} />
