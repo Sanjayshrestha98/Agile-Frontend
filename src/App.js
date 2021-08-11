@@ -11,31 +11,11 @@ import AdminContainer from './AdminContainer/AdminContainer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 // import 'bootstrap-css-only/css/bootstrap.min.css'; 
 import 'mdbreact/dist/css/mdb.css';
-
-import { ThemeProvider } from 'react-bootstrap';
-
-
-const LightTheme = {
-  pageBackground: "white",
-  titleColor: "#dc658b",
-  tagLineColor: "black"
-};
-
-const DarkTheme = {
-  pageBackground: "#282c36",
-  titleColor: "lightpink",
-  tagLineColor: "lavender"
-}
-
-const themes = {
-  light: LightTheme,
-  dark: DarkTheme,
-}
-
+import { ThemeProvider } from "styled-components";
+import Splash from "./Header/Header";
 
 
 function App() {
-
   const [isAdmin, setIsAdmin] = useState(false);
 
   const getURL = () => {
@@ -58,15 +38,11 @@ function App() {
         {
           !isAdmin ?
             <Container>
-              <ThemeProvider theme={themes[theme]}>
-                <Splash theme={theme} setTheme={setTheme} />
-              </ThemeProvider>
 
             </Container>
             :
             <AdminContainer></AdminContainer>
         }
-
       </div>
     </BrowserRouter>
   );
