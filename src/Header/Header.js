@@ -1,30 +1,67 @@
-import { Component } from "react";
+
+import styled, { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme, GlobalStyles } from "../Container/Theme";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from "react-bootstrap";
-import { Nav } from "react-bootstrap";
+import { Nav, Button } from "react-bootstrap";
 import { NavDropdown } from "react-bootstrap";
 import { MdFavorite } from 'react-icons/md';
 import ReactTooltip from 'react-tooltip';
+import { useState, useEffect } from "react";
+
+const StyledApp = styled.div`
+  color: ${(props) => props.theme.color};
+`;
 
 
-class Header extends Component {
+const logout = () => {
+	localStorage.removeItem('token')
+	localStorage.removeItem('role')
+	window.location.href = '/home'
+}
 
-	logout = () => {
-		localStorage.removeItem('token')
-		localStorage.removeItem('role')
-		window.location.href = '/home'
-	}
 
-	render() {
-		if (localStorage.getItem('token')) {
-			console.log(localStorage.getItem('token'))
-			console.log("logged in")
-			return (
+function Header() {
+
+
+	const [theme, setTheme] = useState({});
+	const [themeSelected, setThemeSelected] = useState()
+
+
+	const themeToggler = () => {
+		if (localStorage.getItem('theme', "light") === "light") {
+			localStorage.setItem('theme', "dark")
+			setThemeSelected("dark")
+			// themeSelected = "dark"
+		}
+		else {
+			localStorage.setItem('theme', "light")
+			setThemeSelected("light")
+			// themeSelected = "light"
+		}
+		// theme === localStorage.getItem("theme") ? setTheme("dark") : setTheme("light");
+
+	};
+
+
+	useEffect(() => {
+		setTheme(localStorage.getItem("theme") === "light" ? lightTheme : darkTheme)
+	}, [themeSelected])
+
+
+
+	return (
+		<ThemeProvider theme={theme}>
+
+			<GlobalStyles />
+			<StyledApp>
+				{localStorage.getItem('token')
+				?
 				<div>
 					<Navbar collapseOnSelect expand="lg" variant="light">
 						<Navbar.Brand href="/home">
-							<img src="./logo.png"  alt="logo" height="70px" />
+							<img src="./logo.png" alt="logo" height="70px" />
 						</Navbar.Brand>
 
 						<Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -39,7 +76,6 @@ class Header extends Component {
 									<NavDropdown.Item href="#action/3.3">PC</NavDropdown.Item>
 									<NavDropdown.Item href="#action/3.4">Nintendo</NavDropdown.Item>
 									<NavDropdown.Divider />
-									{/* <NavDropdown.Item href="#action/3.4">Brand</NavDropdown.Item> */}
 								</NavDropdown>
 
 								<NavDropdown title="Genre" id="collasible-nav-dropdown">
@@ -53,7 +89,6 @@ class Header extends Component {
 									<NavDropdown.Item href="/genre/Horror">Horror</NavDropdown.Item>
 									<NavDropdown.Item href="/genre/Role-Playing">Role-Playing</NavDropdown.Item>
 									<NavDropdown.Divider />
-									{/* <NavDropdown.Item href="#action/3.4">Category</NavDropdown.Item> */}
 								</NavDropdown>
 
 								<Nav.Link href="/contact">Contact Us</Nav.Link>
@@ -87,11 +122,18 @@ class Header extends Component {
 										<img src="./user.png" alt="profile" />
 									</div>
 								</Nav.Link>
+								<Nav.Link>
+									<div data-tip="Profile" className="righticons">
+										<button onClick={() => themeToggler()}>Change Theme</button>
+
+									</div>
+								</Nav.Link>
+
 
 								<Nav.Link>
 									<div data-tip="Logout" className="righticons">
 										<img src="./logout.png"
-											onClick={this.logout} alt="logout"
+											onClick={() => logout()} alt="logout"
 										/>
 									</div>
 								</Nav.Link>
@@ -102,12 +144,9 @@ class Header extends Component {
 
 					<ReactTooltip />
 				</div>
-			)
-		}
-		else {
-			console.log(localStorage.getItem('token'))
-			console.log("logged out")
-			return (
+
+				:
+
 				<div>
 					<Navbar collapseOnSelect expand="lg" variant="light">
 						<Navbar.Brand>
@@ -120,28 +159,40 @@ class Header extends Component {
 								<Nav.Link href="/home">Home</Nav.Link>
 								<Nav.Link href="/products">Products</Nav.Link>
 
-								<NavDropdown title="Brands" id="collasible-nav-dropdown">
-									<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+								<NavDropdown title="Platform" id="collasible-nav-dropdown">
+									<NavDropdown.Item href="#action/3.1">XBox</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.2">PS4</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.3">PC</NavDropdown.Item>
+									<NavDropdown.Item href="#action/3.4">Nintendo</NavDropdown.Item>
 									<NavDropdown.Divider />
-									<NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
 								</NavDropdown>
 
-								<NavDropdown title="Categories" id="collasible-nav-dropdown">
-									<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-									<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+								<NavDropdown title="Genre" id="collasible-nav-dropdown">
+									<NavDropdown.Item href="/genre/Sports">Sports</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Shooter">Shooter</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Sandbox">Sandbox</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Puzzle">Puzzle</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Action">Action</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Action-Adventure">Adventure</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Survival">Survival</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Horror">Horror</NavDropdown.Item>
+									<NavDropdown.Item href="/genre/Role-Playing">Role-Playing</NavDropdown.Item>
 									<NavDropdown.Divider />
-									<NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
 								</NavDropdown>
 
 							</Nav>
 
 							<Nav className="rightnav">
+
+							<Nav.Link>
+									<div data-tip="Profile" className="righticons">
+										<button onClick={() => themeToggler()}>Change Theme</button>
+
+									</div>
+								</Nav.Link>
+								
 								<Nav.Link href="/register">Register</Nav.Link>
 								<Nav.Link href="/login">Login</Nav.Link>
-
 
 							</Nav>
 						</Navbar.Collapse>
@@ -149,10 +200,15 @@ class Header extends Component {
 
 					<ReactTooltip />
 				</div>
-			)
+			}
+			</StyledApp>
 
-		}
-	}
+		</ThemeProvider>
+
+	)
+
+
+
 }
 
 export default Header;

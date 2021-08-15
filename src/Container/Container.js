@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState } from "react";
 import Registration from "./Registration";
 import Login from "./Login";
 import { Route } from "react-router-dom";
@@ -16,34 +16,27 @@ import Order from "./Order";
 import RentOrder from "./Cart/RentOrder";
 import FAQ from "./FAQ";
 
+function Container() {
 
-class Container extends Component {
-    render() {
-        return (
-            <div>
-                <Header></Header>
-
-                
-
-                <Route path="/register" component={Registration} />
-                <Route path="/login" component={Login} />
-                <Route path="/products" component={Product} />
-                {/* <Route path="/products/:category" component = {Product}/> */}
-                <Route path="/checkoutpage" component={CheckoutPage} />
-                <Route path="/cartpage" component={Cartpage} />
-                <Route path="/productdetail" component={SingleProduct} />
-                <Route path="/rentcart" component={RentCart} />
-                <Route path="/favourite" component={Favourite} />
-                <Route path="/rentbill" component={RentBill} />
-                <Route path="/genre/:category" component={Genre} />
-                <Route path="/profile" component={Profile} />
-                <Route path="/order" component={Order} />
-                <Route path="/rentorder" component={RentOrder} />
-                <Route path="/faq" component={FAQ} />
-
-            </div>
-        )
-    }
+    return (
+        <div>
+            <Header>        </Header>
+            <Route path="/register" component={Registration} />
+            <Route path="/login" component={Login} />
+            <Route path="/products" component={Product} />
+            <Route path="/checkoutpage" component={CheckoutPage} />
+            <Route path="/cartpage" component={Cartpage} />
+            <Route path="/productdetail" component={SingleProduct} />
+            <Route path="/rentcart" component={RentCart} />
+            <Route path="/favourite" component={Favourite} />
+            <Route path="/rentbill" component={RentBill} />
+            <Route path="/genre/:category" component={Genre} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/order" component={Order} />
+            <Route path="/rentorder" component={RentOrder} />
+            <Route path="/faq" component={FAQ} />
+        </div>
+    )
 }
 
 export default Container;
