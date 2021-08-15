@@ -185,7 +185,7 @@ function Header() {
 							<Nav className="rightnav">
 
 							<Nav.Link>
-									<div data-tip="Profile" className="righticons">
+									<div className="righticons">
 										<button onClick={() => themeToggler()}>Change Theme</button>
 
 									</div>
