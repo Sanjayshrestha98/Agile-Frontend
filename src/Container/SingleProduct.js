@@ -193,7 +193,7 @@ function SingleProduct({ location }) {
                         <div class="img-select">
                             <div class="img-item">
                                 <a href="#" data-id="1">
-                                    <img src="shoes_images/shoe_1.jpg" alt="shoe image" />
+                                    <img src={`http://localhost:90/${product?.image}`} alt="shoe image" />
                                 </a>
                             </div>
                             <div class="img-item">
@@ -214,26 +214,26 @@ function SingleProduct({ location }) {
                         </div>
                     </div>
                     <div class="product-content">
-                        <h2 class="product-title">nike shoes</h2>
-                        <a href="#" class="product-link">visit nike store</a>
-                        <div class="product-rating">
+                        <h2 class="product-title">{product?.productname}</h2>
+                        <a class="product-link">{product?.publisher}</a>
+                        {/* <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star-half-alt"></i>
                             <span>4.7(21)</span>
-                        </div>
+                        </div> */}
 
                         <div class="product-price">
-                            <p class="last-price">Old Price: <span>$257.00</span></p>
-                            <p class="new-price">New Price: <span>$249.00 (5%)</span></p>
+                            {/* <p class="last-price">Old Price: <span></span></p> */}
+                            <p class="new-price">Buy Price: <span>{product?.buy_price}</span></p>
+                            <p class="new-price">Rent Price: <span>{product?.rent_price}</span></p>
                         </div>
 
                         <div class="product-detail">
                             <h2>about this item: </h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+                            <p>{product?.description}</p>
                             <ul>
                                 <li>Color: <span>Black</span></li>
                                 <li>Available: <span>in stock</span></li>
