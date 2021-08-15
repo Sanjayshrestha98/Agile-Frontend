@@ -4,11 +4,12 @@ import { send } from './Notifications/Push'
 
 function Homepage() {
 
-    send("new game on the page", "Preorder now")
+    send("New Games In The Store", "Check Them Out")
 
     return (
         <div>
-            this is home page
+            Home Page
+            
         </div>
     )
 }
