@@ -1,16 +1,22 @@
 import { Component, React, useEffect, useState } from 'react'
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { Card, Container, Row, Col, DropdownButton} from 'react-bootstrap'
+
+
 
 import { Link } from "react-router-dom";
+
 import { Dropdown } from 'bootstrap';
-import { DropdownButton } from 'react-bootstrap';
+
+
 
 function Product({ history, props }) {
 
-    const [data, setRowData] = useState([]);
+    let[search, setSearch]= useState('');
+    let [data, setRowData] = useState([]);
 
-    const [selectedSort, setSortType] = useState("asc");
+    let [selectedSort, setSortType] = useState("asc");
 
     useEffect(()=>{
         axios.get('http://localhost:90/getallproducts/'+selectedSort)
@@ -27,6 +33,8 @@ function Product({ history, props }) {
                 console.log(err)
             })
     },[selectedSort])
+    let filtered = data.filter((val) => { return val.productname.toLowerCase().trim().startsWith(search.toLowerCase().trim()) })
+
 
     // useEffect(() => {
 
@@ -55,6 +63,20 @@ function Product({ history, props }) {
     return (
         <div>
             <div>
+                <Container>
+                    <Row>
+                        <Col lg={4} className="d-none d-md-none d-lg-block"></Col>
+                        <Col lg={4}>
+                        <div className="Search">
+                                <input type="text" placeholder="I am looking for....." onChange={(e) => {
+                                    setSearch(e.target.value);
+                                }} id="txtSearch" className="form-control" />
+                            </div>
+                        </Col>
+                        <Col lg={4} className="d-none d-md-none d-lg-block"></Col>
+                    
+                    </Row>
+                </Container>
 
                 <div class="sortdropdown">
                     <select className="btn btn-secondary" onChange={setSort.bind(this)}>
@@ -79,7 +101,7 @@ function Product({ history, props }) {
                 <h3 className="adminpage-headers title mb-4"> Our Products </h3>
 
                 <div className="row">
-                    {data.map(value => (
+                    {filtered.map(value => (
                         <div className="content" onClick={() => {
                             history.push("/productdetail", {
                                 product: value
