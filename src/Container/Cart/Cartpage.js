@@ -13,8 +13,8 @@ function Cartpage() {
         }
         axios.get('http://localhost:90/get/buycart', config)
             .then((response) => {
-                setdata(response.data.data)
-                console.log(response.data.data)
+                setdata(response.data.data.order)
+                console.log(response.data.data.order)
             })
             .catch((err) => {
                 console.log(err)

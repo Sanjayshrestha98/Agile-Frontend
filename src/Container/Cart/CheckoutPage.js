@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 function CheckoutPage() {
-    
+
     const [data, setdata] = useState([]);
     const [subtotal, setSubtotal] = useState([])
     const [promoError, setPromoError] = useState("")
@@ -20,67 +20,71 @@ function CheckoutPage() {
         }
         axios.get('http://localhost:90/get/buycart', config)
             .then((response) => {
-                
-                setdata(response.data.data)
-                response.data.data.map(val => { 
-                    calculateSubTotal(val.product.buy_price, val.quantity)
-                })
+                if (response.data.data.status == "default") {
+                    setdata(response.data.data.order)
+                    setGrandTotal(response.data.data.grandTotal)
+                }
+                // setdata(response.data.data.order)
+                // calculateSubTotal(response.data.data.grandTotal)
+                // response.data.data.map(val => { 
+                //     calculateSubTotal(val.product.buy_price, val.quantity)
+                // })
                 console.log(response.data.data)
             })
             .catch((err) => {
                 console.log(err)
             })
- 
-    }, 
-    [])
+    },
+        [])
 
-    function calculateSubTotal(price, quantity) { 
-        var subtotall = price * quantity;  
-        setSubtotal(old => [...old, subtotall])
-    }
- 
-    function calculateTotal() {
-        var total = 0; 
-         subtotal.map((value) => {
-            total = total + parseInt(value); 
-        })
+    // function calculateSubTotal(price, quantity) { 
+    //     var subtotall = price * quantity;  
+    //     setSubtotal(old => [...old, subtotall])
+    // }
 
-        setGrandTotal(total)
- 
+    // function calculateTotal() {
+    //     var total = 0; 
+    //      subtotal.map((value) => {
+    //         total = total + parseInt(value); 
+    //     })
+    //     console.log(data.grandTotal)
 
-    }
+    //     setGrandTotal(data.grandTotal)
+    // }
 
     useEffect(() => {
         console.log(subtotal)
-        calculateTotal()
+        // calculateTotal()
     }, [subtotal])
 
     const checkout = () => {
-        alert('Order has been placed')
-        window.location.href = ('/product')
-        let config = {
-            headers: {
-                'authorization': `Bearer ${localStorage.getItem("token")}`
-            }
-        }
-        axios.post('http://localhost:90/add/order', config)
-        .then((response) => {
-            setdata(response.data.data)
-            console.log(response.data.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+        // alert('Order has been placed')
+        //window.location.href = ('/product')
+        // let config = {
+        //     headers: {
+        //         'authorization': `Bearer ${localStorage.getItem("token")}`
+        //     }
+        // }
+        axios.put('http://localhost:90/update/default_to_pending')
+            .then((response) => {
+                alert("update success")
+                // setdata(response.data.data)
+                // console.log(response.data.data)
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
 
     }
 
     const calculateTotalAfterPromo = () => {
-        
-            if(promoPercent !== "") {
-                let promoTotal = grandTotal - (grandTotal * (parseInt(promoPercent) /100))
-               
-                setGrandTotal(promoTotal)
-            }
+
+        if (promoPercent !== "") {
+            let promoTotal = grandTotal - (grandTotal * (parseInt(promoPercent) / 100))
+
+            setGrandTotal(promoTotal)
+        }
     }
 
     const checkPromoCode = () => {
@@ -89,33 +93,33 @@ function CheckoutPage() {
                 'authorization': `Bearer ${localStorage.getItem("token")}`
             }
         }
-        
+
         axios.post('http://localhost:90/checkpromocode', {
-            
-            code : promoCode
+
+            code: promoCode
         }, config).then((response) => {
-      if(response.data.success){
-          setPromoError("") 
-        if(response.data.data.active ){
-        setPromoPercent(response.data.percent)
-            
-          setHasEnteredPromo(true)
-        }else{
-            setPromoError("Promo Code Not Active!!")
-        }
-      }else{
-          setPromoError("Invalid Code!!")
-      }
+            if (response.data.success) {
+                setPromoError("")
+                if (response.data.data.active) {
+                    setPromoPercent(response.data.percent)
+
+                    setHasEnteredPromo(true)
+                } else {
+                    setPromoError("Promo Code Not Active!!")
+                }
+            } else {
+                setPromoError("Invalid Code!!")
+            }
         })
-        .catch((err) => {
-            console.log(err)
-        })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     useEffect(() => {
         calculateTotalAfterPromo()
     }, [promoPercent])
-    
+
 
     return (
         <div className="checkout">
@@ -128,19 +132,19 @@ function CheckoutPage() {
 
                     </tr>
                 </thead>
-                
+
                 <tbody>{
 
-                       data.length > 0 && data.map((p, index) => (
-                            <tr>
-                                <td>{p.product.productname}</td>
-                                <td>{p.quantity}</td>
-                                <td>{p.product.buy_price}</td>
-                               {/* <td>{subtotal[index]}</td> */}
-                           
-                            </tr>
+                    data.length > 0 && data.map((p, index) => (
+                        <tr>
+                            <td>{p.product.productname}</td>
+                            <td>{p.quantity}</td>
+                            <td>{p.product.buy_price}</td>
+                            {/* <td>{subtotal[index]}</td> */}
 
-                        ))
+                        </tr>
+
+                    ))
                 }</tbody>
             </table>
 
@@ -165,19 +169,19 @@ function CheckoutPage() {
 
                     <tr>
                         <th scope="row">Promo Codes</th>
-                        <th><input type="text" disabled = {hasEnteredPromo && true} onChange = {(e) => setPromoCode(e.target.value)}/>  
-                        <button onClick = {() => checkPromoCode()}>Redeem</button></th>
-                    <span className = "danger-text">{promoError}</span>
+                        <th><input type="text" disabled={hasEnteredPromo && true} onChange={(e) => setPromoCode(e.target.value)} />
+                            <button onClick={() => checkPromoCode()}>Redeem</button></th>
+                        <span className="danger-text">{promoError}</span>
                     </tr>
 
                     <tr>
                         <th scope="row">Grand Total</th>
-                            <th><>{grandTotal}</></th>
+                        <th><>{grandTotal}</></th>
                     </tr>
-                    
-                    
 
-                   
+
+
+
                 </tbody>
             </table>
 
@@ -201,7 +205,7 @@ function CheckoutPage() {
 
 
             <div>
-                <button type="button" onClick={() => checkout()}  className="btn btn-primary btn-lg"> Confirm Order </button>
+                <button type="button" onClick={() => checkout()} className="btn btn-primary btn-lg"> Confirm Order </button>
             </div>
 
 
