@@ -1137,7 +1137,7 @@ margin-top: 10px;
 }
 
 .productbody{
-  margin-top: 150px;
+  margin-top: 100px;
   line-height: 1.5;
 }
 
@@ -1152,7 +1152,7 @@ margin-top: 10px;
 }
 .img-showcase{
   display: flex;
-  width: 80%;
+  width: 75%;
   transition: all 0.5s ease;
 }
 .img-showcase img{
