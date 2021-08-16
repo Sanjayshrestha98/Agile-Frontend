@@ -55,7 +55,8 @@ function Product({ history, props }) {
     return (
         <div>
             <div>
-                <div className="sortdropdown">
+
+                <div class="sortdropdown">
                     <select className="btn btn-secondary" onChange={setSort.bind(this)}>
                         {/* <option value="#">select</option> */}
                         <option value="asc">A - Z</option>

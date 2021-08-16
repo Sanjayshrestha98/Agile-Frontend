@@ -1057,9 +1057,6 @@ margin-top: 10px;
 }
 
 
-
-
-
 /* ------------------------------------------- */
 
 .card{
@@ -1243,4 +1240,10 @@ margin-top: 10px;
 .fav{
   background-color: red !important;
   width: 100px !important;
+}
+
+.sortdropdown{
+width: 20%;
+margin-top: 20px;
+margin-left: auto;
 }
