@@ -11,7 +11,6 @@ export const lightTheme = {
 export const darkTheme = {
   body: "#000",
   color: "white",
-
 };
 
 export const GlobalStyles = createGlobalStyle`
