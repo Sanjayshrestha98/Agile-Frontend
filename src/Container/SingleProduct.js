@@ -3,7 +3,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import ReactPlayer from 'react-player';
+import { ImHeart } from 'react-icons/im';
 
+
+import moment from 'moment';
 
 function SingleProduct({ location }) {
     const [product, setProduct] = useState({});
@@ -33,6 +36,7 @@ function SingleProduct({ location }) {
         progress: undefined,
     });
 
+    const formatteddate = moment(product?.release_date).utc().format('YYYY/MM/DD')
 
     const addtoCart = (id) => {
         let data = {
@@ -97,7 +101,6 @@ function SingleProduct({ location }) {
             ).then(result => {
                 console.log(result.data)
                 if (result.data.success) {
-                    // window.location.href('/login')
                     succesnotify()
                 } else {
                     errornotify()
@@ -108,125 +111,27 @@ function SingleProduct({ location }) {
     }
 
     return (
-        // <div className="app">
-        //     <div className="details">
-        //         <div className="big-img">
-        //             <img alt="productimage" src={`http://localhost:90/${product?.image}`} max-width="300px" />
-        //         </div>
-        //         <div>
-        //             <ReactPlayer controls url={product.trailer}/>
-        //         </div>
+        <div className=" container productbody">
 
-        //         <div className="dots">
-        //             <span className="dot dot-color-1 active"></span>
-        //             <span className="dot dot-color-2"></span>
-        //         </div>
-        //     </div>
-
-        //     <div className="box">
-        //         <div className="row">
-
-        //             <span className="info-subtitle">Product Name :</span>
-        //             <h1 className="product-title"> {product?.productname}</h1>
-        //             <p className="product-description"> {product?.description} </p>
-
-        //             <span className="info-subtitle">System Requirements :</span>
-
-        //             <p className="product-description"> {product?.system_requirements} </p>
-
-        //             {/* <div className="info-down"> */}
-        //             {/* <div className="price"> */}
-        //             <h3 className="price-title"> Buy Price</h3>
-        //             <span className="size-total active">{product?.buy_price}</span>
-
-        //             {/* </div> */}
-        //             {/* <div className="price">/ */}
-        //             <h3 className="price-title"> Rent Price</h3>
-        //             <span className="size-total active">{product?.rent_price}</span>
-
-        //             {/* </div> */}
-
-        //             {/* </div> */}
-
-        //             <div className="actionbuttons">
-        //                 <button className="cart" onClick={(e) => {
-        //                     e.preventDefault()
-        //                     addtoCart(product?._id)
-        //                 }}>ADD TO CART </button>
+            <title>Product Card/Page</title>
 
 
-        //                 <button className="cart" onClick={(e) => {
-        //                     e.preventDefault()
-        //                     addtoFav(product?._id)
-        //                 }}>ADD TO Favourite </button>
-
-
-        //                 <button href="/cartpage" className="cart" onClick={(e) => {
-        //                     e.preventDefault();
-        //                     addtoRentCart(product?._id)
-        //                 }}>Rent this Product</button>
-
-        //             </div>
-
-
-        //         </div>
-        //         <ToastContainer />
-        //     </div>
-        // </div>
-
-        <div>
-            {/* <title>Product Card/Page</title> */}
-
-            <div class="card-wrapper">
-
-
-                <div class="card">
-                    <div class="product-imgs">
-                        <div class="img-display">
-                            <div class="img-showcase">
-                                <img src="shoes_images/shoe_1.jpg" alt="shoe image" />
-                                <img src="shoes_images/shoe_2.jpg" alt="shoe image" />
-                                <img src="shoes_images/shoe_3.jpg" alt="shoe image" />
-                                <img src="shoes_images/shoe_4.jpg" alt="shoe image" />
-                            </div>
-                        </div>
-                        <div class="img-select">
-                            <div class="img-item">
-                                <a href="#" data-id="1">
-                                    <img src={`http://localhost:90/${product?.image}`} alt="shoe image" />
-                                </a>
-                            </div>
-                            <div class="img-item">
-                                <a href="#" data-id="2">
-                                    <img src="shoes_images/shoe_2.jpg" alt="shoe image" />
-                                </a>
-                            </div>
-                            <div class="img-item">
-                                <a href="#" data-id="3">
-                                    <img src="shoes_images/shoe_3.jpg" alt="shoe image" />
-                                </a>
-                            </div>
-                            <div class="img-item">
-                                <a href="#" data-id="4">
-                                    <img src="shoes_images/shoe_4.jpg" alt="shoe image" />
-                                </a>
-                            </div>
+            <div class="container productbody">
+                <div class="row">
+                    <div class="col">
+                        <div class="img-showcase">
+                            <img src={`http://localhost:90/${product?.image}`} alt="shoe image" />
                         </div>
                     </div>
-                    <div class="product-content">
+
+
+
+
+                    <div class="col">
                         <h2 class="product-title">{product?.productname}</h2>
                         <a class="product-link">{product?.publisher}</a>
-                        {/* <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.7(21)</span>
-                        </div> */}
 
                         <div class="product-price">
-                            {/* <p class="last-price">Old Price: <span></span></p> */}
                             <p class="new-price">Buy Price: <span>{product?.buy_price}</span></p>
                             <p class="new-price">Rent Price: <span>{product?.rent_price}</span></p>
                         </div>
@@ -235,44 +140,41 @@ function SingleProduct({ location }) {
                             <h2>about this item: </h2>
                             <p>{product?.description}</p>
                             <ul>
-                                <li>Color: <span>Black</span></li>
-                                <li>Available: <span>in stock</span></li>
-                                <li>Category: <span>Shoes</span></li>
-                                <li>Shipping Area: <span>All over the world</span></li>
-                                <li>Shipping Fee: <span>Free</span></li>
+                                <li>System Requirements <span>{product?.system_requirements}</span></li>
+                                <li>InStock: <span>{product?.instock}</span></li>
+                                <li>Category: <span>{product?.genre}</span></li>
+                                <li>Platform: <span>{product?.platform}</span></li>
+                                <li>Released on: <span>{formatteddate}</span></li>
+                                <li>Condition: <span>{product?.condition}</span></li>
+
                             </ul>
                         </div>
 
                         <div class="purchase-info">
-                            <input type="number" min="0" value="1" />
-                            <button type="button" class="btn">
-                                Add to Cart <i class="fas fa-shopping-cart"></i>
+                            <button type="button" class="btn" onClick={(e) => {
+                                e.preventDefault()
+                                addtoCart(product?._id)
+                            }}>
+                                Add to Cart < i class="fas fa-shopping-cart"></i>
                             </button>
-                            <button type="button" class="btn">Compare</button>
-                        </div>
+                            <button className=" btn fav" onClick={(e) => {
+                                e.preventDefault()
+                                addtoFav(product?._id)
+                            }} type="button" ><ImHeart /></button>
 
-                        <div class="social-links">
-                            <p>Share At: </p>
-                            <a href="#">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fab fa-pinterest"></i>
-                            </a>
+                            <button type="button" class="btn" onClick={(e) => {
+                                e.preventDefault();
+                                addtoRentCart(product?._id)
+                            }}>Rent</button>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+
+
+        </div >
 
     )
 }
