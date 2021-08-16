@@ -51,7 +51,7 @@ function AddProduct() {
         productname: Yup.string().required('Required'),
         rent_price: Yup.number().required('Required'),
         buy_price: Yup.number().required('Required'),
-        // platform: Yup.string().required('Required'),
+        platform: Yup.string().required('Required'),
         publisher: Yup.string().required('Required'),
         genre: Yup.string().required('Required'),
         system_requirements: Yup.string().required('Required'),
@@ -64,7 +64,7 @@ function AddProduct() {
         console.log('Formdata', values)
         const formData = new FormData();
         formData.append("productname", values.productname)
-        formData.append("platform", values.platform)
+        // formData.append("platform", values.platform)
         formData.append("rent_price", values.rent_price)
         formData.append("buy_price", values.buy_price)
         formData.append("publisher", values.publisher)
@@ -172,11 +172,9 @@ function AddProduct() {
                                         >
                                             <option value="" label="Select a Platform" />
                                             <option value="PC" label="PC" />
-                                            <option value="XBOX" label="XBox" />
+                                            <option value="XBox" label="XBox" />
                                             <option value="PS4" label="PS4" />
                                         </select>
-
-
 
                                         <ErrorMessage name='platform' render={msg => <div className="error">{msg}</div>} />
                                     </div>
