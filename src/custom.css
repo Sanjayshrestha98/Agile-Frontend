@@ -479,11 +479,9 @@ color: red;
   width: 90%;
 }
 .home-section{
-    /* position: relative; */
     background: #ffffff00;
-    /* min-height: 100vh; */
     width: calc(100% - 240px);
-    /* left: 240px; */
+    width: 100%;
     transition: all 0.5s ease;
 }
 .sidebar.active ~ .home-section{
@@ -1249,6 +1247,21 @@ margin-left: auto;
 }
 
 
+.home-section{
+  margin-top: -51px;
+}
 .Search{
   margin-top: 30px;
+}
+
+.adminnavbar{
+  margin-top: 0px;
+}
+
+
+.chart{
+  border-radius: 20px;
+  padding: 30px;
+  gap: 30px;
+  margin: 20px;
 }

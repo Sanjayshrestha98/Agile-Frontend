@@ -18,12 +18,12 @@ function CheckoutPage() {
                 'authorization': `Bearer ${localStorage.getItem("token")}`
             }
         }
-        axios.get('http://localhost:90/get/buycart', config)
+        axios.get('http://localhost:90/get/default_buycart', config)
             .then((response) => {
-                if (response.data.data.status == "default") {
+                // if (response.data.data.status == "default") {
                     setdata(response.data.data.order)
                     setGrandTotal(response.data.data.grandTotal)
-                }
+                // }
                 // setdata(response.data.data.order)
                 // calculateSubTotal(response.data.data.grandTotal)
                 // response.data.data.map(val => { 
@@ -60,12 +60,12 @@ function CheckoutPage() {
     const checkout = () => {
         // alert('Order has been placed')
         //window.location.href = ('/product')
-        // let config = {
-        //     headers: {
-        //         'authorization': `Bearer ${localStorage.getItem("token")}`
-        //     }
-        // }
-        axios.put('http://localhost:90/update/default_to_pending')
+        let config = {
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        }
+        axios.put('http://localhost:90/update/default_to_pending',{},config)
             .then((response) => {
                 alert("update success")
                 // setdata(response.data.data)
@@ -201,8 +201,6 @@ function CheckoutPage() {
 
                 </div>
             </div>
-
-
 
             <div>
                 <button type="button" onClick={() => checkout()} className="btn btn-primary btn-lg"> Confirm Order </button>

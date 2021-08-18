@@ -11,7 +11,7 @@ function Cartpage() {
                 'authorization': `Bearer ${localStorage.getItem("token")}`
             }
         }
-        axios.get('http://localhost:90/get/buycart', config)
+        axios.get('http://localhost:90/get/default_buycart', config)
             .then((response) => {
                 setdata(response.data.data.order)
                 console.log(response.data.data.order)
@@ -66,7 +66,7 @@ function Cartpage() {
                                 <td>{p.product?.productname}</td>
                                 <td>{p?.quantity}</td>
                                 <td>{p.product?.buy_price}</td>
-                                <td><button onClick={(e) => deletepro(p?._id)} >Remove</button></td>
+                                <td><button onClick={(e) => deletepro(p?.product?._id)} >Remove</button></td>
                             </tr>
 
                         ))

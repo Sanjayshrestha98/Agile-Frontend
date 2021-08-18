@@ -32,7 +32,7 @@ function Favourite() {
         console.log(_id)
          axios.delete('http://localhost:90/delete/favourite/' + _id, config)
          .then((response)=>{
-             console.log(response.data.message)
+             console.log(response.data.data)
              window.location.reload()
          }).catch((err)=>{
  
@@ -63,12 +63,12 @@ function Favourite() {
 
                       data.length > 0 &&  data.map((p) => (
                         <tr>
-                            <td><img width="50px" src = {`http://localhost:90/${p.product.image}`} alt="productimage" /></td>
-                            <td>{p.product.productname}</td>
+                            <td><img width="50px" src = {`http://localhost:90/${p.product?.image}`} alt="productimage" /></td>
+                            <td>{p.product?.productname}</td>
                             {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
-                            <td>{p.product.buy_price}</td>
-                            <td>{p.product.rent_price}</td>
-                            <td><button onClick={(e) => deletepro(p._id)} >Remove</button></td>
+                            <td>{p.product?.buy_price}</td>
+                            <td>{p.product?.rent_price}</td>
+                            <td><button onClick={(e) => deletepro(p?.product._id)} >Remove</button></td>
                         </tr>
 
                         ))
