@@ -8,12 +8,36 @@ import { ImHeart } from 'react-icons/im';
 
 import moment from 'moment';
 
-function SingleProduct({ location }) {
+function SingleProduct({ location, history }) {
+
     const [product, setProduct] = useState({});
+
+    const [data, setRowData] = useState([]);
 
     useEffect(() => {
         console.log(location.state.product)
         setProduct(location.state.product)
+
+        
+        console.log(location.state.product._id)
+
+    }, [])
+
+
+    useEffect(() => {
+        axios.get('http://localhost:90/getfourproducts/' + location.state.product._id)
+            .then((response) => {
+                setRowData(response.data.data)
+                console.log(response.data)
+                this.setState(
+                    {
+                        products: response.data.data
+                    }
+                )
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }, [])
 
     const errornotify = () => toast.error("Invalid Credentials", {
@@ -108,10 +132,11 @@ function SingleProduct({ location }) {
             }).catch(error => {
                 console.error("Error Adding to Cart", error)
             })
+
     }
 
     return (
-        <div className=" container productbody">
+        <div className=" container ">
 
             <title>Product Card/Page</title>
 
@@ -120,12 +145,9 @@ function SingleProduct({ location }) {
                 <div class="row">
                     <div class="col">
                         <div class="img-showcase">
-                            <img src={`http://localhost:90/${product?.image}`} alt="shoe image" />
+                            <img src={`http://localhost:90/public/images/${product?.image}`} alt="shoe image" />
                         </div>
                     </div>
-
-
-
 
                     <div class="col">
                         <h2 class="product-title">{product?.productname}</h2>
@@ -172,6 +194,44 @@ function SingleProduct({ location }) {
                 </div>
             </div>
 
+            <div class="container productbody">
+                <ReactPlayer className='trailer' url={product?.trailer}
+
+                />
+            </div>
+
+
+            <div class="container productbody">
+
+                <h2>Recommended</h2>
+
+                <div className="row">
+                    {data.map(value => (
+                        <div className="content" onClick={() => {
+                            history.push("/productdetail", {
+                                product: value
+                            })
+                        }} >
+                            <div>
+                                <div className="productimage">
+                                    <img className="img-thumbnail align-middle" src={`http://localhost:90/public/images/${value.image}`} alt=" ProductImage" />
+                                </div>
+                                <h1 className="product-name">{value.productname}</h1>
+                                <h4 className="product-type">{value.platform}</h4>
+                            </div>
+                            <div className="price-and-buy">
+                                <p className="price">Buy: Rs {value.buy_price}</p>
+                                <p className="price">Rent : Rs {value.rent_price}</p>
+                            </div>
+
+                        </div>
+
+                    ))}
+                </div>
+
+
+
+            </div>
 
 
         </div >

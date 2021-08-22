@@ -46,6 +46,13 @@ function AddUser() {
         username: Yup.string().required('Required'),
         password: Yup.string().required('Required'),
         confirmpassword: Yup.string().required('Required'),
+        confirmpassword: Yup.string().when("password", {
+            is: val => (val && val.length > 0 ? true : false),
+            then: Yup.string().oneOf(
+                [Yup.ref("password")],
+                "Both password need to be the same"
+            )
+        })
 
     })
 

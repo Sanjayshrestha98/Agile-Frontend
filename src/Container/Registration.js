@@ -26,19 +26,23 @@ const errornotify = () => toast.error("Invalid Credentials", {
     progress: undefined,
 });
 
-const successnotify = () => toast.error("User Registered Successfully", {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-});
+const successnotify = () =>
+
+
+
+    toast.error("User Registered Successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
 
 const validationSchema = Yup.object({
-    fullname: Yup.string().required('Required'),
+    fullname: Yup.string().required('Required').matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
     email: Yup.string().email('Invalid Email Format').required('Field cannot be empty'),
     phone: Yup.string().required('required'),
     address: Yup.string().required('Required'),
@@ -62,9 +66,13 @@ const onSubmit = values => {
         .post(`http://localhost:90/signup`, values).then(result => {
             console.log(result.data)
             if (result.data.success) {
+
+                this.props.history.push('/login')
                 successnotify()
+
             } else {
                 errornotify()
+
             }
         }).catch(error => {
             console.error("Error Registering User", error)
@@ -111,10 +119,31 @@ function Register() {
                             </div>
 
 
-                            <div className="form-label-group form-control">
+                            {/* <div className="form-label-group form-control">
                                 <Field type="text" name="gender" id="gender" placeholder="Gender"
                                 />
                                 <label htmlFor="gender">Gender</label>
+                                <ErrorMessage name='gender' render={msg => <div className="error">{msg}</div>} />
+                            </div> */}
+
+
+                            <div className="form-control">
+
+                                <label className="genderlabel" htmlFor="gender">Gender</label>
+                                <div className="radiobtns" role="group" aria-labelledby="my-radio-group">
+                                    <label>
+                                        <Field type="radio" name="gender" value="Male" style={{ marginRight: "5px" }} />
+                                        Male
+                                    </label>
+                                    <label style={{ marginLeft: "20px" }}>
+                                        <Field type="radio" name="gender" value="Female" style={{ marginRight: "5px" }} />
+                                        Female
+                                    </label>
+                                    <label style={{ marginLeft: "20px" }}>
+                                        <Field type="radio" name="gender" value="Other" style={{ marginRight: "5px" }} />
+                                        Other
+                                    </label>
+                                </div>
                                 <ErrorMessage name='gender' render={msg => <div className="error">{msg}</div>} />
                             </div>
 

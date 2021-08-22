@@ -53,7 +53,6 @@ function Product({ history, props }) {
     //         })
     // }, [])
 
-    
 
     function setSort(e){
         console.log("sort",e.target.value)
@@ -86,16 +85,7 @@ function Product({ history, props }) {
                         <option value="high">Price High to Low</option>
                         <option value="low">Price Low to High</option>
                     </select>
-                    {/* <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sort By :
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">A - Z</a></li>
-                        <li><a class="dropdown-item" href="#">Z - A</a></li>
-                        <li><a class="dropdown-item" href="#">Price High to Low</a></li>
-                        <li><a class="dropdown-item" href="#">Price Low to High</a></li>
-                    </ul> */}
+                  
                 </div>
 
                 <h3 className="adminpage-headers title mb-4"> Our Products </h3>
@@ -109,7 +99,7 @@ function Product({ history, props }) {
                         }} >
                             <div>
                                 <div className="productimage">
-                                    <img className="img-thumbnail align-middle" src={`http://localhost:90/${value.image}`} alt=" ProductImage" />
+                                    <img className="img-thumbnail align-middle" src={`http://localhost:90/public/images/${value.image}`} alt=" ProductImage" />
                                 </div>
                                 <h1 className="product-name">{value.productname}</h1>
                                 <h4 className="product-type">{value.platform}</h4>

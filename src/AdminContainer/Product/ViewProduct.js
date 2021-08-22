@@ -32,7 +32,7 @@ function ViewProduct({history}) {
             buy_price: d.buy_price,
             rent_price: d.rent_price,
             publisher: d.publisher,
-            image: <img src = {`http://localhost:90/${d.image}`} style = {{height : "200px"}}/>,
+            image: <img src = {`http://localhost:90/public/images/${d.image}`} style = {{height : "200px"}}/>,
             screenshots: d.screenshots,
             genre: d.genre,
             release_date: d.release_date,

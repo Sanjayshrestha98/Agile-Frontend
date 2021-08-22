@@ -1265,3 +1265,18 @@ margin-left: auto;
   gap: 30px;
   margin: 20px;
 }
+
+.trailer{
+  width: 100% !important;
+  height: 716px !important;
+}
+
+.radiobtns{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.genderlabel{
+  margin-left: 20px;
+}
