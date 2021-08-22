@@ -7,8 +7,9 @@ import { ImHeart } from 'react-icons/im';
 
 
 import moment from 'moment';
+import { Link, withRouter } from 'react-router-dom';
 
-function SingleProduct({ location, history }) {
+function SingleProduct({ location, history, props }) {
 
     const [product, setProduct] = useState({});
 
@@ -136,20 +137,16 @@ function SingleProduct({ location, history }) {
     }
 
     return (
-        <div className=" container ">
-
-            <title>Product Card/Page</title>
-
-
+        <div className=" container">
             <div class="container productbody">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6">
                         <div class="img-showcase">
-                            <img src={`http://localhost:90/public/images/${product?.image}`} alt="shoe image" />
+                            <img src={`http://localhost:90/public/images/${product?.image}`} alt="Product image" />
                         </div>
                     </div>
 
-                    <div class="col">
+                    <div class="col-md-6">
                         <h2 class="product-title">{product?.productname}</h2>
                         <a class="product-link">{product?.publisher}</a>
 
@@ -205,10 +202,12 @@ function SingleProduct({ location, history }) {
 
                 <h2>Recommended</h2>
 
-                <div className="row">
+                <div className="row recommended" >
                     {data.map(value => (
                         <div className="content" onClick={() => {
-                            history.push("/productdetail", {
+                            window.location.reload(true);
+                            history.push("/productdetail",
+                             {
                                 product: value
                             })
                         }} >
@@ -239,4 +238,4 @@ function SingleProduct({ location, history }) {
     )
 }
 
-export default SingleProduct
+export default withRouter(SingleProduct)
