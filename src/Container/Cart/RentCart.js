@@ -64,7 +64,7 @@ function RentCart() {
 
                       data.length > 0 &&  data.map((p) => (
                         <tr>
-                            <td><img width="50px" src = {`http://localhost:90/${p.product?.image}`} alt="productimage" /></td>
+                            <td><img width="50px" src = {`http://localhost:90/public/images/${p.product?.image}`} alt="productimage" /></td>
                             <td>{p.product?.productname}</td>
                             <td>{p.product?.rent_price}</td>
                             <td><button  onClick={(e) => deletepro(p?.product?._id)} >Remove</button></td>

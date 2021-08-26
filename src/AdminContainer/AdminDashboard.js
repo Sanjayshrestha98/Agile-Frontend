@@ -7,7 +7,7 @@ function AdminDashboard() {
 
     return (
         <div class="home-section">
-            <nav className="adminnavbar">
+            {/* <nav className="adminnavbar">
                 <div class="sidebar-button">
                     <i class='bx bx-menu sidebarBtn'></i>
                     <span class="dashboard">Dashboard</span>
@@ -16,7 +16,7 @@ function AdminDashboard() {
                     <span class="admin_name">Sanjay Shrestha</span>
                     <i class='bx bx-chevron-down'></i>
                 </div>
-            </nav>
+            </nav> */}
 
             <div class="home-content">
                 <div class="overview-boxes">
@@ -68,46 +68,72 @@ function AdminDashboard() {
                             styles="background: #21313C;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
                             width="640" height="480"
                             src="https://charts.mongodb.com/charts-gogogaming-uzdfp/embed/charts?id=b648906e-63d5-474b-be5f-b43e153b8e7f&autoRefresh=10&theme=light" />
- 
+
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <div className="col-md-12">
+                        <Iframe
+                            styles="background: #21313C;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                            width="100%"
+
+                            height="480"
+                            src="https://charts.mongodb.com/charts-gogogaming-uzdfp/embed/charts?id=7bd6ec86-2ad0-4431-9e19-4b6b62d4c8c1&autoRefresh=10&theme=light" />
+
 
                     </div>
 
+                </div>
 
+                <div>
+                    <div className="col">
+                        <Iframe
+                            styles="background: #21313C;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                            width="350px"
+
+                            height="350px"
+                            src="https://charts.mongodb.com/charts-gogogaming-uzdfp/embed/charts?id=3cb1225c-8fa9-431d-8dee-397c7d445e2d&autoRefresh=10&theme=light" />
+
+
+                    </div>
 
                 </div>
 
 
 
-                <div class="sales-boxes">
-                    <div class="top-sales box">
-                        <div class="title">Top Seling Product</div>
-                        <ul class="top-sales-details">
-                            <li>
-                                <a href="#">
-                                    {/* <!--<img src="images/sunglasses.jpg" alt="">--> */}
-                                    <span class="product">Fifa 21</span>
-                                </a>
-                                <span class="price">3000</span>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    {/* <!--<img src="images/jeans.jpg" alt="">--> */}
-                                    <span class="product">Call Of Duty </span>
-                                </a>
-                                <span class="price">4000</span>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    {/* <!-- <img src="images/nike.jpg" alt="">--> */}
-                                    <span class="product">Cyberpunk 2077</span>
-                                </a>
-                                <span class="price">2077</span>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="sales-boxes">
+                <div class="top-sales box">
+                    <div class="title">Top Seling Product</div>
+                    <ul class="top-sales-details">
+                        <li>
+                            <a href="#">
+                                {/* <!--<img src="images/sunglasses.jpg" alt="">--> */}
+                                <span class="product">Fifa 21</span>
+                            </a>
+                            <span class="price">3000</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                {/* <!--<img src="images/jeans.jpg" alt="">--> */}
+                                <span class="product">Call Of Duty </span>
+                            </a>
+                            <span class="price">4000</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                {/* <!-- <img src="images/nike.jpg" alt="">--> */}
+                                <span class="product">Cyberpunk 2077</span>
+                            </a>
+                            <span class="price">2077</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
+        </div >
 
     )
 

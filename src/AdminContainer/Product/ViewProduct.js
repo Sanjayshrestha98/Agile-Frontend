@@ -34,6 +34,7 @@ function ViewProduct({history}) {
             publisher: d.publisher,
             image: <img src = {`http://localhost:90/public/images/${d.image}`} style = {{height : "200px"}}/>,
             screenshots: d.screenshots,
+                      
             genre: d.genre,
             release_date: d.release_date,
             system_requirements: d.system_requirements,
@@ -112,6 +113,8 @@ function ViewProduct({history}) {
             {
                 label: 'Genre',
                 field: 'genre',
+                sort: 'asc',
+                innerHeight:10,
                 width: 100
             },
             {

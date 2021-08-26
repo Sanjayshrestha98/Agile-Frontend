@@ -578,7 +578,7 @@ nav .profile-details i{
 }
 .home-section .home-content{
   position: relative;
-  padding-top: 104px;
+  padding-top: 100px;
 }
 .home-content .overview-boxes{
   display: flex;
@@ -1284,4 +1284,21 @@ margin-left: auto;
 
 .recommended{
 margin-top: 70px !important;
+}
+
+
+.top-admin-nav nav{
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: calc(100% - 240px);
+  left: 240px;
+  z-index: 100;
+  padding: 0 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
 }
