@@ -7,7 +7,7 @@ function AdminDashboard() {
 
     return (
         <div class="home-section">
-            {/* <nav className="adminnavbar">
+            <nav className="adminnavbar">
                 <div class="sidebar-button">
                     <i class='bx bx-menu sidebarBtn'></i>
                     <span class="dashboard">Dashboard</span>
@@ -16,7 +16,7 @@ function AdminDashboard() {
                     <span class="admin_name">Sanjay Shrestha</span>
                     <i class='bx bx-chevron-down'></i>
                 </div>
-            </nav> */}
+            </nav>
 
             <div class="home-content">
                 <div class="overview-boxes">

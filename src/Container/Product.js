@@ -12,7 +12,7 @@ function Product({ history, props }) {
     let [selectedSort, setSortType] = useState("asc");
 
     useEffect(()=>{
-        axios.get('https://gogo-gaming.herokuapp.com/getallproducts/'+selectedSort)
+        axios.get('http://localhost:90/getallproducts/'+selectedSort)
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)
@@ -74,7 +74,7 @@ function Product({ history, props }) {
                         }} >
                             <div>
                                 <div className="productimage">
-                                    <img className="img-thumbnail align-middle" src={`https://gogo-gaming.herokuapp.com/${value.image}`} alt=" ProductImage" />
+                                    <img className="img-thumbnail align-middle" src={`http://localhost:90/public/images/${value.image}`} alt=" ProductImage" />
                                 </div>
                                 <h1 className="product-name">{value.productname}</h1>
                                 <h4 className="product-type">{value.platform}</h4>

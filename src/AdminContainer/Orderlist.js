@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { MDBDataTable, } from 'mdbreact';
 import { FaEdit } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md'
+import { GrDocumentUpdate } from 'react-icons/gr'
 import { withRouter } from 'react-router-dom';
 
 
@@ -13,11 +13,7 @@ function Orderlist({ history }) {
     const [data, setRowData] = useState([]);
 
     useEffect(() => {
-
-        console.log("URL",process.env.BASE_URL )
-
-        axios.get(`${process.env.BASE_URL}/getallproducts`)
-
+        axios.get(`http://localhost:90/get/admin/order`)
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)
@@ -28,34 +24,44 @@ function Orderlist({ history }) {
 
     }, [])
 
-    const rowdata = data?.map(d => {
+
+    const rowdata = data?.map((value, key) => {
         return ({
+            status: value.status,
+            fullname: value.user.fullname,
 
-            productId: d._id,
-            productname: d.productname,
-            platform: d.platform,
-            buy_price: d.buy_price,
-            rent_price: d.rent_price,
-            publisher: d.publisher,
-            image: <img src={`http://localhost:90/public/images/${d.image}`} style={{ height: "200px" }} />,
-            screenshots: d.screenshots,
+            product:
 
-            genre: d.genre,
-            release_date: d.release_date,
-            system_requirements: d.system_requirements,
-            instock: d.instock,
-            description: <p max-height='200px' >{d.description}</p>,
-            trailer: d.trailer,
-            action: <div>
-                <button onClick={() => goToEdit(d._id)}><FaEdit className="editicon" /></button>
-                <button onClick={() => deletepro(d._id)}><MdDelete className="deleteicon" /></button>
-            </div>
+                value.order.map(order => {
+                    return (
+
+                        <table class="table">
+                            
+                            <tbody>
+                                <tr>
+                                    {console.log(`http://localhost:90/${order.product?.image}`)}
+                                    <th scope="row"><img width="50px" src={`http://localhost:90/public/images/${order.product?.image}`} alt="productimage" /></th>
+                                    <td>{order.product?.productname}</td>
+                                    <td>{order?.quantity}</td>
+                                    <td>{order.buy_price}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    )
+                })
+            ,
+            action:
+                <div>
+                    <button className="actionbutton" onClick={() => delivered(value._id)}><GrDocumentUpdate className="editicon" /></button>
+                </div>
         })
     })
 
-    const deletepro = (_id) => {
+    const delivered = (_id) => {
         console.log(_id)
-        axios.delete('http://localhost:90/deleteproduct/' + _id)
+        axios.put('http://localhost:90/update/pending_to_delivered/' + _id )
             .then((response) => {
                 console.log(response.data.message)
                 window.location.reload()
@@ -74,84 +80,32 @@ function Orderlist({ history }) {
     const dataTable = {
         columns: [
             {
-                label: 'Product Name',
-                field: 'productname',
+                label: 'status',
+                field: 'status',
                 sort: 'asc',
                 width: 150
             },
+
             {
-                label: 'Platform',
-                field: 'platform',
+                label: 'Full Name',
+                field: 'fullname',
                 sort: 'asc',
-                width: 270
+                width: 200
             },
+
             {
-                label: 'Buy Price',
-                field: 'buy_price',
+                label: 'Products',
+                field: 'product',
                 sort: 'asc',
                 width: 200
             },
             {
-                label: 'Rent Price',
-                field: 'rent_price',
+                label: 'Price',
+                field: 'price',
                 sort: 'asc',
                 width: 200
             },
-            {
-                label: 'Publisher',
-                field: 'publisher',
-                sort: 'asc',
-                width: 100
-            },
-            {
-                label: 'Image',
-                field: 'image',
-                sort: 'asc',
-                width: 150
-            },
-            // {
-            //     label: 'Screenshots',
-            //     field: 'screenshots',
-            //     sort: 'asc',
-            //     width: 100
-            // },
-            {
-                label: 'Genre',
-                field: 'genre',
-                sort: 'asc',
-                innerHeight: 10,
-                width: 100
-            },
-            {
-                label: 'Release Date',
-                field: 'release_date',
-                sort: 'asc',
-                width: 100
-            },
-            {
-                label: 'System Requirements',
-                field: 'system_requirements',
-                sort: 'asc',
-                width: 100
-            },
-            {
-                label: 'In-Stock',
-                field: 'instock',
-                sort: 'asc',
-                width: 100
-            },
-            {
-                label: 'Description',
-                field: 'description',
-                sort: 'asc',
-                width: 100
-            },
-            {
-                label: 'Trailer',
-                field: 'trailer',
-                sort: 'asc',
-                width: 100
-            },
+
             {
                 label: 'Action',
                 field: 'action',

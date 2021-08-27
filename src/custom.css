@@ -1289,8 +1289,9 @@ margin-top: 70px !important;
 
 .top-admin-nav nav{
   display: flex;
+  margin-top: -51px;
   justify-content: space-between;
-  height: 80px;
+  height: 100px;
   background: #fff;
   display: flex;
   align-items: center;
@@ -1301,4 +1302,34 @@ margin-top: 70px !important;
   padding: 0 20px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
+}
+
+
+.top-admin-nav nav .sidebar-button{
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+
+.top-admin-nav nav .profile-details{
+  display: flex;
+  align-items: center;
+  background: #F5F6FA;
+  border: 2px solid #EFEEF1;
+  border-radius: 6px;
+  height: 50px;
+  min-width: 190px;
+  padding: 0 15px 0 2px;
+}
+
+.addproductform{
+  margin-top: 40px;
+}
+
+
+.actionbutton{
+ border: none;
+ background-color: transparent !important;
 }

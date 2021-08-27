@@ -24,7 +24,7 @@ function AdminSideNav({ toggle, toggleSidenav }) {
 
     <div className>
 
-      <div className="top-admin-nav">
+      {/* <div className="top-admin-nav">
 
         <nav className="adminnavbar">
           <div class="sidebar-button">
@@ -37,7 +37,7 @@ function AdminSideNav({ toggle, toggleSidenav }) {
           </div>
         </nav>
 
-      </div>
+      </div> */}
 
       <div className={`sidenavcontainer `}>
 
