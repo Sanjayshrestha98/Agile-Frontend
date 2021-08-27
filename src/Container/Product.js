@@ -4,13 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { Card, Container, Row, Col, DropdownButton} from 'react-bootstrap'
 
 
-
-import { Link } from "react-router-dom";
-
-import { Dropdown } from 'bootstrap';
-
-
-
 function Product({ history, props }) {
 
     let[search, setSearch]= useState('');
@@ -19,7 +12,7 @@ function Product({ history, props }) {
     let [selectedSort, setSortType] = useState("asc");
 
     useEffect(()=>{
-        axios.get('http://localhost:90/getallproducts/'+selectedSort)
+        axios.get('https://gogo-gaming.herokuapp.com/getallproducts/'+selectedSort)
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)
@@ -34,24 +27,6 @@ function Product({ history, props }) {
             })
     },[selectedSort])
     let filtered = data.filter((val) => { return val.productname.toLowerCase().trim().startsWith(search.toLowerCase().trim()) })
-
-
-    // useEffect(() => {
-
-    //     axios.get('http://localhost:90/getallproducts')
-    //         .then((response) => {
-    //             setRowData(response.data.data)
-    //             console.log(response.data)
-    //             this.setState(
-    //                 {
-    //                     products: response.data.data
-    //                 }
-    //             )
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    // }, [])
 
 
     function setSort(e){
@@ -99,7 +74,7 @@ function Product({ history, props }) {
                         }} >
                             <div>
                                 <div className="productimage">
-                                    <img className="img-thumbnail align-middle" src={`http://localhost:90/public/images/${value.image}`} alt=" ProductImage" />
+                                    <img className="img-thumbnail align-middle" src={`https://gogo-gaming.herokuapp.com/${value.image}`} alt=" ProductImage" />
                                 </div>
                                 <h1 className="product-name">{value.productname}</h1>
                                 <h4 className="product-type">{value.platform}</h4>

@@ -63,7 +63,7 @@ const validationSchema = Yup.object({
 const onSubmit = values => {
     console.log('Formdata', values)
     const response = axios
-        .post(`http://localhost:90/signup`, values).then(result => {
+        .post(`https://gogo-gaming.herokuapp.com/signup`, values).then(result => {
             console.log(result.data)
             if (result.data.success) {
 

@@ -12,9 +12,12 @@ function Orderlist({ history }) {
 
     const [data, setRowData] = useState([]);
 
-
     useEffect(() => {
-        axios.get('http://localhost:90/getallproducts')
+
+        console.log("URL",process.env.BASE_URL )
+
+        axios.get(`${process.env.BASE_URL}/getallproducts`)
+
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)

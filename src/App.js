@@ -1,5 +1,6 @@
 import './App.css';
 import './custom.css';
+import 'dotenv';
 import { BrowserRouter } from 'react-router-dom';
 import Container from './Container/Container';
 import React, { useEffect, useState } from 'react'
@@ -18,7 +19,7 @@ function App() {
   const [theme, setTheme] = useState({});
   const [themeSelected, setThemeSelected] = useState()
 
-  localStorage.setItem('theme',"light")
+  localStorage.setItem('theme', "light")
 
   const themeToggler = () => {
     if (localStorage.getItem('theme', "light") === "light") {

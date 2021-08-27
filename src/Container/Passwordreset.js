@@ -7,9 +7,10 @@ import { values } from "lodash";
 import * as Yup from "yup";
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const initialValues = {
-    username: '',
-    password: ''
+    newpassword: '',
+    repassword:''
 }
 
 const notify = () => toast.error("Invalid Credentials", {
@@ -25,29 +26,34 @@ const notify = () => toast.error("Invalid Credentials", {
 const onSubmit = values => {
     console.log('Form Data', values)
     const response = axios
-        .post(`http://localhost:90/login`, values)
+        .post(`http://localhost:90/`, values)
         .then(result => {
 
            
             if (result.data.success) { 
-                localStorage.setItem('token',result.data.token)
-                localStorage.setItem('userid',result.data.userid)
     
-                window.location.href = '/home'
+                window.location.href = '/login'
             } else {
                 notify()
             }
         }).catch(error => {
-            console.error("Error loggin in", error)
+            console.error("Error changing password in", error)
         })
 }
 
 const validationSchema = Yup.object({
-    username: Yup.string().required('Required'),
-    password: Yup.string().required('Required')
+    newpassword: Yup.string().required('Required'),
+    repassword: Yup.string().required('Required'),
+    repassword: Yup.string().when("newpassword", {
+        is: val => (val && val.length > 0 ? true : false),
+        then: Yup.string().oneOf(
+            [Yup.ref("newpassword")],
+            "Both password need to be the same"
+        )
+    })
 })
 
-function Login() {
+function Passwordreset() {
 
     return (
         <>
@@ -58,36 +64,32 @@ function Login() {
             >
                 <div className="loginform">
                     <div className="col-md-12 col-lg-12">
-                        <h3 className="form-heading mb-4">Welcome Back ! Login to Continue</h3>
+                        <h3 className="form-heading mb-4">Welcome Back ! Reset Your Password</h3>
 
                         <Form>
                             <div className="form-label-group form-control">
                                 <Field
-                                    type="username" name="username" id="username" placeholder="Username"
+                                    type="password" name="newpassword" id="newpassword" placeholder="New Password"
                                 />
-                                <label htmlFor="username">Username</label>
-                                <ErrorMessage name='username' render={msg => <div className="error">{msg}</div>} />
+                                <label htmlFor="newpassword">New Password</label>
+                                <ErrorMessage name='newpassword' render={msg => <div className="error">{msg}</div>} />
 
                             </div>
 
                             <div className="form-label-group form-control">
-                                <Field type="password" name="password" id="password" placeholder="Password"
+                                <Field type="password" name="repassword" id="repassword" placeholder="Re-Enter Password"
                                 />
-                                <label htmlFor="password">Password</label>
+                                <label htmlFor="repassword">Re-Enter Password</label>
 
-                                <ErrorMessage name="password" render={msg => <div className="error">{msg}</div>} />
+                                <ErrorMessage name="repassword" render={msg => <div className="error">{msg}</div>} />
                             </div>
                             <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
 
                                 type="submit"
                             >
-                                Log in
+                                Confirm
                             </button>
 
-                            <div className="text-center">
-                                <a className="small" href="/login">Forgot password?</a></div>
-
-                            <p className="registerprompt">Not an User, Register Now. Click<a href="/register">Here</a></p>
                         </Form>
                     </div>
                 </div>
@@ -100,5 +102,4 @@ function Login() {
     )
 }
 
-
-export default Login
+export default Passwordreset
