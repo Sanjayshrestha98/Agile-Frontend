@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Modal } from 'react-bootstrap';
 import { Formik } from 'formik';
@@ -19,19 +19,26 @@ function Profile() {
     }
 
 
-    const EditProfile = (e) => {
-        e.preventDefault();
-        axios.put("http://localhost:90/userProfile/updateProfile" ,this.state,this.state.config)
-        .then((response) => {
-            
-            this.props.history.push("/userprofile")
-            this.componentDidMount()
 
-        })
-        .catch((err) => {
-            console.log(err.response)
-        })
-    }
+    const [data, setuserdata] = useState([]);
+
+    useEffect(() => {
+
+        const userid = localStorage.getItem('userid')
+
+        console.log('asdasdasd', userid)
+
+        axios.get('http://localhost:90/getsingleuser/' + userid)
+            .then((response) => {
+                setuserdata(response.data.userData)
+                console.log(response.data.userData)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+    }, [])
+
 
     const notify = () => toast.error("Invalid Credentials", {
         position: "top-center",
@@ -92,76 +99,96 @@ function Profile() {
     return (
         <div className="Profile">
 
-            <button className="OrderButton" onClick={() => RentedOrder()}>
-                Rented Products
-            </button>
+            <div>
+                <div className="row py-5 px-4">
+                    <div className="col-md-6 mx-auto">
 
+                        <div className="bg-white shadow rounded overflow-hidden">
+                            <div className="px-4 pt-0 pb-4 cover">
 
-
-            <div className="container emp-profile">
-                <form method="">
-                    <div className="row">
-                        <div className="col-md-4">
-                            <img src alt="profile" />
-                        </div>
-
-                        <div className="col-md-6">
-                            <div className="profile-head">
-                                <h2>My Profile</h2>
+                                <img src="logo.png" width="200px" className="profile-pic rounded"/>
 
                             </div>
-                        </div>
-                        <div className="form">
-                            <div className="row m-2">
-                                <div className="col-6 p-2">
-                                    <TextField id="firstname" type="text" variant="outlined" label="First Name" fullWidth
-                                        value={this.state.firstname} onChange={(event) => { this.setState({ firstname: event.target.value }) }}
-                                    />
-                                </div>
-                                <br />
+                            <div className="bg-light p-4 d-flex justify-content-end text-center gap-4">
+                                <a onClick={() => RentedOrder()} className="btn btn-outline-dark btn-sm btn-block">Rented Products</a>
 
-                                <div className="col-6 p-2">
-                                    <TextField id="lastname" type="text" variant="outlined" label="Last Name" fullWidth
-                                        value={this.state.lastname} onChange={(event) => { this.setState({ lastname: event.target.value }) }}
-                                    />
-                                </div>
-                                <br />
+
+                                <a onClick={handleShow} className="btn btn-outline-dark btn-sm btn-block">Reset Password</a>
+
+                                <a href="/profile" className="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
+
                             </div>
+                            <div className="px-4 py-3">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    </li>
 
-                            <br />
+                                </ul>
+                                <div class="col-md-10 userdetails">
+                                    <div class="tab-content profile-tab" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                            <div className="row m-2">
-                                <TextField id="email" className="p-2" type="text" variant="outlined" label="Email" fullWidth
-                                    value={this.state.email} onChange={(event) => { this.setState({ email: event.target.value }) }}
-                                />
 
-                                <div className="col-6 p-2">
-                                    <TextField id="phone" type="text" variant="outlined" label="Phone" fullWidth
-                                        value={this.state.phone} onChange={(event) => { this.setState({ phone: event.target.value }) }}
-                                    />
+                                            <div class="row ">
+                                                <div class="col-md-6">
+                                                    <label>User Name</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{data.username}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Full Name</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{data.fullname} </p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Email</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{data.email}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Phone</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{data.phone}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Address</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{data.address}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Gender</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{data.gender}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <br />
-
-                                <div className="col-6 p-2">
-                                    <TextField id="address" type="text" variant="outlined" label="Address" fullWidth
-                                        value={this.state.address} onChange={(event) => { this.setState({ address: event.target.value }) }}
-                                    />
-                                </div>
-                                <br />
-                            </div>
-                            <br />
-                            <div className="col-md-2">
-                                <Button variant="contained" color="primary" onClick={this.EditProfile}>Update</Button>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
 
-
-            <Button variant="primary" onClick={handleShow}>
-                Reset Password
-            </Button>
 
             <Modal
                 show={show}

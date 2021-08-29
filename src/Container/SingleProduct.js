@@ -24,6 +24,7 @@ function SingleProduct({ location, history, props }) {
 
     }, [])
 
+    
 
     useEffect(() => {
         axios.get('http://localhost:90/getfourproducts/' + location.state.product._id)
