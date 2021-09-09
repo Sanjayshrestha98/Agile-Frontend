@@ -27,7 +27,7 @@ function Profile() {
 
         console.log('asdasdasd', userid)
 
-        axios.get('http://localhost:90/getsingleuser/' + userid)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/getsingleuser/` + userid)
             .then((response) => {
                 setuserdata(response.data.userData)
                 console.log(response.data.userData)
@@ -68,7 +68,7 @@ function Profile() {
         console.log('Form Data', values)
 
         axios
-            .post(`http://localhost:90/change/password`)
+            .post(`${process.env.REACT_APP_BASE_URI}/change/password`)
             .then(result => {
 
                 if (result.data.success) {
@@ -107,7 +107,7 @@ function Profile() {
                         <div className="bg-white shadow rounded overflow-hidden">
                             <div className="px-4 pt-0 pb-4 cover">
 
-                                <img src={`http://localhost:90/${data.profile}`} width="200px" className="profile-pic rounded"/>
+                                <img src={`${process.env.REACT_APP_BASE_URI}/${data.profile}`} width="200px" className="profile-pic rounded"/>
 
                             </div>
                             <div className="bg-light p-4 d-flex justify-content-end text-center gap-4">

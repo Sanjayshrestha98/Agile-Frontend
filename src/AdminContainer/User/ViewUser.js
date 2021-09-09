@@ -13,7 +13,7 @@ function ViewUser() {
 
 
   const getallusers = () =>{
-    axios.get('http://localhost:90/getallusers')
+    axios.get(`${process.env.REACT_APP_BASE_URI}/getallusers`)
     .then((response) => {
       setRowData(response.data.data)
       console.log(response.data)
@@ -44,7 +44,7 @@ function ViewUser() {
             if (willDelete) {
 
               console.log(_id)
-              axios.delete('http://localhost:90/userdelete/' + _id)
+              axios.delete(`${process.env.REACT_APP_BASE_URI}/userdelete/` + _id)
               .then((response)=>{
                   console.log(response.data.message)
                   getallusers()
@@ -66,8 +66,8 @@ function ViewUser() {
       email : d.email,
       phone : d.phone,
       address : d.address,
-      profile : 
-        <img src={`http://localhost:90/${d.profile}`} style={{ height: "50px" }} ></img>,
+      // profile : 
+      //   <img src={`${process.env.REACT_APP_BASE_URI}/${d.profile}`} style={{ height: "50px" }} ></img>,
       username : d.username,
       action: <div>
           <FaEdit  className="editicon" />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import * as Yup from "yup";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -6,22 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 function AddUser() {
-
-    const [image, setImage] = useState();
-    const imageInputRef = React.useRef();
-
-
-    const initialValues = {
-        fullname: "",
-        email: "",
-        phone: "",
-        address: "",
-        gender: "",
-        username: "",
-        password: "",
-    }
-
-
 
     const errornotify = () => toast.error("Invalid Credentials", {
         position: "top-center",
@@ -33,21 +17,28 @@ function AddUser() {
         progress: undefined,
     });
 
-    const successnotify = () =>
+    const succesnotify = () => toast.error("User Reistered Succesfully", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
-        toast.error("User Registered Successfully", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-
+    const initialValues = {
+        fullname: "",
+        email: "",
+        phone: "",
+        address: "",
+        gender: "",
+        username: "",
+        password: "",
+    }
 
     const validationSchema = Yup.object({
-        fullname: Yup.string().required('Required').matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
+        fullname: Yup.string().required('Required'),
         email: Yup.string().email('Invalid Email Format').required('Field cannot be empty'),
         phone: Yup.string().required('required'),
         address: Yup.string().required('Required'),
@@ -65,37 +56,22 @@ function AddUser() {
 
     })
 
+
     const onSubmit = values => {
-
         console.log('Formdata', values)
-        const formData = new FormData();
-            formData.append("fullname", values.fullname)
-            formData.append("gender", values.gender)
-            formData.append("email", values.email)
-            formData.append("phone", values.phone)
-            formData.append("address", values.address)
-            formData.append("profile", image)
-            formData.append("username", values.username)
-            formData.append("password", values.password)
-
-            console.log(formData)
-
-
-        axios
-            .post(`http://localhost:90/signup`, formData).then(result => {
+        const response = axios
+            .post(`${process.env.REACT_APP_BASE_URI}/signup`, values).then(result => {
                 console.log(result.data)
-
                 if (result.data.success) {
-                    successnotify()
+                    // window.location.href('/login')
+                    succesnotify()
                 } else {
                     errornotify()
-
                 }
             }).catch(error => {
                 console.error("Error Registering User", error)
             })
     }
-
 
     return (
         <>
@@ -104,15 +80,16 @@ function AddUser() {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
+
                 <div className="registerform">
                     <div className="col-md-12 col-lg-12">
                         <h3 className="form-heading mb-4">Fill out the details below.</h3>
                         <Form>
                             <div className="form-label-group form-control">
                                 <Field
-                                    type="text" name="fullname" id="fullname" placeholder="Fullname"
+                                    type="text" name="fullname" id="Fullname" placeholder="Fullname"
                                 />
-                                <label htmlFor="fullname">Full Name</label>
+                                <label htmlFor="Fullname">Full Name</label>
 
                                 <ErrorMessage name='fullname' render={msg => <div className="error">{msg}</div>} />
                             </div>
@@ -133,20 +110,21 @@ function AddUser() {
                                 <ErrorMessage name='phone' render={msg => <div className="error">{msg}</div>} />
                             </div>
 
+
                             <div className="form-control">
 
-                                <label className="genderlabel" htmlFor="gender">Gender</label>
-                                <div className="radiobtns" role="group" aria-labelledby="my-radio-group">
+                                <label htmlFor="gender">Gender</label>
+                                <div role="group" aria-labelledby="my-radio-group">
                                     <label>
-                                        <Field type="radio" name="gender" value="Male" style={{ marginRight: "5px" }} />
+                                        <Field type="radio" name="gender" value="Male" />
                                         Male
                                     </label>
-                                    <label style={{ marginLeft: "20px" }}>
-                                        <Field type="radio" name="gender" value="Female" style={{ marginRight: "5px" }} />
+                                    <label style = {{marginLeft : "20px"}}>
+                                        <Field type="radio" name="gender" value="Female" />
                                         Female
                                     </label>
-                                    <label style={{ marginLeft: "20px" }}>
-                                        <Field type="radio" name="gender" value="Other" style={{ marginRight: "5px" }} />
+                                    <label style = {{marginLeft : "20px"}}>
+                                        <Field type="radio" name="gender" value="Other" />
                                         Other
                                     </label>
                                 </div>
@@ -157,19 +135,6 @@ function AddUser() {
                                 <Field type="email" name="email" id="email" placeholder="Email" />
                                 <label htmlFor="email">Email</label>
                                 <ErrorMessage name='email' render={msg => <div className="error">{msg}</div>} />
-                            </div>
-
-                            <div className="form-label-group form-control">
-                                <input type="file" name="profile" id="profile" placeholder="Profile"
-                                    onChange={(e) => {
-                                        setImage(e.currentTarget.files[0])
-                                        console.log(e.currentTarget.files[0])
-
-                                    }}
-
-                                />
-                                <label htmlFor="profile">Profile</label>
-                                <ErrorMessage name='profile' render={msg => <div className="error">{msg}</div>} />
                             </div>
 
                             <div className="form-label-group form-control">
@@ -205,11 +170,10 @@ function AddUser() {
                                 Confirm
                             </button>
 
-                            <p className="registerprompt">Already an User ? Login Now. Click <a href="/login">Here</a></p>
+                            <p className="registerprompt">Already an User ? Login Now. Click<a href="/login">Here</a></p>
                         </Form>
                     </div>
                 </div>
-
             </Formik>
             <ToastContainer />
         </>

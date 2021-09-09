@@ -38,8 +38,8 @@ function Orderlist({ history }) {
                             
                             <tbody>
                                 <tr>
-                                    {console.log(`http://localhost:90/${order.product?.image}`)}
-                                    <th scope="row"><img width="50px" src={`http://localhost:90/public/images/${order.product?.image}`} alt="productimage" /></th>
+                                    {console.log(`${process.env.REACT_APP_BASE_URI}/${order.product?.image}`)}
+                                    <th scope="row"><img width="50px" src={`${process.env.REACT_APP_BASE_URI}/public/images/${order.product?.image}`} alt="productimage" /></th>
                                     <td>{order.product?.productname}</td>
                                     <td>{order?.quantity}</td>
                                 </tr>
@@ -53,7 +53,7 @@ function Orderlist({ history }) {
 
             price : value.grandTotal,
 
-            
+
 
             action:
                 <div>

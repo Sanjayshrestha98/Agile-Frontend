@@ -61,7 +61,7 @@ function Login() {
 
     const verifyAddress = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:90/forgot/password", forgot)
+        axios.post(`${process.env.REACT_APP_BASE_URI}/forgot/password`, forgot)
             .then((response) => {
                 if (response.data.success == true) {
                     localStorage.setItem('email', forgot.email)

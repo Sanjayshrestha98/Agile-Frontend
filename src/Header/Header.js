@@ -61,7 +61,7 @@ function Header() {
 					?
 					<div>
 						<Navbar collapseOnSelect expand="lg" variant="light">
-							<Navbar.Brand href="/home">
+							<Navbar.Brand href="/">
 								<img src="./logo.png" alt="logo" height="70px" />
 							</Navbar.Brand>
 
@@ -134,27 +134,14 @@ function Header() {
 							<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 							<Navbar.Collapse id="responsive-navbar-nav">
 								<Nav className="mr-auto">
-									<Nav.Link href="/home">Home</Nav.Link>
+									<Nav.Link href="/">Home</Nav.Link>
 									<Nav.Link href="/products">Products</Nav.Link>
 
-									<NavDropdown title="Platform" id="collasible-nav-dropdown">
-										<NavDropdown.Item href="#action/3.1">XBox</NavDropdown.Item>
-										<NavDropdown.Item href="#action/3.2">PS4</NavDropdown.Item>
-										<NavDropdown.Item href="#action/3.3">PC</NavDropdown.Item>
-										<NavDropdown.Item href="#action/3.4">Nintendo</NavDropdown.Item>
-										<NavDropdown.Divider />
-									</NavDropdown>
+									
 
 									<NavDropdown title="Genre" id="collasible-nav-dropdown">
 										<NavDropdown.Item href="/genre/Sports">Sports</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Shooter">Shooter</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Sandbox">Sandbox</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Puzzle">Puzzle</NavDropdown.Item>
 										<NavDropdown.Item href="/genre/Action">Action</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Action-Adventure">Adventure</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Survival">Survival</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Horror">Horror</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Role-Playing">Role-Playing</NavDropdown.Item>
 										<NavDropdown.Divider />
 									</NavDropdown>
 
@@ -164,7 +151,7 @@ function Header() {
 
 									<Nav.Link>
 										<div className="righticons">
-											<button onClick={() => themeToggler()}>Change Theme</button>
+											<button className = "btn btn-success btn-sm" onClick={() => themeToggler()}>Change Theme</button>
 
 										</div>
 									</Nav.Link>

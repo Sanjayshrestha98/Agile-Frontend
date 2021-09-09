@@ -16,7 +16,7 @@ function Order() {
             }
         }
 
-        axios.get(`${process.env.REACT_APP_BASE_URI}/get/buycart`, config)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/get/order`, config)
             .then((response) => {
                 setdata(response.data.data)
                 console.log(response.data.data)

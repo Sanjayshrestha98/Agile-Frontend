@@ -29,7 +29,7 @@ function Editprofile() {
 
         console.log('asdasdasd', userid)
 
-        axios.get('http://localhost:90/getsingleuser/' + userid)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/getsingleuser/` + userid)
             .then((response) => {
                
                 setUserDetail({
@@ -74,7 +74,7 @@ function Editprofile() {
         console.log(data)
         e.preventDefault();
         const id = localStorage.getItem('userid')
-        axios.put(`http://localhost:90/userupdate/` + id,userDetail)
+        axios.put(`${process.env.REACT_APP_BASE_URI}/userupdate/` + id,userDetail)
             .then((response)=>{
                 console.log(response)
                 if(response.data.success == true)

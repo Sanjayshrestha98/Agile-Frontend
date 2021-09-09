@@ -10,7 +10,7 @@ const Trending = (props) => {
     let [data, setData] = useState([]);
 
     const trending = () =>{
-        axios.get("http://localhost:90/get/trending")
+        axios.get(`${process.env.REACT_APP_BASE_URI}/get/trending`)
             .then((response) => {
                 console.log(response)
                 if (response.data.success == true) {
@@ -89,7 +89,7 @@ const Trending = (props) => {
                                 <div className="hglh">
                                     <Card className="crgd">
 
-                                        <img className="imgrs" alt="" src={`http://localhost:90/public/images/${val.product.image}`} />
+                                        <img className="imgrs" alt="" src={`${process.env.REACT_APP_BASE_URI}/public/images/${val.product.image}`} />
                                         <Card.Body className="hlgh">
                                             <h3 id="hemd">{val.product.productname}</h3>
                                         

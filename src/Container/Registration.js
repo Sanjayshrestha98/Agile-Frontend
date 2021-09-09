@@ -84,7 +84,7 @@ function Register() {
 
 
         axios
-            .post(`http://localhost:90/signup`, formData).then(result => {
+            .post(`${process.env.REACT_APP_BASE_URI}/signup`, formData).then(result => {
                 console.log(result.data)
 
                 if (result.data.success) {

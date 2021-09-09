@@ -26,7 +26,7 @@ const notify = () => toast.error("Invalid Credentials", {
 const onSubmit = values => {
     console.log('Form Data', values)
     const response = axios
-        .post(`http://localhost:90/admin/login`, values)
+        .post(`${process.env.REACT_APP_BASE_URI}/admin/login`, values)
         .then(result => {
             if (result.data.success) {
                 localStorage.setItem('token', result.data.token)
@@ -84,11 +84,6 @@ function AdminLogin() {
                             >
                                 Log in
                             </button>
-
-                            <div className="text-center">
-                                <a className="small" href="/admin/login">Forgot password?</a></div>
-
-                            <p className="registerprompt">Not an User, Register Now. Click<a href="/admin/register">Here</a></p>
                         </Form>
                     </div>
                 </div>

@@ -50,7 +50,7 @@ const initialValues = {
 const onSubmit = values => {
     console.log('Formdata', values)
     const response = axios
-        .post(`http://localhost:90/add/faq`, values).then(result => {
+        .post(`${process.env.REACT_APP_BASE_URI}/add/faq`, values).then(result => {
             console.log(result.data)
             if (result.data.success) {
                 successnotify()
@@ -71,7 +71,7 @@ function FAQ() {
 
     useEffect(() => {
 
-        axios.post('http://localhost:90/getunanswered/' + true)
+        axios.post(`${process.env.REACT_APP_BASE_URI}/getunanswered/` + true)
 
             .then((response) => {
                 setRowData(response.data.data)

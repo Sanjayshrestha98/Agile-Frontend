@@ -18,7 +18,7 @@ const ResetPassword = (props) => {
 
     const resendLink = (e) => {
         if (localStorage.getItem("email")) {
-            axios.post("http://localhost:90/forgot/password", { "email": localStorage.getItem("email") })
+            axios.post(`${process.env.REACT_APP_BASE_URI}/forgot/password`, { "email": localStorage.getItem("email") })
                 .then((response) => {
                     if (response.data.success == true) {
                         toast.success(response.data.message);
@@ -48,7 +48,7 @@ const ResetPassword = (props) => {
 
     const resetThePassword = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:90/reset/Password", resetPassword)
+        axios.post(`${process.env.REACT_APP_BASE_URI}/reset/Password`, resetPassword)
             .then((response) => {
                 console.log(response)
                 if (response.data.success == true) {
