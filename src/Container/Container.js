@@ -11,12 +11,16 @@ import RentCart from "./Cart/RentCart";
 import Favourite from "./Cart/Favourite";
 import RentBill from "./Cart/RentBill";
 import Genre from "./Genre";
-import Profile from "./Profile";
+import Profile from "./profile/Profile";
 import Order from "./Order";
 import RentOrder from "./Cart/RentOrder";
 import FAQ from "./FAQ";
-import Passwordreset from "./Passwordreset";
-import Editprofile from "./Editprofile";
+import Passwordreset from "./profile/Passwordreset";
+import Editprofile from "./profile/Editprofile";
+import Home from "./Home/Home";
+import Trending from "./Trending/trending";
+import Footer from "./Footer/Footer";
+import Contact from "./Contact/Contact";
 
 function Container() {
 
@@ -39,6 +43,11 @@ function Container() {
             <Route path="/faq" component={FAQ} />
             <Route path="/passwordreset" component={Passwordreset} />
             <Route path="/editprofile" component={Editprofile} />
+            <Route path="/home" component={Home} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/trending" component={Trending} />
+
+            <Footer></Footer>
         </div>
     )
 }

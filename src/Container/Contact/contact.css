@@ -1,0 +1,72 @@
+.gera {
+    background: url(../Home/ss.jpg);
+    overflow: hidden;
+    transition: 1s all ease;
+    height: 400px;
+    width: 100%;
+    z-index: 0;
+    padding: 0px;
+    background-size: cover;
+    background-repeat: no-repeat !important;
+}
+
+.hera {
+    font-size: 3.8rem;
+    line-height: 1;
+    font-family: "anziano", serif;
+    margin-top: 100px;
+    color: rgb(247, 247, 247);
+    text-align: center;
+}
+
+#helen {
+    color: white;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.alom {
+    margin-top: -100px;
+}
+
+@media screen and (max-width: 768px) {
+    .alom {
+        margin-top: 20px;
+    }
+    #helen{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.marry {
+    /* text-align: center; */
+    font-weight: 700;
+    font-size: 25px;
+    color: black;
+}
+
+#jak{
+    color: black;
+    text-align: justify;
+}
+
+.boya{
+    background-color:rgb(211, 211, 211);
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    /* margin: 0; */
+    border-radius: 3px;
+}
+.btnk{
+    margin: 0;
+    color: rgb(31, 106, 192);
+    text-decoration: underline;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.franky{
+    margin-bottom: 30px;
+}

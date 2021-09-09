@@ -10,6 +10,8 @@ function Register() {
 
 
     const [image, setImage] = useState();
+    const imageInputRef = React.useRef();
+
 
     const initialValues = {
         fullname: "",
@@ -68,9 +70,23 @@ function Register() {
     const onSubmit = values => {
 
         console.log('Formdata', values)
+        const formData = new FormData();
+            formData.append("fullname", values.fullname)
+            formData.append("gender", values.gender)
+            formData.append("email", values.email)
+            formData.append("phone", values.phone)
+            formData.append("address", values.address)
+            formData.append("profile", image)
+            formData.append("username", values.username)
+            formData.append("password", values.password)
+
+            console.log(formData)
+
 
         axios
-            .post(`http://localhost:90/signup`, values).then(result => {
+            .post(`http://localhost:90/signup`, formData).then(result => {
+                console.log(result.data)
+
                 if (result.data.success) {
                     successnotify()
                 } else {
@@ -96,9 +112,9 @@ function Register() {
                         <Form>
                             <div className="form-label-group form-control">
                                 <Field
-                                    type="text" name="fullname" id="Fullname" placeholder="Fullname"
+                                    type="text" name="fullname" id="fullname" placeholder="Fullname"
                                 />
-                                <label htmlFor="Fullname">Full Name</label>
+                                <label htmlFor="fullname">Full Name</label>
 
                                 <ErrorMessage name='fullname' render={msg => <div className="error">{msg}</div>} />
                             </div>
@@ -191,7 +207,7 @@ function Register() {
                                 Confirm
                             </button>
 
-                            <p className="registerprompt">Already an User ? Login Now. Click<a href="/login">Here</a></p>
+                            <p className="registerprompt">Already an User ? Login Now. Click <a href="/login">Here</a></p>
                         </Form>
                     </div>
                 </div>

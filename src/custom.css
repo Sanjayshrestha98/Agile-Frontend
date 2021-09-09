@@ -1059,11 +1059,11 @@ margin-top: 10px;
   width: 24px;
 }
 
-
 /* ------------------------------------------- */
 
 .card{
   /* margin: 20px; */
+  overflow: hidden;
   width: 100%;
 }
 
