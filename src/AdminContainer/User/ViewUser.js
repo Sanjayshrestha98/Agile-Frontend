@@ -4,34 +4,59 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { FaEdit } from 'react-icons/fa';
 import {MdDelete} from 'react-icons/md';
+import swal from 'sweetalert';
 
 
 function ViewUser() {
 
   const [data, setRowData] = useState([]);
 
-  useEffect(() => {
+
+  const getallusers = () =>{
     axios.get('http://localhost:90/getallusers')
-      .then((response) => {
-        setRowData(response.data.data)
-        console.log(response.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    .then((response) => {
+      setRowData(response.data.data)
+      console.log(response.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  useEffect(() => {
+
+    getallusers()
+
   }, [])
 
 
-  const deleteuser = (_id)=>{
-    console.log(_id)
-     axios.delete('http://localhost:90/userdelete/' + _id)
-     .then((response)=>{
-         console.log(response.data.message)
-         window.location.reload()
-     }).catch((err)=>{
 
-         console.log(err.message)
-     })
+  const deleteuser = (_id) => {
+
+    swal({
+        title: "Are you sure?",
+        text: "This User's Data Will Be Deleted",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+
+              console.log(_id)
+              axios.delete('http://localhost:90/userdelete/' + _id)
+              .then((response)=>{
+                  console.log(response.data.message)
+                  getallusers()
+              }).catch((err)=>{
+         
+                  console.log(err.message)
+              })
+
+            } else {
+
+            }
+        });
 }
 
   const rowdata = data.map(d =>{
@@ -41,6 +66,8 @@ function ViewUser() {
       email : d.email,
       phone : d.phone,
       address : d.address,
+      profile : 
+        <img src={`http://localhost:90/${d.profile}`} style={{ height: "50px" }} ></img>,
       username : d.username,
       action: <div>
           <FaEdit  className="editicon" />
@@ -81,6 +108,12 @@ function ViewUser() {
       {
         label: 'Address',
         field: 'address',
+        sort: 'asc',
+        width: 150
+      },
+      {
+        label: 'Profile',
+        field: 'profile',
         sort: 'asc',
         width: 150
       },

@@ -1,9 +1,32 @@
 import React from 'react';
-
+import swal from 'sweetalert';
 import Iframe from 'react-iframe'
 
 
 function AdminDashboard() {
+
+    const logout = () => {
+
+        swal({
+            title: "Are you sure?",
+            text: "You Will Be Logged Out",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    localStorage.removeItem('adminid')
+                    window.location.href = '/admin/login'
+
+                } else {
+
+                }
+            });
+
+    }
+
 
     return (
         <div class="home-section">
@@ -14,38 +37,11 @@ function AdminDashboard() {
                 </div>
                 <div class="profile-details">
                     <span class="admin_name">Sanjay Shrestha</span>
-                    <i class='bx bx-chevron-down'></i>
+                    <button onClick={() => logout()} class="fas fa-sign-out-alt"></button>
                 </div>
             </nav>
 
             <div class="home-content">
-                <div class="overview-boxes">
-                    {/* <div class="box">
-                            <div class="right-side">
-                                <div class="box-topic">Total Order</div>
-                                <div class="number">40,876</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                            <i class='bx bx-cart-alt cart'></i>
-                        </div> */}
-                    {/* <div class="box">
-                            <div class="right-side">
-                                <div class="box-topic">Total Sales</div>
-                                <div class="number">38,876</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                            <i class='bx bxs-cart-add cart two'></i>
-                        </div> */}
-                </div>
-
-
-
 
                 <div className="chart row">
 
@@ -102,37 +98,7 @@ function AdminDashboard() {
 
                 </div>
 
-
-
-            <div class="sales-boxes">
-                <div class="top-sales box">
-                    <div class="title">Top Seling Product</div>
-                    <ul class="top-sales-details">
-                        <li>
-                            <a href="#">
-                                {/* <!--<img src="images/sunglasses.jpg" alt="">--> */}
-                                <span class="product">Fifa 21</span>
-                            </a>
-                            <span class="price">3000</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                {/* <!--<img src="images/jeans.jpg" alt="">--> */}
-                                <span class="product">Call Of Duty </span>
-                            </a>
-                            <span class="price">4000</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                {/* <!-- <img src="images/nike.jpg" alt="">--> */}
-                                <span class="product">Cyberpunk 2077</span>
-                            </a>
-                            <span class="price">2077</span>
-                        </li>
-                    </ul>
-                </div>
             </div>
-        </div>
         </div >
 
     )

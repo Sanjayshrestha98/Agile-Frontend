@@ -372,6 +372,9 @@ color: red;
   background-size: cover;
   background-repeat: no-repeat;
   height: 260px;
+
+  display: flex;
+    align-items: flex-end;
 }
 
 .productimage{
@@ -417,6 +420,7 @@ color: red;
   width: 240px;
   background: #0A2558;
   transition: all 0.5s ease;
+  overflow-x: hidden;
 }
 .sidebar.active{
   width: 60px;
@@ -1035,6 +1039,7 @@ margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
+    width: 97%;
 }
 
 

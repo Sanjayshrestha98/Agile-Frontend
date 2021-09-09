@@ -83,8 +83,6 @@ function EditProduct({ location }) {
     return (
         <>
 
-
-
             <Formik
                 enableReinitialize={true}
 

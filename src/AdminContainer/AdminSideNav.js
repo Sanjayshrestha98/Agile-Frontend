@@ -136,14 +136,14 @@ function AdminSideNav({ toggle, toggleSidenav }) {
             </li>
 
 
-            <li className="bottomicon">
+            {/* <li className="bottomicon">
               <a href="">
                 <i className='navicons-toggle-on'> <BiLogOut /> </i>
                 <span className="links_name">Log out</span>
                 <i className='navicons'> <BiLogOut /> </i>
 
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
 

@@ -85,7 +85,7 @@ function AddProduct() {
             console.log(formData)
 
             axios
-                .post(`https://gogo-gaming.herokuapp.com/add/product`, formData).then(result => {
+                .post(`http://localhost:90/add/product`, formData).then(result => {
                     console.log(result.data)
                     if (result.data.success) {
                         successnotify()
@@ -123,10 +123,6 @@ function AddProduct() {
 
     return (
         <>
-
-
-
-
             <div className="top-admin-nav">
 
                 <nav className="adminnavbar">

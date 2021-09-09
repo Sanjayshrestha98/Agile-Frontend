@@ -16,6 +16,7 @@ import Order from "./Order";
 import RentOrder from "./Cart/RentOrder";
 import FAQ from "./FAQ";
 import Passwordreset from "./Passwordreset";
+import Editprofile from "./Editprofile";
 
 function Container() {
 
@@ -37,6 +38,7 @@ function Container() {
             <Route path="/rentorder" component={RentOrder} />
             <Route path="/faq" component={FAQ} />
             <Route path="/passwordreset" component={Passwordreset} />
+            <Route path="/editprofile" component={Editprofile} />
         </div>
     )
 }

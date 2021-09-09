@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 import { MDBDataTable, } from 'mdbreact';
 import { FaEdit } from 'react-icons/fa';
@@ -11,7 +12,8 @@ function ViewProduct({ history }) {
 
     const [data, setRowData] = useState([]);
 
-    useEffect(() => {
+    function getallproducts() {
+
         axios.get('http://localhost:90/getallproducts')
             .then((response) => {
                 setRowData(response.data.data)
@@ -20,6 +22,11 @@ function ViewProduct({ history }) {
             .catch((err) => {
                 console.log(err)
             })
+
+    }
+
+    useEffect(() => {
+        getallproducts()
 
     }, [])
 
@@ -32,9 +39,8 @@ function ViewProduct({ history }) {
             buy_price: d.buy_price,
             rent_price: d.rent_price,
             publisher: d.publisher,
-            image: <img src={`http://localhost:90/public/images/${d.image}`} style={{ height: "200px" }} />,
+            image: <img src={`http://localhost:90/public/images/${d.image}`} style={{ height: "200px", width:"200px" }} />,
             screenshots: d.screenshots,
-
             genre: d.genre,
             release_date: d.release_date,
             system_requirements: d.system_requirements,
@@ -49,15 +55,33 @@ function ViewProduct({ history }) {
     })
 
     const deletepro = (_id) => {
-        console.log(_id)
-        axios.delete('http://localhost:90/deleteproduct/' + _id)
-            .then((response) => {
-                console.log(response.data.message)
-                window.location.reload()
-            }).catch((err) => {
 
-                console.log(err.message)
-            })
+        swal({
+            title: "Are you sure?",
+            text: "Product Will Be Deleted",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    console.log(_id)
+                    axios.delete('http://localhost:90/deleteproduct/' + _id)
+                        .then((response) => {
+                            console.log(response.data.message)
+            
+                            getallproducts()
+            
+                        }).catch((err) => {
+            
+                            console.log(err.message)
+                        })
+
+                } else {
+
+                }
+            });
     }
 
     const goToEdit = (id) => {
