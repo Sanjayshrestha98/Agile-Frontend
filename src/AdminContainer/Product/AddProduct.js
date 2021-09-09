@@ -27,7 +27,7 @@ function AddProduct() {
         system_requirements: '',
         instock: '',
         description: '',
-        trailer:''
+        trailer: ''
     }
 
     const errornotify = () => toast.error("Product Not Inserted", {
@@ -65,41 +65,41 @@ function AddProduct() {
     const onSubmit = values => {
         // handelDate()
 
-        if(platformvalue!=='Default'){
+        if (platformvalue !== 'Default') {
 
-        console.log('Formdata', values)
-        const formData = new FormData();
-        formData.append("productname", values.productname)
-        formData.append("platform", platformvalue )
-        formData.append("rent_price", values.rent_price)
-        formData.append("buy_price", values.buy_price)
-        formData.append("publisher", values.publisher)
-        formData.append("image", image)
-        formData.append("genre", values.genre)
-        formData.append("screenshots", multiple)
-        formData.append("release_date", values.release_date)
-        formData.append("system_requirements", values.system_requirements)
-        formData.append("instock", values.instock)
-        formData.append("description", values.description)
+            console.log('Formdata', values)
+            const formData = new FormData();
+            formData.append("productname", values.productname)
+            formData.append("platform", platformvalue)
+            formData.append("rent_price", values.rent_price)
+            formData.append("buy_price", values.buy_price)
+            formData.append("publisher", values.publisher)
+            formData.append("image", image)
+            formData.append("genre", values.genre)
+            formData.append("screenshots", multiple)
+            formData.append("release_date", values.release_date)
+            formData.append("system_requirements", values.system_requirements)
+            formData.append("instock", values.instock)
+            formData.append("description", values.description)
 
-        console.log(formData)
+            console.log(formData)
 
-        axios
-            .post(`https://gogo-gaming.herokuapp.com/add/product`, formData).then(result => {
-                console.log(result.data)
-                if (result.data.success) {
-                    successnotify()
-                } else {
-                    errornotify()
-                }
-            }).catch(error => {
-                console.error("Error Inserting Product", error)
-            })
-    }else{
-        console.log('aslcnaksc')
+            axios
+                .post(`http://localhost:90/add/product`, formData).then(result => {
+                    console.log(result.data)
+                    if (result.data.success) {
+                        successnotify()
+                    } else {
+                        errornotify()
+                    }
+                }).catch(error => {
+                    console.error("Error Inserting Product", error)
+                })
+        } else {
+            console.log('aslcnaksc')
+        }
+
     }
-
-} 
 
     const addMultiple = (e) => {
 
@@ -123,6 +123,22 @@ function AddProduct() {
 
     return (
         <>
+            <div className="top-admin-nav">
+
+                <nav className="adminnavbar">
+                    <div class="sidebar-button">
+                        <i class='bx bx-menu sidebarBtn'></i>
+                        <span class="dashboard">Add Product</span>
+                    </div>
+                    <div class="profile-details">
+                        <span class="admin_name">Sanjay Shrestha</span>
+                        <i class='bx bx-chevron-down'></i>
+                    </div>
+                </nav>
+            </div>
+
+
+
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -178,7 +194,7 @@ function AddProduct() {
                                         <select
                                             name="platform"
                                             id="platform"
-                                            style={{ display: 'block' }} onChange={(e)=>{setplatformvalue (e.target.value)}}
+                                            style={{ display: 'block' }} onChange={(e) => { setplatformvalue(e.target.value) }}
                                         >
                                             <option value="Default" label="Select a Platform" />
                                             <option value="PC" label="PC" />
@@ -260,7 +276,7 @@ function AddProduct() {
                                         <label htmlFor="release_date">Released On</label>
                                         <ErrorMessage name='release_date' render={msg => <div className="error">{msg}</div>} />
                                     </div>
-{/* 
+                                    {/* 
                                     <div className=" form-label-group form-control">
                                         <label htmlFor="added_Date">{cdate}</label>
 
@@ -319,7 +335,9 @@ function AddProduct() {
                     </div>
 
 
-                    <p className="registerprompt">View Your Added Products <a href="#">Here</a></p>
+                    <p className="registerprompt">View Your Added Products 
+                    
+                    <a href="/admin/viewproduct">  Here</a></p>
                 </div>
 
             </Formik>

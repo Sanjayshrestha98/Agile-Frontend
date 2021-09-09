@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import swal from 'sweetalert'
 
 
 function CheckoutPage() {
@@ -37,20 +38,6 @@ function CheckoutPage() {
     },
         [])
 
-    // function calculateSubTotal(price, quantity) { 
-    //     var subtotall = price * quantity;  
-    //     setSubtotal(old => [...old, subtotall])
-    // }
-
-    // function calculateTotal() {
-    //     var total = 0; 
-    //      subtotal.map((value) => {
-    //         total = total + parseInt(value); 
-    //     })
-    //     console.log(data.grandTotal)
-
-    //     setGrandTotal(data.grandTotal)
-    // }
 
     useEffect(() => {
         console.log(subtotal)
@@ -67,9 +54,22 @@ function CheckoutPage() {
         }
         axios.put('http://localhost:90/update/default_to_pending',{},config)
             .then((response) => {
-                alert("update success")
-                // setdata(response.data.data)
-                // console.log(response.data.data)
+  
+                swal({
+                    title: "Order Placed.",
+                    text: "Your order will be delivered very soon!!!",
+                    icon: "success",
+                    button: "Okay!",
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            window.location.href = '/order'
+            
+                        } else {
+            
+                        }
+                    });
+             
 
             })
             .catch((err) => {

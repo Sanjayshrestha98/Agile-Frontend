@@ -72,7 +72,7 @@ function Order() {
 
                                                     <tbody>
                                                         <tr>
-                                                            <td><img width="50px" src={`http://localhost:90/${order.product?.image}`} alt="productimage" /></td>
+                                                            <td><img width="50px" src={`http://localhost:90/public/images/${order.product?.image}`} alt="productimage" /></td>
                                                             <td>{order.product?.productname}</td>
                                                             <td>{order?.quantity}</td>
                                                             <td>{order.product?.buy_price}</td>
@@ -99,12 +99,6 @@ function Order() {
 
 
 
-
-                <div>
-                    <a href="/checkoutpage">
-                        <button type="button" className="btn btn-primary btn-lg"> Checkout </button>
-                    </a>
-                </div>
 
             </div>
 

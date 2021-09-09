@@ -1,17 +1,19 @@
 import React from 'react';
-import {useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 import { MDBDataTable, } from 'mdbreact';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md'
 import { withRouter } from 'react-router-dom';
 
-function ViewProduct({history}) {
+function ViewProduct({ history }) {
 
     const [data, setRowData] = useState([]);
 
-    useEffect(() => {
+    function getallproducts() {
+
         axios.get('http://localhost:90/getallproducts')
             .then((response) => {
                 setRowData(response.data.data)
@@ -21,20 +23,24 @@ function ViewProduct({history}) {
                 console.log(err)
             })
 
+    }
+
+    useEffect(() => {
+        getallproducts()
+
     }, [])
 
     const rowdata = data?.map(d => {
         return ({
-            
+
             productId: d._id,
             productname: d.productname,
             platform: d.platform,
             buy_price: d.buy_price,
             rent_price: d.rent_price,
             publisher: d.publisher,
-            image: <img src = {`http://localhost:90/public/images/${d.image}`} style = {{height : "200px"}}/>,
+            image: <img src={`http://localhost:90/public/images/${d.image}`} style={{ height: "200px", width:"200px" }} />,
             screenshots: d.screenshots,
-                      
             genre: d.genre,
             release_date: d.release_date,
             system_requirements: d.system_requirements,
@@ -42,29 +48,47 @@ function ViewProduct({history}) {
             description: <p max-height='200px' >{d.description}</p>,
             trailer: d.trailer,
             action: <div>
-                <button onClick = {() => goToEdit(d._id)}><FaEdit  className="editicon" /></button>
-                <button onClick={() => deletepro(d._id)}><MdDelete  className="deleteicon" /></button>
+                <button onClick={() => goToEdit(d._id)}><FaEdit className="editicon" /></button>
+                <button onClick={() => deletepro(d._id)}><MdDelete className="deleteicon" /></button>
             </div>
         })
     })
 
-   const deletepro = (_id)=>{
-       console.log(_id)
-        axios.delete('http://localhost:90/deleteproduct/' + _id)
-        .then((response)=>{
-            console.log(response.data.message)
-            window.location.reload()
-        }).catch((err)=>{
+    const deletepro = (_id) => {
 
-            console.log(err.message)
+        swal({
+            title: "Are you sure?",
+            text: "Product Will Be Deleted",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
-   }
+            .then((willDelete) => {
+                if (willDelete) {
 
-   const goToEdit = (id) => {
-    history.push("/admin/editproduct", {
-        id : id
-    })
-   }
+                    console.log(_id)
+                    axios.delete('http://localhost:90/deleteproduct/' + _id)
+                        .then((response) => {
+                            console.log(response.data.message)
+            
+                            getallproducts()
+            
+                        }).catch((err) => {
+            
+                            console.log(err.message)
+                        })
+
+                } else {
+
+                }
+            });
+    }
+
+    const goToEdit = (id) => {
+        history.push("/admin/editproduct", {
+            id: id
+        })
+    }
 
     const dataTable = {
         columns: [
@@ -114,7 +138,7 @@ function ViewProduct({history}) {
                 label: 'Genre',
                 field: 'genre',
                 sort: 'asc',
-                innerHeight:10,
+                innerHeight: 10,
                 width: 100
             },
             {
@@ -153,14 +177,30 @@ function ViewProduct({history}) {
                 sort: 'asc',
                 width: 100
             },
-       ],
+        ],
 
         rows: rowdata
 
     };
 
     return (
+
         <div>
+
+            <div className="top-admin-nav">
+
+                <nav className="adminnavbar">
+                    <div class="sidebar-button">
+                        <i class='bx bx-menu sidebarBtn'></i>
+                        <span class="dashboard">All Added Products</span>
+                    </div>
+                    <div class="profile-details">
+                        <span class="admin_name">Sanjay Shrestha</span>
+                        <i class='bx bx-chevron-down'></i>
+                    </div>
+                </nav>
+            </div>
+
 
             <div>
                 <h3 className="adminpage-headers mb-4"> List of Products </h3>

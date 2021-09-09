@@ -62,7 +62,7 @@ function Cartpage() {
 
                         data.length > 0 && data.map((p) => (
                             <tr>
-                                <td><img width="50px" src={`http://localhost:90/${p.product?.image}`} alt="productimage" /></td>
+                                <td><img width="50px" src={`http://localhost:90/public/images/${p.product?.image}`} alt="productimage" /></td>
                                 <td>{p.product?.productname}</td>
                                 <td>{p?.quantity}</td>
                                 <td>{p.product?.buy_price}</td>

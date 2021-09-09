@@ -19,10 +19,11 @@ function SingleProduct({ location, history, props }) {
         console.log(location.state.product)
         setProduct(location.state.product)
 
-        
+
         console.log(location.state.product._id)
 
     }, [])
+
 
 
     useEffect(() => {
@@ -207,9 +208,9 @@ function SingleProduct({ location, history, props }) {
                         <div className="content" onClick={() => {
                             window.location.reload(true);
                             history.push("/productdetail",
-                             {
-                                product: value
-                            })
+                                {
+                                    product: value
+                                })
                         }} >
                             <div>
                                 <div className="productimage">
@@ -229,7 +230,7 @@ function SingleProduct({ location, history, props }) {
                 </div>
 
 
-
+                <ToastContainer />
             </div>
 
 
