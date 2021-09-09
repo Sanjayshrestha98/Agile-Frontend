@@ -16,7 +16,7 @@ function Order() {
             }
         }
 
-        axios.get('http://localhost:90/get/buycart', config)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/get/buycart`, config)
             .then((response) => {
                 setdata(response.data.data)
                 console.log(response.data.data)
@@ -72,7 +72,7 @@ function Order() {
 
                                                     <tbody>
                                                         <tr>
-                                                            <td><img width="50px" src={`http://localhost:90/public/images/${order.product?.image}`} alt="productimage" /></td>
+                                                            <td><img width="50px" src={`${process.env.REACT_APP_BASE_URI}/public/images/${order.product?.image}`} alt="productimage" /></td>
                                                             <td>{order.product?.productname}</td>
                                                             <td>{order?.quantity}</td>
                                                             <td>{order.product?.buy_price}</td>
@@ -96,7 +96,6 @@ function Order() {
                         }
                         )}</tbody>
                 </table>
-
 
 
 

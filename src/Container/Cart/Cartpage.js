@@ -5,13 +5,14 @@ function Cartpage() {
 
     const [data, setdata] = useState([]);
 
-    useEffect(() => {
+
+    const getCart = () => {
         let config = {
             headers: {
                 'authorization': `Bearer ${localStorage.getItem("token")}`
             }
         }
-        axios.get('http://localhost:90/get/default_buycart', config)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/get/default_buycart`, config)
             .then((response) => {
                 setdata(response.data.data.order)
                 console.log(response.data.data.order)
@@ -20,6 +21,10 @@ function Cartpage() {
                 console.log(err)
             })
 
+    }
+
+    useEffect(() => {
+        getCart()
     }, [])
 
     const deletepro = (_id) => {
@@ -29,10 +34,10 @@ function Cartpage() {
             }
         }
         console.log(_id)
-        axios.delete('http://localhost:90/delete/buycart/' + _id, config)
+        axios.delete(`${process.env.REACT_APP_BASE_URI}/delete/buycart/` + _id, config)
             .then((response) => {
-                console.log(response.data.message)
-                window.location.reload()
+        getCart()
+               
             }).catch((err) => {
 
                 console.log(err.message)
@@ -42,7 +47,10 @@ function Cartpage() {
 
     return (
         <div>
-            <div className="title">
+            {
+                data.length > 0 ?
+                <>
+                <div className="title">
                 <h1>Your Buy Cart</h1>
             </div>
             <div className="checkout">
@@ -62,7 +70,7 @@ function Cartpage() {
 
                         data.length > 0 && data.map((p) => (
                             <tr>
-                                <td><img width="50px" src={`http://localhost:90/public/images/${p.product?.image}`} alt="productimage" /></td>
+                                <td><img width="50px" src={`${process.env.REACT_APP_BASE_URI}/public/images/${p.product?.image}`} alt="productimage" /></td>
                                 <td>{p.product?.productname}</td>
                                 <td>{p?.quantity}</td>
                                 <td>{p.product?.buy_price}</td>
@@ -82,7 +90,11 @@ function Cartpage() {
                     </a>
                 </div>
 
-            </div>
+            </div></>
+        :
+        <h3 className = "text-center mt-5">< i className = "fa fa-shopping-cart"></i> &nbsp; Your Cart is Empty</h3>    
+        }
+
 
         </div>
     )

@@ -6,7 +6,8 @@ import * as Yup from "yup";
 import { Field, ErrorMessage } from 'formik';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Link } from '@material-ui/core';
+import { Redirect } from 'react-router';
 
 
 function Editprofile() {
@@ -78,7 +79,7 @@ function Editprofile() {
                 console.log(response)
                 if(response.data.success == true)
                 {
-
+                    window.location.href = "/profile"
                 }
             })
             .catch((err)=>{
@@ -164,18 +165,6 @@ function Editprofile() {
                                         <label htmlFor="gender">Gender</label>
                                         <ErrorMessage name='gender' render={msg => <div className="error">{msg}</div>} />
                                     </div>
-
-                                    {/* <div className="form-label-group form-control">
-                                        <input
-                                            type="file" name="profile" id="profile" placeholder="profile"
-
-                                        />
-                                        <label htmlFor="profile">Profile Picture</label>
-                                        <ErrorMessage name='profile' render={msg => <div className="error">{msg}</div>} />
-                                    </div> */}
-                                    <img src={`http://localhost:90/${data.profile}`} style={{ height: "200px" }} />,
-
-
 
                                 </div>
 

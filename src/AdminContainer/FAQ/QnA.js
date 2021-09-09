@@ -14,7 +14,7 @@ function QnA({ history }) {
     const [data, setRowData] = useState([]);
 
     useEffect(() => {
-        axios.post('http://localhost:90/getunanswered/'+ false)
+        axios.post(`${process.env.REACT_APP_BASE_URI}/getunanswered/`+ false)
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)
@@ -27,7 +27,7 @@ function QnA({ history }) {
 
     const deletepro = (_id)=>{
         console.log(_id)
-         axios.delete('http://localhost:90/deletefaq/' + _id)
+         axios.delete(`${process.env.REACT_APP_BASE_URI}/deletefaq/` + _id)
          .then((response)=>{
              console.log(response.data.message)
              window.location.reload()

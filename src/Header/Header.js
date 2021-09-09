@@ -17,8 +17,9 @@ const StyledApp = styled.div`
 
 const logout = () => {
 	localStorage.removeItem('token')
+	localStorage.removeItem('userid')
 	localStorage.removeItem('role')
-	window.location.href = '/home'
+	window.location.href = '/'
 }
 
 
@@ -67,27 +68,11 @@ function Header() {
 							<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 							<Navbar.Collapse id="responsive-navbar-nav">
 								<Nav className="mr-auto">
-									<Nav.Link href="/home">Home</Nav.Link>
+									<Nav.Link href="/">Home</Nav.Link>
 									<Nav.Link href="/products">Products</Nav.Link>
-
-									<NavDropdown title="Platform" id="collasible-nav-dropdown">
-										<NavDropdown.Item href="#action/3.1">XBox</NavDropdown.Item>
-										<NavDropdown.Item href="#action/3.2">PS4</NavDropdown.Item>
-										<NavDropdown.Item href="#action/3.3">PC</NavDropdown.Item>
-										<NavDropdown.Item href="#action/3.4">Nintendo</NavDropdown.Item>
-										<NavDropdown.Divider />
-									</NavDropdown>
-
 									<NavDropdown title="Genre" id="collasible-nav-dropdown">
 										<NavDropdown.Item href="/genre/Sports">Sports</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Shooter">Shooter</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Sandbox">Sandbox</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Puzzle">Puzzle</NavDropdown.Item>
 										<NavDropdown.Item href="/genre/Action">Action</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Action-Adventure">Adventure</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Survival">Survival</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Horror">Horror</NavDropdown.Item>
-										<NavDropdown.Item href="/genre/Role-Playing">Role-Playing</NavDropdown.Item>
 										<NavDropdown.Divider />
 									</NavDropdown>
 
@@ -99,42 +84,35 @@ function Header() {
 
 								<Nav className="rightnav">
 
-									<Nav.Link href="/rentcart">
-										<div data-tip="Rent Cart" className="righticons">
-											<img src="./rent.png" alt="cart" />
-										</div>
+									<Nav.Link href="/rentcart"  data-tip="Rent Cart" className = " m-auto">
+									<i class="fas fa-calendar-check "></i>
 									</Nav.Link>
 
-									<Nav.Link href="/favourite">
+									<Nav.Link href="/favourite" className = " m-auto">
 										<div data-tip="Favourites" className="righticons">
 											<MdFavorite fontSize="24px" />
 										</div>
 									</Nav.Link>
 
-									<Nav.Link href="/cartpage">
-										<div data-tip="Buy Cart" className="righticons">
-											<img src="./cart.png" alt="cart" />
-										</div>
+									<Nav.Link href="/cartpage" className = " m-auto">
+										< i className = "fa fa-shopping-cart "></i>
+									 
 									</Nav.Link>
 
-									<Nav.Link href="/profile">
-										<div data-tip="Profile" className="righticons">
-											<img src="./user.png" alt="profile" />
-										</div>
+									<Nav.Link href="/profile" data-tip="Profile" className = " m-auto">
+									< i className = "fa fa-user "></i>
 									</Nav.Link>
-									<Nav.Link>
-										<div data-tip="Profile" className="righticons">
-											<button onClick={() => themeToggler()}>Change Theme</button>
-
+									<Nav.Link className = " m-auto">
+										<div  className="righticons">
+											<button className = "btn btn-success btn-sm" onClick={() => themeToggler()}>Change Theme</button>
 										</div>
 									</Nav.Link>
 
 
-									<Nav.Link>
+									<Nav.Link className = " m-auto">
 										<div data-tip="Logout" className="righticons">
-											<img src="./logout.png"
-												onClick={() => logout()} alt="logout"
-											/>
+										<i class="fas fa-sign-out-alt " onClick={() => logout()}></i>
+										  
 										</div>
 									</Nav.Link>
 

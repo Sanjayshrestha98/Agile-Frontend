@@ -1,19 +1,19 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
 import axios from 'axios';
 import { MDBDataTable, } from 'mdbreact';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md'
 import { withRouter } from 'react-router-dom';
-import swal from 'sweetalert';
 
 
-function Faqlist({ history }) {
+function Faqlist({history}){
 
     const [data, setRowData] = useState([]);
 
-    const getunanswered = () => {
-        axios.post('http://localhost:90/getunanswered/' + true)
+    useEffect(() => {
+        // axios.get('${process.env.REACT_APP_BASE_URI}/getallfaq')
+        axios.post(`${process.env.REACT_APP_BASE_URI}/getunanswered/`+ true)
 
             .then((response) => {
                 setRowData(response.data.data)
@@ -23,64 +23,37 @@ function Faqlist({ history }) {
                 console.log(err)
             })
 
-    }
-
-
-    useEffect(() => {
-        getunanswered()
     }, [])
 
     const rowdata = data?.map(d => {
         return ({
-
+            
             question: d.question,
             answer: d.answer,
             action: <div>
-                <button onClick={() => goToEdit(d._id)}><FaEdit className="editicon" /></button>
-                <button onClick={() => deletefaq(d._id)}><MdDelete className="deleteicon" /></button>
+                <button onClick = {() => goToEdit(d._id)}><FaEdit  className="editicon" /></button>
+                <button onClick={() => deletepro(d._id)}><MdDelete  className="deleteicon" /></button>
             </div>
         })
     })
 
+   const deletepro = (_id)=>{
+       console.log(_id)
+        axios.delete(`${process.env.REACT_APP_BASE_URI}/deletefaq/` + _id)
+        .then((response)=>{
+            console.log(response.data.message)
+            window.location.reload()
+        }).catch((err)=>{
 
-    const deletefaq = (_id) => {
-
-
-        swal({
-            title: "Are you sure?",
-            text: "Product Will Be Deleted",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
+            console.log(err.message)
         })
-            .then((willDelete) => {
-                if (willDelete) {
+   }
 
-                    console.log(_id)
-                    axios.delete('http://localhost:90/deletefaq/' + _id)
-                        .then((response) => {
-                            console.log(response.data.message)
-                            getunanswered()
-
-                        }).catch((err) => {
-            
-                            console.log(err.message)
-                        })
-
-                } else {
-
-                }
-            });
-
-       
-    }
-
-   
-    const goToEdit = (id) => {
-        history.push("/admin/answer/", {
-            id: id
-        })
-    }
+   const goToEdit = (id) => {
+    history.push("/admin/answer/", {
+        id : id
+    })
+   }
 
     const dataTable = {
         columns: [
@@ -102,7 +75,7 @@ function Faqlist({ history }) {
                 sort: 'asc',
                 width: 20
             },
-        ],
+       ],
 
         rows: rowdata
 

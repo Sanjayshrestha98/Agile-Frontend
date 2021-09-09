@@ -10,7 +10,7 @@ function Favourite() {
                 'authorization' : `Bearer ${localStorage.getItem("token")}`
             }
         }
-        axios.get('http://localhost:90/get/favourite',config)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/get/favourite`,config)
           .then((response) => {
             setdata(response.data.data)
             console.log(response.data.data)
@@ -30,7 +30,7 @@ function Favourite() {
             }
         }
         console.log(_id)
-         axios.delete('http://localhost:90/delete/favourite/' + _id, config)
+         axios.delete(`${process.env.REACT_APP_BASE_URI}/delete/favourite/` + _id, config)
          .then((response)=>{
              console.log(response.data.data)
              window.location.reload()
@@ -63,7 +63,7 @@ function Favourite() {
 
                       data.length > 0 &&  data.map((p) => (
                         <tr>
-                            <td><img width="50px" src = {`http://localhost:90/${p.product?.image}`} alt="productimage" /></td>
+                            <td><img width="50px" src = {`${process.env.REACT_APP_BASE_URI}/public/images/${p.product?.image}`} alt="productimage" /></td>
                             <td>{p.product?.productname}</td>
                             {/* <td><input type="number" value="1" min="1" max="20" step="1" /></td> */}
                             <td>{p.product?.buy_price}</td>

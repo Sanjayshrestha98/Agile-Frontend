@@ -49,21 +49,21 @@ function Register() {
 
 
     const validationSchema = Yup.object({
-        // fullname: Yup.string().required('Required').matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
-        // email: Yup.string().email('Invalid Email Format').required('Field cannot be empty'),
-        // phone: Yup.string().required('required'),
-        // address: Yup.string().required('Required'),
-        // gender: Yup.string().required('required'),
-        // username: Yup.string().required('Required'),
-        // password: Yup.string().required('Required'),
-        // confirmpassword: Yup.string().required('Required'),
-        // confirmpassword: Yup.string().when("password", {
-        //     is: val => (val && val.length > 0 ? true : false),
-        //     then: Yup.string().oneOf(
-        //         [Yup.ref("password")],
-        //         "Both password need to be the same"
-        //     )
-        // })
+        fullname: Yup.string().required('Required').matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
+        email: Yup.string().email('Invalid Email Format').required('Field cannot be empty'),
+        phone: Yup.string().required('required'),
+        address: Yup.string().required('Required'),
+        gender: Yup.string().required('required'),
+        username: Yup.string().required('Required'),
+        password: Yup.string().required('Required'),
+        confirmpassword: Yup.string().required('Required'),
+        confirmpassword: Yup.string().when("password", {
+            is: val => (val && val.length > 0 ? true : false),
+            then: Yup.string().oneOf(
+                [Yup.ref("password")],
+                "Both password need to be the same"
+            )
+        })
 
     })
 

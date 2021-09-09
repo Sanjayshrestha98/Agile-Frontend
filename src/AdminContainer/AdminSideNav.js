@@ -24,20 +24,6 @@ function AdminSideNav({ toggle, toggleSidenav }) {
 
     <div className>
 
-      {/* <div className="top-admin-nav">
-
-        <nav className="adminnavbar">
-          <div class="sidebar-button">
-            <i class='bx bx-menu sidebarBtn'></i>
-            <span class="dashboard">Dashboard</span>
-          </div>
-          <div class="profile-details">
-            <span class="admin_name">Sanjay Shrestha</span>
-            <i class='bx bx-chevron-down'></i>
-          </div>
-        </nav>
-
-      </div> */}
 
       <div className={`sidenavcontainer `}>
 

@@ -1,92 +1,148 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-
-
+import moment from 'moment'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function RentBill() {
 
 
     const [data, setdata] = useState([]);
-    // const [subtotal, setSubtotal] = useState([])
-    const subtotal = []
+    const [returnDates, setReturnDates] = useState([])
+    const [grandTotal, setGrandTotal] = useState(0)
+    const [subtotal, setSubtotal] = useState([]) 
+     
 
-
-    useEffect(() => {
+    const getRentBill = () =>{ 
         let config = {
             headers: {
                 'authorization': `Bearer ${localStorage.getItem("token")}`
             }
         }
 
-        axios.get('http://localhost:90/get/rentcart', config)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/get/rentcart`, config)
             .then((response) => {
-                setdata(response.data.data)
-                console.log(response.data.data)
+                setdata(response.data.data) 
+                response.data.data.map((val, index) => {
+                        let data = {
+                            index : index,
+                            productid : val.product._id,
+                            returnDate : "",
+                            quantity  : val.quantity,
+                            rentDays : 0,
+                            subtotal : val.product.rent_price * val.quantity,
+                        }
+
+                        let chkDate = returnDates.map(va => {return va.index}).indexOf(index);
+
+                        if(chkDate === -1){
+                            setReturnDates(old => [...old,  data]) 
+
+                        }
+
+                })
             })
             .catch((err) => {
                 console.log(err)
             })
+    }
 
-        return (() => {
-            subtotal = []
-        })
-
+    useEffect(() => {
+            getRentBill()
     }, [])
 
-    const checkout = () => {
-        alert('Order has been placed')
-        window.location.href = ('/home')
+    const successnotify = () => toast.error("Your order has been placed!!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    const changeReturnDate = (e, index, price, quantity) => {
+        
+        let chkDate = returnDates.map(va => {return va.index}).indexOf(index);
 
+        if(chkDate !== -1){
+            let rentDays = moment(e.target.value, 'yyyy-MM-DD').diff(moment(new Date(), 'yyyy-MM-DD'), "days") + 1
+            returnDates[chkDate].returnDate = moment(e.target.value).format('yyyy-MM-DD')
+            returnDates[chkDate].rentDays = rentDays
+
+            let sub = price * quantity
+            let totalCharge = rentDays * sub
+
+            returnDates[chkDate].subtotal =  totalCharge
+           
+
+            setReturnDates(old => [...old])
+        }
     }
 
-
-
-    function calculateSubTotal(price, quantity) {
-        console.log("check", price, quantity)
-        var subtotall = price * quantity;
-        subtotal.push(subtotall);
-    }
-
-    function calculateTotal() {
-        var total = 0;
-        subtotal.map((value) => {
-            total = total + value;
-
+    useEffect(() => {
+        console.log("Dates", returnDates)
+        let total = 0
+        returnDates.map(val => {
+           total = total + val.subtotal
         })
+        setGrandTotal(total)
+     }, [returnDates])
 
-        return total
+    const checkout = () => { 
+
+        let config = {
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        }
+ 
+        let data = {
+            data : returnDates
+        }
+            axios.post(`${process.env.REACT_APP_BASE_URI}/add/rentbill`,data, config)
+            .then((response) => {
+                successnotify();
+                setTimeout(() => {
+                    window.location.href = "/rentorder"
+                }, 1000)
+            })
+            .catch((err) => {
+                console.log(err)
+            }) 
 
     }
 
 
+    useEffect(() => { 
+    }, [])
+ 
     return (
         <div className="checkout">
             <table className="table table-borderless">
                 <thead>
                     <tr>
                         <th scope="col"> Products </th>
-                        {/* <th scope="col"> Quantity </th> */}
+                        <th scope="col"> Quantity </th>
                         <th scope="col"> Advance Required </th>
                         <th scope="col"> Return Date </th>
-
+                        <th scope="col"> Rent Days </th> 
                         <th scope="col"> Rent Price (Rs) </th>
-
+                        <th scope="col"> Sub Total</th>
+                   
                     </tr>
                 </thead>
 
                 <tbody>{
 
-                    data.length > 0 && data.map((p) => (
+                    data.length > 0 && data.map((p, index) => (
                         <tr>
                             <td>{p.product.productname}</td>
 
-                            {/* <td>{p.quantity}</td> */}
-                            <td>500</td>
-                            <td><input type="date"/> </td>
-
-
-                            <td>{p.product.rent_price}</td>
-                            {calculateSubTotal(p.product.rent_price, p.quantity)}
-
+                            <td>{p.quantity}</td>
+                            <td>Rs 1000</td>
+                            <td><input type="date"  id = "redate" min = {moment(new Date()).format("yyyy-MM-DD")} onChange = {(e) => changeReturnDate(e, index, p.product.rent_price, p.quantity)}/> </td> 
+                            <td>{returnDates[index]?.rentDays} Days </td> 
+                            <td>{p.product.rent_price} per Day / Piece</td> 
+                            <td>Rs {returnDates[index]?.subtotal}</td> 
                         </tr>
 
                     ))
@@ -99,7 +155,20 @@ function RentBill() {
                     <tr>
                         <th scope="col">Initial Amount to be paid</th>
                         {/* <td><>{calculateTotal()}</></td> */}
-                        <td>600</td>
+                        <td>Rs 1000</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="col">Late Return Fee</th>
+                        {/* <td><>{calculateTotal()}</></td> */}
+                        <td>Rs 1000 per Day</td>
+
+                    </tr>
+
+                    <tr>
+                        <th scope="col">Grand Total</th>
+                        {/* <td><>{calculateTotal()}</></td> */}
+                        <td>Rs {grandTotal}</td>
 
                     </tr>
                 </thead>
@@ -132,7 +201,7 @@ function RentBill() {
                 <button type="button" onClick={() => checkout()}  className="btn btn-primary btn-lg"> Confirm Order </button>
             </div>
 
-
+            <ToastContainer />
         </div>
     )
 

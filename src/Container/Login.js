@@ -24,7 +24,7 @@ const notify = () => toast.error("Invalid Credentials", {
 const onSubmit = values => {
     console.log('Form Data', values)
     const response = axios
-        .post(`http://localhost:90/login`, values)
+        .post(`${process.env.REACT_APP_BASE_URI}/login`, values)
         .then(result => {
 
 
@@ -32,7 +32,7 @@ const onSubmit = values => {
                 localStorage.setItem('token', result.data.token)
                 localStorage.setItem('userid', result.data.userid)
 
-                window.location.href = '/home'
+                window.location.href = '/'
             } else {
                 notify()
             }

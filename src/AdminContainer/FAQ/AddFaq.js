@@ -37,7 +37,7 @@ const successnotify = () => toast.error("FAQ Added", {
 const onSubmit = values => {
     console.log('Form Data', values)
     const response = axios
-        .post(`http://localhost:90/add/admin/faq`, values)
+        .post(`${process.env.REACT_APP_BASE_URI}/add/admin/faq`, values)
         .then(result => {
 
            console.log(result.data)

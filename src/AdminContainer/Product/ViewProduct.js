@@ -14,7 +14,8 @@ function ViewProduct({ history }) {
 
     function getallproducts() {
 
-        axios.get('http://localhost:90/getallproducts')
+        axios.get(`${process.env.REACT_APP_BASE_URI}/getallproducts`)
+
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)
@@ -39,7 +40,7 @@ function ViewProduct({ history }) {
             buy_price: d.buy_price,
             rent_price: d.rent_price,
             publisher: d.publisher,
-            image: <img src={`http://localhost:90/public/images/${d.image}`} style={{ height: "200px", width:"200px" }} />,
+            image: <img src={`${process.env.REACT_APP_BASE_URI}/public/images/${d.image}`} style={{ height: "200px", width: "200px" }} />,
             screenshots: d.screenshots,
             genre: d.genre,
             release_date: d.release_date,
@@ -67,14 +68,15 @@ function ViewProduct({ history }) {
                 if (willDelete) {
 
                     console.log(_id)
-                    axios.delete('http://localhost:90/deleteproduct/' + _id)
+                    axios.delete(`${process.env.REACT_APP_BASE_URI}/deleteproduct/` + _id)
+
                         .then((response) => {
                             console.log(response.data.message)
-            
+
                             getallproducts()
-            
+
                         }).catch((err) => {
-            
+
                             console.log(err.message)
                         })
 

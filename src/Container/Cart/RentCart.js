@@ -6,21 +6,24 @@ function RentCart() {
 
     const[data,setdata] = useState([]);
 
-    useEffect(() => { 
+
+    const getRentCart = () => {
         let config = {
             headers : {
                 'authorization' : `Bearer ${localStorage.getItem("token")}`
             }
         }
-        axios.get('http://localhost:90/get/rentcart',config)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/get/rentcart`,config)
           .then((response) => {
-            setdata(response.data.data)    
-            console.log(response.data)
+            setdata(response.data.data)     
           })
           .catch((err) => {
             console.log(err)
           })
     
+    }
+    useEffect(() => { 
+       getRentCart()
       }, [])
 
 
@@ -32,12 +35,11 @@ function RentCart() {
             }
         }
         console.log(_id)
-         axios.delete('http://localhost:90/delete/rentcart/' + _id, config)
-         .then((response)=>{
-             console.log(response.data.message)
-             window.location.reload()
+         axios.delete(`${process.env.REACT_APP_BASE_URI}/delete/rentcart/` + _id, config)
+         .then((response)=>{ 
+            getRentCart()
          }).catch((err)=>{
- 
+      
              console.log(err.message)
          })
     }
@@ -45,7 +47,10 @@ function RentCart() {
     return(
 
         <div>
-            <div className="title">
+           {
+               data.length > 0 ?
+                <>
+                 <div className="title">
                 <h1>Your Rent Cart</h1>
             </div>
             <div className="checkout">
@@ -55,7 +60,9 @@ function RentCart() {
                         <tr>
                             {/* <th scope="col">S.N </th> */}
                             <th scope="col"> Product Image </th>
+                         
                             <th scope="col"> Products </th>
+                            <th scope="col"> Quantity </th>
                             <th scope="col"> Price (Rs) </th>
                             <th scope="col"> Actions </th>
                         </tr>
@@ -64,8 +71,9 @@ function RentCart() {
 
                       data.length > 0 &&  data.map((p) => (
                         <tr>
-                            <td><img width="50px" src = {`http://localhost:90/public/images/${p.product?.image}`} alt="productimage" /></td>
+                            <td><img width="50px" src = {`${process.env.REACT_APP_BASE_URI}/public/images/${p.product?.image}`} alt="productimage" /></td>
                             <td>{p.product?.productname}</td>
+                            <td>{p.quantity}</td>
                             <td>{p.product?.rent_price}</td>
                             <td><button  onClick={(e) => deletepro(p?.product?._id)} >Remove</button></td>
                         </tr>
@@ -95,7 +103,9 @@ function RentCart() {
                 </div>
 
             </div>
-
+</>
+:
+<h3 className = "text-center mt-5"> Your Rent Cart is Empty!</h3>           }
         </div>
     )
 }

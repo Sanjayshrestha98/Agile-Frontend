@@ -13,7 +13,7 @@ function Orderlist({ history }) {
     const [data, setRowData] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:90/get/admin/order`)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/get/admin/order`)
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)
@@ -29,9 +29,8 @@ function Orderlist({ history }) {
         return ({
             status: value.status,
             fullname: value.user.fullname,
-
+                
             product:
-
                 value.order.map(order => {
                     return (
 
@@ -43,25 +42,28 @@ function Orderlist({ history }) {
                                     <th scope="row"><img width="50px" src={`http://localhost:90/public/images/${order.product?.image}`} alt="productimage" /></th>
                                     <td>{order.product?.productname}</td>
                                     <td>{order?.quantity}</td>
-                                    <td>{order.buy_price}</td>
                                 </tr>
-
                             </tbody>
                         </table>
+                        
 
                     )
                 })
             ,
+
+            price : value.grandTotal,
+
+            
+
             action:
                 <div>
-                    <button className="actionbutton" onClick={() => delivered(value._id)}><GrDocumentUpdate className="editicon" /></button>
+                    <button className="actionbutton" onClick={() => delivered(value.user._id)}><GrDocumentUpdate className="editicon" /></button>
                 </div>
         })
     })
 
-    const delivered = (_id) => {
-        console.log(_id)
-        axios.put('http://localhost:90/update/pending_to_delivered/' + _id )
+    const delivered = (_id) => { 
+        axios.put(`${process.env.REACT_APP_BASE_URI}/update/pending_to_delivered/` + _id )
             .then((response) => {
                 console.log(response.data.message)
                 window.location.reload()

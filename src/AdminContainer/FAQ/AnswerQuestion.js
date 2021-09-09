@@ -39,7 +39,7 @@ function AnswerQuestion({ location }) {
     const onSubmit = values => {
         const id = location.state.id
         const result = axios
-            .put(`http://localhost:90/update/faq/` + id, values)
+            .put(`${process.env.REACT_APP_BASE_URI}/update/faq/` + id, values)
             .then(result => {
                 console.log(result.faqdata)
                 if (result.data.success) {
@@ -57,7 +57,7 @@ function AnswerQuestion({ location }) {
     const getData = () => {
         const id = location.state.id
         axios
-            .get(`http://localhost:90/getsinglefaq/` + id).then(result => {
+            .get(`${process.env.REACT_APP_BASE_URI}/getsinglefaq/` + id).then(result => {
                 console.log(result.data.faqData)
                 if (result.data.success) {
                     setData(result.data.faqData)

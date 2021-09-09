@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import swal from 'sweetalert'
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 function CheckoutPage() {
 
@@ -12,6 +12,16 @@ function CheckoutPage() {
     const [promoPercent, setPromoPercent] = useState("")
     const [grandTotal, setGrandTotal] = useState("")
     const [hasEnteredPromo, setHasEnteredPromo] = useState(false)
+    
+    const successnotify = () => toast.error("Your order has been confirmed!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
     useEffect(() => {
         let config = {
@@ -19,7 +29,7 @@ function CheckoutPage() {
                 'authorization': `Bearer ${localStorage.getItem("token")}`
             }
         }
-        axios.get('http://localhost:90/get/default_buycart', config)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/get/default_buycart`, config)
             .then((response) => {
                 // if (response.data.data.status == "default") {
                     setdata(response.data.data.order)
@@ -38,6 +48,20 @@ function CheckoutPage() {
     },
         [])
 
+    // function calculateSubTotal(price, quantity) { 
+    //     var subtotall = price * quantity;  
+    //     setSubtotal(old => [...old, subtotall])
+    // }
+
+    // function calculateTotal() {
+    //     var total = 0; 
+    //      subtotal.map((value) => {
+    //         total = total + parseInt(value); 
+    //     })
+    //     console.log(data.grandTotal)
+
+    //     setGrandTotal(data.grandTotal)
+    // }
 
     useEffect(() => {
         console.log(subtotal)
@@ -45,31 +69,19 @@ function CheckoutPage() {
     }, [subtotal])
 
     const checkout = () => {
-        // alert('Order has been placed')
-        //window.location.href = ('/product')
         let config = {
             headers: {
                 'authorization': `Bearer ${localStorage.getItem("token")}`
             }
         }
-        axios.put('http://localhost:90/update/default_to_pending',{},config)
+        axios.put(`${process.env.REACT_APP_BASE_URI}/update/default_to_pending`,{},config)
             .then((response) => {
-  
-                swal({
-                    title: "Order Placed.",
-                    text: "Your order will be delivered very soon!!!",
-                    icon: "success",
-                    button: "Okay!",
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            window.location.href = '/order'
-            
-                        } else {
-            
-                        }
-                    });
-             
+                successnotify()
+                setTimeout(() => {
+                    window.location.href = "/order"
+                }, 1000)
+                // setdata(response.data.data)
+                // console.log(response.data.data)
 
             })
             .catch((err) => {
@@ -94,7 +106,7 @@ function CheckoutPage() {
             }
         }
 
-        axios.post('http://localhost:90/checkpromocode', {
+        axios.post(`${process.env.REACT_APP_BASE_URI}/checkpromocode`, {
 
             code: promoCode
         }, config).then((response) => {
@@ -206,7 +218,7 @@ function CheckoutPage() {
                 <button type="button" onClick={() => checkout()} className="btn btn-primary btn-lg"> Confirm Order </button>
             </div>
 
-
+            <ToastContainer />
         </div>
     )
 }

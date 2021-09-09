@@ -81,7 +81,7 @@ class Home extends Component {
                   <FontAwesomeIcon id="fale" icon={faNewspaper} />
                   <Card.Body>
                     <Card.Title>News of trending games</Card.Title>
-                    <Card.Text>Frequently anouncement is done and updated news are provided by us.</Card.Text>
+                    <Card.Text>Frequently anouncement is done with updated news.</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
@@ -90,7 +90,7 @@ class Home extends Component {
                   <FontAwesomeIcon id="fale" icon={faPaintBrush} />
                   <Card.Body>
                     <Card.Title>Design and Developement</Card.Title>
-                    <Card.Text>Viewers can get an interactive user experience from this site.</Card.Text>
+                    <Card.Text>Viewers can get an interactive user experience.</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>

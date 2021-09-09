@@ -22,7 +22,7 @@ function Genre( { history } ){
         // console.log(category)
         var path = category
         
-        axios.get("http://localhost:90/get/genre/" + path)
+        axios.get(`${process.env.REACT_APP_BASE_URI}/get/genre/` + path)
             .then((response) => {
                 setRowData(response.data.data)
                 console.log(response.data)
@@ -51,7 +51,7 @@ function Genre( { history } ){
                         }} >
                             <div>
                                 <div className="productimage">
-                                    <img className="img-thumbnail align-middle" src={`http://localhost:90/${value.image}`} alt=" ProductImage" />
+                                    <img className="img-thumbnail align-middle" src={`${process.env.REACT_APP_BASE_URI}/public/images/${value.image}`} alt=" ProductImage" />
                                 </div>
                                 <h1 className="product-name">{value.productname}</h1>
                                 <h4 className="product-type">{value.platform}</h4>

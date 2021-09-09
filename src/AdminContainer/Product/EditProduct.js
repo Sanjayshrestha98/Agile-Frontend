@@ -46,7 +46,7 @@ function EditProduct({ location }) {
         const id = location.state.id
 
         const result = axios
-            .put(`http://localhost:90/update/product/` + id, values)
+            .put(`${process.env.REACT_APP_BASE_URI}/update/product/` + id, values)
             .then(result => {
                 console.log(result.data)
                 if (result.data.success) {
@@ -63,7 +63,7 @@ function EditProduct({ location }) {
     const getData = () => {
         const id = location.state.id
         axios
-            .get(`http://localhost:90/getsingleproduct/` + id).then(result => {
+            .get(`${process.env.REACT_APP_BASE_URI}/getsingleproduct/` + id).then(result => {
                 console.log(result.data.productData)
                 if (result.data.success) {
                     setData(result.data.productData)
@@ -82,7 +82,6 @@ function EditProduct({ location }) {
 
     return (
         <>
-
             <Formik
                 enableReinitialize={true}
 
@@ -98,15 +97,14 @@ function EditProduct({ location }) {
                     system_requirements: data?.system_requirements,
                     instock: data?.instock,
                     description: data?.description,
-                    trailer: data?.trailer,
-                    image: <img src={`http://localhost:90/${data.image}`} style={{ height: "200px" }} />,
+                    trailer:data?.trailer,
+                    // image: <img src = {`${process.env.REACT_APP_BASE_URI}/${data.image}`} style = {{height : "200px"}}/>,
                 }
 
                 }
                 // validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
-                
                 <div>
                     <h3 className="adminpage-headers mb-4"> Edit Products </h3>
                     <div className="addproductform">
@@ -157,7 +155,7 @@ function EditProduct({ location }) {
                                         <label htmlFor="publisher">Publisher</label>
                                         <ErrorMessage name='publisher' render={msg => <div className="error">{msg}</div>} />
                                     </div>
-                                    {/* 
+{/* 
                                     <div className="form-label-group form-control">
                                         <Field
                                             type="file" name="image" id="image" placeholder="Image"

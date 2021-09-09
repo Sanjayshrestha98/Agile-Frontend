@@ -21,6 +21,7 @@ import Home from "./Home/Home";
 import Trending from "./Trending/trending";
 import Footer from "./Footer/Footer";
 import Contact from "./Contact/Contact";
+import ResetPassword from "./profile/Passwordreset";
 
 function Container() {
 
@@ -41,11 +42,11 @@ function Container() {
             <Route path="/order" component={Order} />
             <Route path="/rentorder" component={RentOrder} />
             <Route path="/faq" component={FAQ} />
-            <Route path="/passwordreset" component={Passwordreset} />
             <Route path="/editprofile" component={Editprofile} />
-            <Route path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route path="/contact" component={Contact} />
             <Route path="/trending" component={Trending} />
+            <Route path="/passwordreset/:token" component={ResetPassword} />
 
             <Footer></Footer>
         </div>
